@@ -12,9 +12,13 @@ return [
     | If you come up with something more exciting, let us know.
     |
     */
+    'consumed_hours'                        => 'Horas consumidas',
+    'end_date'                              => 'Fecha de finalización',
+    'estimated_end_date'                    => 'Fecha de finalización estimada',
+    'estimated_hours'                       => 'Horas estimadas',
+    'init_date'                             => 'Fecha de inicio',
     'package_name'                          => 'Projects',
     'project'                               => 'Proyecto|Proyectos',
+    'total_hours'                           => 'Total de horas',
     'todo'                                  => 'Tarea|Tareas',
-    'estimated_end_date'                    => 'Fecha de finalización estimada',
-    'end_date'                              => 'Fecha de finalización',
 ];

@@ -12,9 +12,13 @@ return [
     | If you come up with something more exciting, let us know.
     |
     */
+    'consumed_hours'                        => 'Consumed hours',
+    'end_date'                              => 'End date',
+    'estimated_end_date'                    => 'Estimated end date',
+    'estimated_hours'                       => 'Estimated hours',
+    'init_date'                             => 'Init date',
     'package_name'                          => 'Projects',
     'project'                               => 'Project|Projects',
+    'total_hours'                           => 'Total hours',
     'todo'                                  => 'Todo|Todos',
-    'estimated_end_date'                    => 'Estimated end date',
-    'end_date'                              => 'End date',
 ];

@@ -1,6 +1,11 @@
 @extends('pulsar::layouts.form')
 
 @section('head')
+    <link rel="stylesheet" href="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
+
+    <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/moment.min.js') }}"></script>
+    <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+
     @include('pulsar::includes.html.froala_references')
 
     <script>
@@ -74,6 +79,7 @@
     @include('pulsar::includes.html.form_wysiwyg_group', [
         'label' => trans_choice('pulsar::pulsar.description', 1),
         'name' => 'description',
+        'value' => old('name', isset($object)? $object->description_090 : null),
         'labelSize' => 2,
         'fieldSize' => 10
     ])
@@ -82,15 +88,79 @@
         'icon' => 'fa fa-clock-o',
         'containerId' => 'headerContent'
     ])
+    <div class="row">
+        <div class="col-md-6">
+            @include('pulsar::includes.html.form_text_group', [
+                 'labelSize' => 4,
+                 'fieldSize' => 5,
+                 'type' => 'number',
+                 'label' => trans('projects::pulsar.consumed_hours'),
+                 'name' => 'consumedHours',
+                 'value' => old('consumedHours', isset($object)? $object->consumed_hours_090 : null),
+                 'readOnly' => true
+            ])
+        </div>
+        <div class="col-md-6">
+            @include('pulsar::includes.html.form_text_group', [
+                 'labelSize' => 4,
+                 'fieldSize' => 5,
+                 'type' => 'number',
+                 'label' => trans('projects::pulsar.estimated_hours'),
+                 'name' => 'estimatedHours',
+                 'value' => old('estimatedHours', isset($object)? $object->estimated_hours_090 : null)
+            ])
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @include('pulsar::includes.html.form_text_group', [
+                 'labelSize' => 4,
+                 'fieldSize' => 5,
+                 'type' => 'number',
+                 'label' => trans('projects::pulsar.total_hours'),
+                 'name' => 'totalHours',
+                 'value' => old('totalHours', isset($object)? $object->total_hours_090 : null),
+                 'readOnly' => true
+            ])
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+
     @include('pulsar::includes.html.form_section_header', [
-        'label' => trans('projects::pulsar.estimated_end_date'),
+        'label' => trans_choice('pulsar::pulsar.date', 2),
         'icon' => 'fa fa-hourglass-half',
         'containerId' => 'headerContent'
     ])
-    @include('pulsar::includes.html.form_section_header', [
+    @include('pulsar::includes.html.form_datetimepicker_group', [
+        'fieldSize' => 4,
+        'label' => trans('projects::pulsar.init_date'),
+        'name' => 'initDate',
+        'value' => old('initDate', isset($object->init_date_090)? date(config('pulsar.datePattern'), $object->init_date_090) : null),
+        'data' => [
+            'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+            'locale' => config('app.locale')
+        ]
+    ])
+    @include('pulsar::includes.html.form_datetimepicker_group', [
+        'fieldSize' => 4,
+        'label' => trans('projects::pulsar.estimated_end_date'),
+        'name' => 'estimatedEndDate',
+        'value' => old('estimatedEndDate', isset($object->estimated_end_date_090)? date(config('pulsar.datePattern'), $object->estimated_end_date_090) : null),
+        'data' => [
+            'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+            'locale' => config('app.locale')
+        ]
+    ])
+    @include('pulsar::includes.html.form_datetimepicker_group', [
+        'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
-        'icon' => 'fa fa-hourglass-end',
-        'containerId' => 'headerContent'
+        'name' => 'endDate',
+        'value' => old('endDate', isset($object->end_date_090)? date(config('pulsar.datePattern'), $object->end_date_090) : null),
+        'data' => [
+            'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+            'locale' => config('app.locale')
+        ]
     ])
     <!-- ./projects::groups.form -->
 @stop
