@@ -24,15 +24,22 @@ class ProjectsCreateTableProject extends Migration {
 
                 // descripción del proyecto
                 $table->string('name_090');
-                $table->string('description_090');
+                $table->text('description_090')->nullable();
 
                 // horas estimadas para la finalización y consumidas
-                $table->integer('estimated_hours_090')->unsigned();
-                $table->integer('consumed_hours_090')->unsigned();
+                $table->decimal('estimated_hours_090', 10, 2);
+                $table->decimal('consumed_hours_090', 10, 2);
+                $table->decimal('total_hours_090', 10, 2);
 
-                $table->integer('init_date_090')->unsigned();
-                $table->string('init_date_text_090');
+                // fecha de inicio del proyecto
+                $table->integer('init_date_090')->unsigned()->nullable();
+                $table->string('init_date_text_090')->nullable();
 
+                // fecha de finalización estimada
+                $table->integer('estimated_end_date_090')->unsigned()->nullable();
+                $table->string('estimated_end_date_text_090')->nullable();
+
+                // fecha de finalización real
                 $table->integer('end_date_090')->unsigned()->nullable();
                 $table->string('end_date_text_090')->nullable();
             });
@@ -48,5 +55,4 @@ class ProjectsCreateTableProject extends Migration {
     {
         Schema::drop('006_090_project');
     }
-
 }

@@ -12,5 +12,9 @@ return [
     | If you come up with something more exciting, let us know.
     |
     */
-    'XX'                          => 'XX',
+    'package_name'                          => 'Projects',
+    'project'                               => 'Proyecto|Proyectos',
+    'todo'                                  => 'Tarea|Tareas',
+    'estimated_end_date'                    => 'Fecha de finalización estimada',
+    'end_date'                              => 'Fecha de finalización',
 ];
