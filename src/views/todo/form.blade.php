@@ -60,18 +60,18 @@
 @stop
 
 @section('rows')
-    <!-- projects::projects.form -->
+    <!-- projects::todo_.form -->
     @include('pulsar::includes.html.form_text_group', [
         'label' => 'ID',
         'name' => 'id',
-        'value' => old('id', isset($object)? $object->id_090 : null),
+        'value' => old('id', isset($object)? $object->id_091 : null),
         'readOnly' => true,
         'fieldSize' => 2
     ])
     @include('pulsar::includes.html.form_text_group', [
         'label' => trans('pulsar::pulsar.name'),
         'name' => 'name',
-        'value' => old('name', isset($object)? $object->name_090 : null),
+        'value' => old('name', isset($object)? $object->name_091 : null),
         'maxLength' => '255',
         'rangeLength' => '2,255',
         'required' => true]
@@ -79,7 +79,7 @@
     @include('pulsar::includes.html.form_wysiwyg_group', [
         'label' => trans_choice('pulsar::pulsar.description', 1),
         'name' => 'description',
-        'value' => old('name', isset($object)? $object->description_090 : null),
+        'value' => old('name', isset($object)? $object->description_091 : null),
         'labelSize' => 2,
         'fieldSize' => 10
     ])
@@ -96,7 +96,7 @@
                  'type' => 'number',
                  'label' => trans('projects::pulsar.consumed_hours'),
                  'name' => 'consumedHours',
-                 'value' => old('consumedHours', isset($object)? $object->consumed_hours_090 : null),
+                 'value' => old('consumedHours', isset($object)? $object->consumed_hours_091 : null),
                  'readOnly' => true
             ])
         </div>
@@ -107,7 +107,7 @@
                  'type' => 'number',
                  'label' => trans('projects::pulsar.estimated_hours'),
                  'name' => 'estimatedHours',
-                 'value' => old('estimatedHours', isset($object)? $object->estimated_hours_090 : null)
+                 'value' => old('estimatedHours', isset($object)? $object->estimated_hours_091 : null)
             ])
         </div>
     </div>
@@ -119,7 +119,7 @@
                  'type' => 'number',
                  'label' => trans('projects::pulsar.total_hours'),
                  'name' => 'totalHours',
-                 'value' => old('totalHours', isset($object)? $object->total_hours_090 : null),
+                 'value' => old('totalHours', isset($object)? $object->total_hours_091 : null),
                  'readOnly' => true
             ])
         </div>
@@ -136,7 +136,7 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.init_date'),
         'name' => 'initDate',
-        'value' => old('initDate', isset($object->init_date_090)? date(config('pulsar.datePattern'), $object->init_date_090) : null),
+        'value' => old('initDate', isset($object->init_date_091)? date(config('pulsar.datePattern'), $object->init_date_091) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale')
@@ -146,7 +146,7 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.estimated_end_date'),
         'name' => 'estimatedEndDate',
-        'value' => old('estimatedEndDate', isset($object->estimated_end_date_090)? date(config('pulsar.datePattern'), $object->estimated_end_date_090) : null),
+        'value' => old('estimatedEndDate', isset($object->estimated_end_date_091)? date(config('pulsar.datePattern'), $object->estimated_end_date_091) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale')
@@ -157,12 +157,12 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.end_date'),
             'name' => 'endDate',
-            'value' => old('endDate', isset($object->end_date_090)? date(config('pulsar.datePattern'), $object->end_date_090) : null),
+            'value' => old('endDate', isset($object->end_date_091)? date(config('pulsar.datePattern'), $object->end_date_091) : null),
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                 'locale' => config('app.locale')
             ]
         ])
     @endif
-    <!-- ./projects::projects.form -->
+    <!-- ./projects::todo_.form -->
 @stop

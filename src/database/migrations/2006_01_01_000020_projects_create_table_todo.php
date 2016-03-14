@@ -23,33 +23,42 @@ class ProjectsCreateTableTodo extends Migration {
                 $table->string('customer_name_091');
 
                 // developer / usuario que se la ha asignado la tarea
-                $table->integer('project_manager_id_091')->unsigned();
+                $table->integer('developer_id_091')->unsigned()->nullable();
+                $table->string('developer_name_091')->nullable();
 
-                // developer / usuario que se la ha asignado la tarea
-                $table->integer('developer_id_091')->unsigned();
+                // descripción de la tarea
                 $table->string('name_091');
-                $table->text('description_091');
+                $table->text('description_091')->nullable();
 
-                // puede ser project o hours
+                // puede ser: project o hours
+                // 1 - project
+                // 2 - hours
                 $table->tinyInteger('type_091')->unsigned();
 
-                // project
-                $table->integer('project_id_091')->unsigned();
+                // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto
+                $table->integer('project_id_091')->unsigned()->nullable();
 
                 // número de horas realizadas en esta tarea
-                $table->decimal('hours_091', 8, 2);
+                $table->decimal('hours_091', 10, 2)->nullable();
 
-                // precio de la tarea, en el cado de haberse definido
+                // precio de la tarea, en el caso de haberse definido
                 $table->decimal('price_091', 10, 2)->nullable();
 
-                // fechas de petición de la tarea y fecha de entrega
+                // fecha de petición de la tarea y fecha de entrega
                 $table->integer('request_date_091')->unsigned();
                 $table->string('request_date_text_091');
+
+                // fecha de petición de finalización de tarea
                 $table->integer('end_date_091')->unsigned()->nullable();
                 $table->string('end_date_text_091')->nullable();
 
                 // si está facturado o no
                 $table->tinyInteger('invoiced_091')->unsigned();
+
+                $table->foreign('developer_id_091', 'fk01_006_091_todo')->references('id_010')->on('001_010_user')
+                    ->onDelete('set null')->onUpdate('cascade');
+                $table->foreign('project_id_091', 'fk02_006_091_todo')->references('id_090')->on('006_090_project')
+                    ->onDelete('cascade')->onUpdate('cascade');
             });
         }
     }

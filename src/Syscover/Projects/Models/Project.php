@@ -28,7 +28,7 @@ class Project extends Model {
     protected $maps         = [];
     protected $relationMaps = [];
     private static $rules   = [
-        'name'  => 'required|between:2,50'
+        'name'  => 'required|between:2,255'
     ];
 
     public static function validate($data)

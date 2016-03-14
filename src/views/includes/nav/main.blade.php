@@ -5,7 +5,7 @@
             <li{!! Miscellaneous::setCurrentPage('projects-project') !!}><a href="{{ route('projectsProject') }}"><i class="fa fa-rocket"></i>{{ trans_choice('projects::pulsar.project', 2) }}</a></li>
         @endif
         @if(session('userAcl')->allows('projects-todo', 'access'))
-            <li{!! Miscellaneous::setCurrentPage('projects-todo') !!}><a href="{{ route('crmGroup') }}"><i class="fa fa-hourglass-start"></i>{{ trans_choice('projects::pulsar.todo', 2) }}</a></li>
+            <li{!! Miscellaneous::setCurrentPage('projects-todo') !!}><a href="{{ route('projectsTodo') }}"><i class="fa fa-hourglass-start"></i>{{ trans_choice('projects::pulsar.todo', 2) }}</a></li>
         @endif
     </ul>
 </li>

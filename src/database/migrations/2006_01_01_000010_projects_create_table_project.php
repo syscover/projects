@@ -22,6 +22,8 @@ class ProjectsCreateTableProject extends Migration {
                 $table->integer('customer_id_090')->unsigned();
                 $table->string('customer_name_090');
 
+                //TODO: especificar un project manager para enviarle avisos???
+
                 // descripción del proyecto
                 $table->string('name_090');
                 $table->text('description_090')->nullable();
