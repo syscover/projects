@@ -12,7 +12,7 @@ class ProjectsResourceTableSeeder extends Seeder {
             ['id_007' => 'projects-project',    'name_007' => 'Project',            'package_007' => '6'],
             ['id_007' => 'projects-todo',       'name_007' => 'Todo',               'package_007' => '6'],
             ['id_007' => 'projects-billing',    'name_007' => 'Billing',            'package_007' => '6'],
-            ['id_007' => 'projects-history',    'name_007' => 'History',            'package_007' => '6'],
+            ['id_007' => 'projects-historical', 'name_007' => 'Historical',         'package_007' => '6'],
         ]);
     }
 }

@@ -12,10 +12,13 @@ return [
     | If you come up with something more exciting, let us know.
     |
     */
+    'billing'                               => 'Facturación',
     'consumed_hours'                        => 'Horas consumidas',
+    'developer'                             => 'Desarrollador|Desarrolladores',
     'end_date'                              => 'Fecha de finalización',
     'estimated_end_date'                    => 'Fecha de finalización estimada',
     'estimated_hours'                       => 'Horas estimadas',
+    'historical'                            => 'Histórico',
     'init_date'                             => 'Fecha de inicio',
     'package_name'                          => 'Projects',
     'project'                               => 'Proyecto|Proyectos',

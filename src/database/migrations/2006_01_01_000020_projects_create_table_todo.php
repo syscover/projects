@@ -41,7 +41,7 @@ class ProjectsCreateTableTodo extends Migration {
                 // precio de la tarea, en el caso de haberse definido
                 $table->decimal('price_091', 10, 2)->nullable();
 
-                // fecha de petición de la tarea y fecha de entrega
+                // fecha de petición de la tarea
                 $table->integer('request_date_091')->unsigned()->nullable();
                 $table->string('request_date_text_091')->nullable();
 
@@ -70,6 +70,9 @@ class ProjectsCreateTableTodo extends Migration {
      */
     public function down()
     {
-        Schema::drop('006_091_todo');
+        if (Schema::hasTable('006_091_todo'))
+        {
+            Schema::drop('006_091_todo');
+        }
     }
 }

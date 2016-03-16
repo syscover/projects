@@ -55,6 +55,9 @@ class ProjectsCreateTableProject extends Migration {
      */
     public function down()
     {
-        Schema::drop('006_090_project');
+        if (Schema::hasTable('006_090_project'))
+        {
+            Schema::drop('006_090_project');
+        }
     }
 }

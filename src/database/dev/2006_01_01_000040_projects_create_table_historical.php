@@ -1,0 +1,81 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class ProjectsCreateTableHistorical extends Migration {
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if(!Schema::hasTable('006_093_historical'))
+        {
+            Schema::create('006_093_historical', function (Blueprint $table) {
+                $table->engine = 'InnoDB';
+                $table->increments('id_093')->unsigned();
+
+                // tarea de donde procede este registro
+                $table->integer('todo_id_093')->unsigned();
+
+                // developer / usuario que se la ha asignado la tarea
+                $table->integer('developer_id_093')->unsigned()->nullable();
+                $table->integer('developer_name_093')->nullable();
+
+                // puede ser: project o hours
+                // 1 - project
+                // 2 - hours
+                $table->tinyInteger('type_093')->unsigned();
+
+                // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto
+                $table->integer('project_id_093')->unsigned()->nullable();
+
+                // selecciona un cliente en caso de no pertenecer a un proyecto
+                $table->integer('customer_id_093')->unsigned();
+                $table->string('customer_name_093');
+
+                // descripción de la tarea
+                $table->string('title_093');
+                $table->text('description_093')->nullable();
+
+                // precio de la tarea, en el cado de haberse definido
+                $table->decimal('price_093', 10, 2)->nullable();
+
+                // fecha de petición de la tarea
+                $table->integer('request_date_093')->unsigned()->nullable();
+                $table->string('request_date_text_093')->nullable();
+
+                // fecha de petición de finalización de tarea
+                $table->integer('end_date_093')->unsigned()->nullable();
+                $table->string('end_date_text_093')->nullable();
+
+                // número de horas realizadas en esta tarea
+                $table->decimal('hours_093', 8, 2)->nullable();
+
+                // si está facturado o no
+                $table->boolean('invoiced_093')->default(false)->unsigned();
+
+                $table->foreign('developer_id_093', 'fk01_006_093_historical')->references('id_010')->on('001_010_user')
+                    ->onDelete('set null')->onUpdate('cascade');
+                $table->foreign('project_id_093', 'fk02_006_093_historical')->references('id_090')->on('006_090_project')
+                    ->onDelete('cascade')->onUpdate('cascade');
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        if (Schema::hasTable('006_093_historical'))
+        {
+            Schema::drop('006_093_historical');
+        }
+    }
+}
