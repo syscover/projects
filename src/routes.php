@@ -11,7 +11,14 @@
 */
 
 Route::group(['middleware' => ['web', 'pulsar']], function() {
-    
+
+    /*
+    |--------------------------------------------------------------------------
+    | FACTURA DIRECTA
+    |--------------------------------------------------------------------------
+    */
+    Route::any(config('pulsar.appName') . '/pulsar/factura/directa/json/customers/{term?}',     ['as'=>'jsonGetFacturaDirectaCustomers',    'uses'=>'Syscover\Pulsar\Controllers\CountryController@jsonCountries',            'resource' => 'admin-country',          'action' => 'access']);
+
     /*
     |--------------------------------------------------------------------------
     | PROJECTS

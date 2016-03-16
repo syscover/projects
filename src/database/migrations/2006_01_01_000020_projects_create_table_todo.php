@@ -18,10 +18,6 @@ class ProjectsCreateTableTodo extends Migration {
                 $table->engine = 'InnoDB';
                 $table->increments('id_091')->unsigned();
 
-                // customer
-                $table->integer('customer_id_091')->unsigned();
-                $table->string('customer_name_091');
-
                 // developer / usuario que se la ha asignado la tarea
                 $table->integer('developer_id_091')->unsigned()->nullable();
                 $table->string('developer_name_091')->nullable();
@@ -37,6 +33,10 @@ class ProjectsCreateTableTodo extends Migration {
 
                 // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto
                 $table->integer('project_id_091')->unsigned()->nullable();
+
+                // selecciona un cliente en caso de no pertenecer a un proyecto
+                $table->integer('customer_id_091')->unsigned();
+                $table->string('customer_name_091');
 
                 // número de horas realizadas en esta tarea
                 $table->decimal('hours_091', 10, 2)->nullable();

@@ -1,6 +1,7 @@
 @extends('pulsar::layouts.form')
 
 @section('head')
+    @parent
     <link rel="stylesheet" href="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
 
     <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/moment.min.js') }}"></script>
@@ -55,6 +56,70 @@
                     console.log ('image delete problem')
                 })
             })
+
+            // start select2 ajax function
+            // need declare firs, cuntion templates before, select2 function
+            $.formatCustomer = function(customer) {
+                if(customer.name == undefined)
+                    var markup = '{{ trans('pulsar::pulsar.searching') }}...';
+                else
+                    var markup = customer.companyCode + ' ' + customer.name;
+
+                return markup;
+            }
+
+            $.formatCustomerSelection = function (customer) {
+                if(customer.name == undefined)
+                {
+                    @if(isset($customers))
+                        return '{{ $customers->first()->companyCode . ' ' . $customers->first()->name  }}'
+                    @else
+                        return customer
+                    @endif
+                }
+                else
+                {
+                    $('[name=customerName]').val(customer.name)
+                    return customer.companyCode + ' ' + customer.name
+                }
+            }
+
+            var itemsPerPage = 25; // intems per page
+            $('#customerId').select2({
+                ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    type: 'POST',
+                    url: '{{ route('apiFacturadirectaCustomers') }}',
+                    data: function (params) {
+                        return {
+                            term:  params.term, // search term
+                            start: params.page * itemsPerPage,
+                            limit: itemsPerPage
+                        };
+                    },
+                    dataType: 'json',
+                    delay: 300,
+                    processResults: function (data, params) {
+
+                        params.page = params.page || 0;
+
+                        return {
+                            results: data.client,
+                            pagination: {
+                                more: (params.page * itemsPerPage) < data.attributes.total
+                            }
+                        }
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+                templateResult: $.formatCustomer,
+                templateSelection: $.formatCustomerSelection
+            })
+            // end select2 ajax function
+
         })
     </script>
 @stop
@@ -62,11 +127,31 @@
 @section('rows')
     <!-- projects::projects.form -->
     @include('pulsar::includes.html.form_text_group', [
+        'fieldSize' => 2,
         'label' => 'ID',
         'name' => 'id',
         'value' => old('id', isset($object)? $object->id_090 : null),
         'readOnly' => true,
-        'fieldSize' => 2
+    ])
+    @include('pulsar::includes.html.form_select_group', [
+        'fieldSize' => 5,
+        'label' => trans_choice('pulsar::pulsar.customer', 1),
+        'id' => 'customerId',
+        'name' => 'customerId',
+        'value' => old('customerId', isset($object->customer_id_090)? $object->customer_id_090 : null),
+        'objects' => isset($customers)? $customers : null,
+        'idSelect' => 'id',
+        'nameSelect' => 'name',
+        'required' => true,
+        'data' => [
+            'language' => config('app.locale'),
+            'width' => '100%',
+            'error-placement' => 'select2-customerId-outer-container'
+        ]
+    ])
+    @include('pulsar::includes.html.form_hidden', [
+        'name' => 'customerName',
+        'value' => old('customerName', isset($object->customer_name_090)? $object->customer_name_090 : null)
     ])
     @include('pulsar::includes.html.form_text_group', [
         'label' => trans('pulsar::pulsar.name'),
