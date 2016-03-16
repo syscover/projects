@@ -2,8 +2,8 @@
 
 @section('head')
     @parent
-    <!-- crm::customer.index -->
-    <script type="text/javascript">
+    <!-- projects::project.index -->
+    <script>
         $(document).ready(function() {
             if ($.fn.dataTable)
             {
@@ -23,11 +23,11 @@
             }
         });
     </script>
-    <!-- ./crm::customer.index -->
+    <!-- ./projects::project.index -->
 @stop
 
 @section('tHead')
-    <!-- crm::customer.index -->
+    <!-- projects::project.index -->
     <tr>
         <th data-hide="phone,tablet">ID.</th>
         <th data-class="expand">{{ trans_choice('pulsar::pulsar.customer', 1) }}</th>
@@ -38,5 +38,5 @@
         <th class="checkbox-column"><input type="checkbox" class="uniform"></th>
         <th>{{ trans_choice('pulsar::pulsar.action', 2) }}</th>
     </tr>
-    <!-- ./crm::customer.index -->
+    <!-- ./projects::project.index -->
 @stop

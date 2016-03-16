@@ -2,19 +2,29 @@
 
 @section('head')
     @parent
-    <!-- crm::customer.index -->
-    <script type="text/javascript">
+    <!-- projects::todo_.index -->
+    <style>
+        .customer-width {
+            max-width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <script>
         $(document).ready(function() {
             if ($.fn.dataTable)
             {
                 $('.datatable-pulsar').dataTable({
                     'iDisplayStart' : {{ $offset }},
                     'aoColumnDefs': [
-                        { 'visible': false, "bSearchable": false, 'aTargets': [4]}, // hidden column 1 and prevents search on column 1
-                        { 'iDataSort': 4, 'aTargets': [5] }, // sort column 2 according hidden column 1 data
-                        { 'bSortable': false, 'aTargets': [6,7]},
-                        { 'sClass': 'checkbox-column', 'aTargets': [6]},
-                        { 'sClass': 'align-center', 'aTargets': [7]}
+                        { 'visible': false, "bSearchable": false, 'aTargets': [6,8]}, // hidden column 1 and prevents search on column 1
+                        { 'iDataSort': 6, 'aTargets': [7] }, // sort column 2 according hidden column 1 data
+                        { 'iDataSort': 8, 'aTargets': [9] }, // sort column 2 according hidden column 1 data
+                        { 'bSortable': false, 'aTargets': [10,11]},
+                        { 'sClass': 'customer-width', 'aTargets': [1]},
+                        { 'sClass': 'checkbox-column', 'aTargets': [10]},
+                        { 'sClass': 'align-center', 'aTargets': [11]}
                     ],
                     "bProcessing": true,
                     "bServerSide": true,
@@ -23,20 +33,24 @@
             }
         });
     </script>
-    <!-- ./crm::customer.index -->
+    <!-- ./projects::todo_.index -->
 @stop
 
 @section('tHead')
-    <!-- crm::customer.index -->
+    <!-- projects::todo_.index -->
     <tr>
         <th data-hide="phone,tablet">ID.</th>
-        <th data-class="expand">{{ trans_choice('pulsar::pulsar.customer', 1) }}</th>
-        <th data-hide="phone">{{ trans('pulsar::pulsar.name') }}</th>
-        <th data-hide="phone">{{ trans('projects::pulsar.total_hours') }}</th>
-        <th>{{ trans('projects::pulsar.estimated_end_date') }}</th>
-        <th data-hide="phone">{{ trans('projects::pulsar.estimated_end_date') }}</th>
+        <th>{{ trans_choice('pulsar::pulsar.customer', 1) }}</th>
+        <th data-hide="phone">{{ trans_choice('projects::pulsar.project', 1) }}</th>
+        <th data-hide="phone">{{ trans('pulsar::pulsar.title') }}</th>
+        <th data-hide="phone">{{ trans_choice('pulsar::pulsar.price', 1) }}</th>
+        <th data-hide="phone">{{ trans_choice('pulsar::pulsar.hour', 1) }}</th>
+        <th>{{ trans('projects::pulsar.request_date') }}</th>
+        <th data-hide="phone">{{ trans('projects::pulsar.request_date') }}</th>
+        <th>{{ trans('projects::pulsar.end_date') }}</th>
+        <th data-hide="phone">{{ trans('projects::pulsar.end_date') }}</th>
         <th class="checkbox-column"><input type="checkbox" class="uniform"></th>
         <th>{{ trans_choice('pulsar::pulsar.action', 2) }}</th>
     </tr>
-    <!-- ./crm::customer.index -->
+    <!-- ./projects::todo_.index -->
 @stop

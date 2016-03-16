@@ -1,6 +1,7 @@
 @extends('pulsar::layouts.form')
 
 @section('head')
+    @parent
     <link rel="stylesheet" href="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
 
     <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/moment.min.js') }}"></script>
@@ -18,7 +19,7 @@
                 tabSpaces: true,
                 shortcutsEnabled: ['show', 'bold', 'italic', 'underline', 'strikeThrough', 'indent', 'outdent', 'undo', 'redo', 'insertImage', 'createLink'],
                 toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'insertHR', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html'],
-                heightMin: 250,
+                heightMin: 125,
                 enter: $.FroalaEditor.ENTER_BR,
                 key: '{{ config('pulsar.froalaEditorKey') }}',
                 imageUploadURL: '{{ route('froalaUploadImage') }}',
@@ -55,6 +56,119 @@
                     console.log ('image delete problem')
                 })
             })
+
+            // start change developer
+            $('#developerId').on('change', function() {
+                $('[name=developerName]').val($('#developerId option:selected').text())
+            })
+
+            // start select2 ajax function
+            // need declare firs, cuntion templates before, select2 function
+            $.formatCustomer = function(customer) {
+                if(customer.name == undefined)
+                    var markup = '{{ trans('pulsar::pulsar.searching') }}...';
+                else
+                    var markup = customer.companyCode + ' ' + customer.name;
+
+                return markup;
+            }
+
+            $.formatCustomerSelection = function (customer) {
+                if(customer.name == undefined)
+                {
+                    @if(isset($customers))
+                        return '{{ $customers->first()->companyCode . ' ' . $customers->first()->name  }}'
+                    @else
+                        return customer
+                    @endif
+                }
+                else
+                {
+                    $('[name=customerName]').val(customer.name)
+                    return customer.companyCode + ' ' + customer.name
+                }
+            }
+
+            var itemsPerPage = 25; // intems per page
+            $('#customerId').select2({
+                ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    type: 'POST',
+                    url: '{{ route('apiFacturadirectaCustomers') }}',
+                    data: function (params) {
+                        return {
+                            term:  params.term, // search term
+                            start: params.page * itemsPerPage,
+                            limit: itemsPerPage
+                        };
+                    },
+                    dataType: 'json',
+                    delay: 300,
+                    processResults: function (data, params) {
+
+                        params.page = params.page || 0;
+
+                        return {
+                            results: data.client,
+                            pagination: {
+                                more: (params.page * itemsPerPage) < data.attributes.total
+                            }
+                        }
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+                templateResult: $.formatCustomer,
+                templateSelection: $.formatCustomerSelection
+            })
+            // end select2 ajax function
+
+            // start change type todo_
+            $('[name=type]').on('change', function() {
+                // 1 - project
+                if($(this).val() == 1)
+                {
+                    $("#hoursFields").hide()
+                    $("#descriptionTodo").hide()
+                    $("#priceRequestTodo").hide()
+                    $("#projectFields").fadeIn()
+                }
+                // 2 - hours
+                else if($(this).val() == 2)
+                {
+                    $("#projectFields").hide()
+                    $("#hoursFields").fadeIn()
+                    $("#priceRequestTodo").fadeIn()
+                    $("#descriptionTodo").fadeIn()
+                }
+                else
+                {
+                    $("#projectFields").hide()
+                    $("#hoursFields").hide()
+                    $("#descriptionTodo").hide()
+                    $("#priceRequestTodo").hide()
+                }
+            })
+
+            // hide every fields
+            $("#projectFields").hide()
+            $("#hoursFields").hide()
+            $("#descriptionTodo").hide()
+            $("#priceRequestTodo").hide()
+
+            @if(isset($object))
+                @if($object->type_091 == 1)
+                    // 1 - project
+                    $("#projectFields").show()
+                @else
+                    $("#hoursFields").show()
+                    $("#priceRequestTodo").show()
+                    $("#descriptionTodo").show()
+                @endif
+            @endif
+            // end change type todo_
         })
     </script>
 @stop
@@ -68,101 +182,148 @@
         'readOnly' => true,
         'fieldSize' => 2
     ])
+    @include('pulsar::includes.html.form_select_group', [
+        'fieldSize' => 5,
+        'label' => trans_choice('projects::pulsar.developer', 1),
+        'id' => 'developerId',
+        'name' => 'developerId',
+        'value' => old('developerId', isset($object->developer_id_091)? $object->developer_id_091 : null),
+        'objects' => $developers,
+        'class' => 'select2',
+        'idSelect' => 'id',
+        'nameSelect' => 'name',
+        'required' => true,
+        'data' => [
+            'language' => config('app.locale'),
+            'width' => '100%',
+            'error-placement' => 'select2-developerId-outer-container'
+        ]
+    ])
+    @include('pulsar::includes.html.form_hidden', [
+        'name' => 'developerName',
+        'value' => old('developerName', isset($object->developer_name_091)? $object->developer_name_091 : null)
+    ])
+    @include('pulsar::includes.html.form_select_group', [
+        'fieldSize' => 5,
+        'label' => trans_choice('pulsar::pulsar.type', 1),
+        'name' => 'type',
+        'value' => old('type', isset($object->type_091)? $object->type_091 : null),
+        'objects' => $types,
+        'idSelect' => 'id',
+        'nameSelect' => 'name',
+        'required' => true
+    ])
+    <div id="hoursFields">
+        @include('pulsar::includes.html.form_select_group', [
+            'fieldSize' => 5,
+            'label' => trans_choice('pulsar::pulsar.customer', 1),
+            'id' => 'customerId',
+            'name' => 'customerId',
+            'value' => old('customerId', isset($object->customer_id_091)? $object->customer_id_091 : null),
+            'objects' => isset($customers)? $customers : null,
+            'idSelect' => 'id',
+            'nameSelect' => 'name',
+            'required' => true,
+            'data' => [
+                'language' => config('app.locale'),
+                'width' => '100%',
+                'error-placement' => 'select2-customerId-outer-container'
+            ]
+        ])
+        @include('pulsar::includes.html.form_hidden', [
+            'name' => 'customerName',
+            'value' => old('customerName', isset($object->customer_name_091)? $object->customer_name_091 : null)
+        ])
+    </div>
+    <div id="projectFields">
+        @include('pulsar::includes.html.form_select_group', [
+            'fieldSize' => 5,
+            'label' => trans_choice('projects::pulsar.project', 1),
+            'id' => 'projectId',
+            'name' => 'projectId',
+            'value' => old('projectId', isset($object->project_id_091)? $object->project_id_091 : null),
+            'objects' => $projects,
+            'class' => 'select2',
+            'idSelect' => 'id',
+            'nameSelect' => 'name',
+            'required' => true,
+            'data' => [
+                'language' => config('app.locale'),
+                'width' => '100%',
+                'error-placement' => 'select2-projectId-outer-container'
+            ]
+        ])
+    </div>
     @include('pulsar::includes.html.form_text_group', [
-        'label' => trans('pulsar::pulsar.name'),
-        'name' => 'name',
-        'value' => old('name', isset($object)? $object->name_091 : null),
+        'label' => trans('pulsar::pulsar.title'),
+        'name' => 'title',
+        'value' => old('title', isset($object)? $object->title_091 : null),
         'maxLength' => '255',
         'rangeLength' => '2,255',
         'required' => true]
     )
-    @include('pulsar::includes.html.form_wysiwyg_group', [
-        'label' => trans_choice('pulsar::pulsar.description', 1),
-        'name' => 'description',
-        'value' => old('name', isset($object)? $object->description_091 : null),
-        'labelSize' => 2,
-        'fieldSize' => 10
-    ])
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans_choice('pulsar::pulsar.hour', 2),
-        'icon' => 'fa fa-clock-o',
-        'containerId' => 'headerContent'
-    ])
-    <div class="row">
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                 'labelSize' => 4,
-                 'fieldSize' => 5,
-                 'type' => 'number',
-                 'label' => trans('projects::pulsar.consumed_hours'),
-                 'name' => 'consumedHours',
-                 'value' => old('consumedHours', isset($object)? $object->consumed_hours_091 : null),
-                 'readOnly' => true
-            ])
-        </div>
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                 'labelSize' => 4,
-                 'fieldSize' => 5,
-                 'type' => 'number',
-                 'label' => trans('projects::pulsar.estimated_hours'),
-                 'name' => 'estimatedHours',
-                 'value' => old('estimatedHours', isset($object)? $object->estimated_hours_091 : null)
-            ])
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            @include('pulsar::includes.html.form_text_group', [
-                 'labelSize' => 4,
-                 'fieldSize' => 5,
-                 'type' => 'number',
-                 'label' => trans('projects::pulsar.total_hours'),
-                 'name' => 'totalHours',
-                 'value' => old('totalHours', isset($object)? $object->total_hours_091 : null),
-                 'readOnly' => true
-            ])
-        </div>
-        <div class="col-md-6">
-        </div>
-    </div>
-
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans_choice('pulsar::pulsar.date', 2),
-        'icon' => 'fa fa-hourglass-half',
-        'containerId' => 'headerContent'
-    ])
-    @include('pulsar::includes.html.form_datetimepicker_group', [
-        'fieldSize' => 4,
-        'label' => trans('projects::pulsar.init_date'),
-        'name' => 'initDate',
-        'value' => old('initDate', isset($object->init_date_091)? date(config('pulsar.datePattern'), $object->init_date_091) : null),
-        'data' => [
-            'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-            'locale' => config('app.locale')
-        ]
-    ])
-    @include('pulsar::includes.html.form_datetimepicker_group', [
-        'fieldSize' => 4,
-        'label' => trans('projects::pulsar.estimated_end_date'),
-        'name' => 'estimatedEndDate',
-        'value' => old('estimatedEndDate', isset($object->estimated_end_date_091)? date(config('pulsar.datePattern'), $object->estimated_end_date_091) : null),
-        'data' => [
-            'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-            'locale' => config('app.locale')
-        ]
-    ])
-    @if($action == 'create')
-        @include('pulsar::includes.html.form_datetimepicker_group', [
-            'fieldSize' => 4,
-            'label' => trans('projects::pulsar.end_date'),
-            'name' => 'endDate',
-            'value' => old('endDate', isset($object->end_date_091)? date(config('pulsar.datePattern'), $object->end_date_091) : null),
-            'data' => [
-                'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-                'locale' => config('app.locale')
-            ]
+    <div id="descriptionTodo">
+        @include('pulsar::includes.html.form_wysiwyg_group', [
+            'label' => trans_choice('pulsar::pulsar.description', 1),
+            'name' => 'description',
+            'value' => old('name', isset($object)? $object->description_091 : null),
+            'labelSize' => 2,
+            'fieldSize' => 10
         ])
-    @endif
+    </div>
+    <div id="priceRequestTodo">
+        @include('pulsar::includes.html.form_section_header', [
+            'label' => trans_choice('pulsar::pulsar.date', 2),
+            'icon' => 'fa fa-hourglass-half',
+            'containerId' => 'headerContent'
+        ])
+        <div class="row">
+            <div class="col-md-6">
+                @include('pulsar::includes.html.form_text_group', [
+                     'labelSize' => 4,
+                     'fieldSize' => 5,
+                     'type' => 'number',
+                     'label' => trans_choice('pulsar::pulsar.price', 1),
+                     'name' => 'price',
+                     'value' => old('price', isset($object)? $object->price_091 : null)
+                ])
+            </div>
+            <div class="col-md-6">
+                @include('pulsar::includes.html.form_datetimepicker_group', [
+                    'labelSize' => 4,
+                    'fieldSize' => 5,
+                    'label' => trans('projects::pulsar.request_date'),
+                    'name' => 'requestDate',
+                    'value' => old('requestDate', isset($object->request_date_091)? date(config('pulsar.datePattern'), $object->request_date_091) : null),
+                    'data' => [
+                        'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+                        'locale' => config('app.locale')
+                    ]
+                ])
+            </div>
+        </div>
+    </div>
+    @include('pulsar::includes.html.form_section_header', [
+        'label' => trans_choice('pulsar::pulsar.work', 2),
+        'icon' => 'fa fa-keyboard-o',
+        'containerId' => 'headerContent'
+    ])
+    @include('pulsar::includes.html.form_datetimepicker_group', [
+        'fieldSize' => 4,
+        'label' => trans('projects::pulsar.end_date'),
+        'name' => 'endDate',
+        'value' => old('endDate', isset($object->end_date_091)? date(config('pulsar.datePattern'), $object->end_date_091) : null),
+        'data' => [
+            'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+            'locale' => config('app.locale')
+        ]
+    ])
+    @include('pulsar::includes.html.form_text_group', [
+        'fieldSize' => 4,
+        'type' => 'number',
+        'label' => trans_choice('pulsar::pulsar.hour', 2),
+        'name' => 'hours',
+        'value' => old('hours', isset($object)? $object->hours_091 : null)
+    ])
     <!-- ./projects::todo_.form -->
 @stop

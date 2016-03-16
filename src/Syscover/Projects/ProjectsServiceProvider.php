@@ -21,6 +21,11 @@ class ProjectsServiceProvider extends ServiceProvider
         // register translations
         $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'projects');
 
+		// register config files
+		$this->publishes([
+			__DIR__ . '/../../config/projects.php' 				=> config_path('projects.php')
+		]);
+
         // register migrations
         $this->publishes([
             __DIR__ . '/../../database/migrations/' 			=> base_path('/database/migrations'),

@@ -46,7 +46,7 @@ class ProjectsCreateTableHistory extends Migration {
                 $table->string('end_date_text_093')->nullable();
 
                 // si está facturado o no
-                $table->tinyInteger('invoiced_093')->unsigned();
+                $table->boolean('invoiced_093')->default(false)->unsigned();
             });
         }
     }

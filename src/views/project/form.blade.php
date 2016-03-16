@@ -119,7 +119,6 @@
                 templateSelection: $.formatCustomerSelection
             })
             // end select2 ajax function
-
         })
     </script>
 @stop

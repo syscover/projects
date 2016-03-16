@@ -19,6 +19,7 @@ return [
     'init_date'                             => 'Fecha de inicio',
     'package_name'                          => 'Projects',
     'project'                               => 'Proyecto|Proyectos',
+    'request_date'                          => 'Fecha de petición',
     'total_hours'                           => 'Total de horas',
     'todo'                                  => 'Tarea|Tareas',
 ];
