@@ -25,6 +25,7 @@ class BillingController extends Controller {
     protected $model        = Billing::class;
     protected $icon         = 'fa fa-credit-card';
     protected $objectTrans  = 'billing';
+    protected $jsonParam    = ['edit' => false, 'delete' => false, 'show' => true];
 
     public function createCustomRecord($request, $parameters)
     {

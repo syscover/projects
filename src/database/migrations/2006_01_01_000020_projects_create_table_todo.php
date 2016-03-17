@@ -52,8 +52,8 @@ class ProjectsCreateTableTodo extends Migration {
                 // número de horas realizadas en esta tarea
                 $table->decimal('hours_091', 10, 2)->nullable();
 
-                // si está facturado o no
-                $table->boolean('invoiced_091')->default(false)->unsigned();
+                // indica si la tarea se ha finalizado
+                $table->boolean('finished_091');
 
                 $table->foreign('developer_id_091', 'fk01_006_091_todo')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');

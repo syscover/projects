@@ -33,25 +33,23 @@ class ProjectsCreateTableBilling extends Migration {
                 $table->string('title_092');
                 $table->text('description_092');
 
-                // precio de la tarea, en el caso de haberse definido
-                $table->decimal('price_092', 10, 2)->nullable();
-
-                // fecha de petición de la tarea
-                $table->integer('request_date_092')->unsigned();
-                $table->string('request_date_text_092');
-
-                // fechas de entrega
+                // fecha de entrega
                 $table->integer('end_date_092')->unsigned()->nullable();
                 $table->string('end_date_text_092')->nullable();
 
                 // número de horas realizadas en esta tarea
                 $table->decimal('hours_092', 8, 2);
 
+                // precio de la tarea, en el caso de haberse definido
+                $table->decimal('price_092', 10, 2)->nullable();
+
                 // si está facturado o no
-                $table->tinyInteger('invoiced_092')->unsigned();
+                $table->boolean('invoiced_092')->default(false);
 
                 $table->foreign('developer_id_092', 'fk01_006_092_billing')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');
+                $table->foreign('todo_id_092', 'fk02_006_092_billing')->references('id_091')->on('006_091_todo')
+                    ->onDelete('restrict')->onUpdate('cascade');
             });
         }
     }

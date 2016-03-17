@@ -23,7 +23,7 @@
                         { 'iDataSort': 7, 'aTargets': [8] }, // sort column 2 according hidden column 1 data
                         { 'bSortable': false, 'aTargets': [9,10]},
                         { 'sClass': 'customer-width', 'aTargets': [1]},
-                        { 'sClass': 'checkbox-column', 'aTargets': [9]},
+//                        { 'sClass': 'checkbox-column', 'aTargets': [9]},
                         { 'sClass': 'align-center', 'aTargets': [10]}
                     ],
                     "bProcessing": true,
