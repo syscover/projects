@@ -89,7 +89,8 @@
                 }
             }
 
-            var itemsPerPage = 25; // intems per page
+            // intems per page
+            var itemsPerPage = 25;
             $('#customerId').select2({
                 ajax: {
                     headers: {
@@ -99,7 +100,8 @@
                     url: '{{ route('apiFacturadirectaCustomers') }}',
                     data: function (params) {
                         return {
-                            term:  params.term, // search term
+                            // search term
+                            term:  params.term,
                             start: params.page * itemsPerPage,
                             limit: itemsPerPage
                         };
@@ -260,13 +262,13 @@
         'value' => old('title', isset($object)? $object->title_091 : null),
         'maxLength' => '255',
         'rangeLength' => '2,255',
-        'required' => true]
-    )
+        'required' => true
+    ])
     <div id="descriptionTodo">
         @include('pulsar::includes.html.form_wysiwyg_group', [
             'label' => trans_choice('pulsar::pulsar.description', 1),
             'name' => 'description',
-            'value' => old('name', isset($object)? $object->description_091 : null),
+            'value' => old('description', isset($object)? $object->description_091 : null),
             'labelSize' => 2,
             'fieldSize' => 10
         ])

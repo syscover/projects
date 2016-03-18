@@ -35,6 +35,11 @@ class TodoController extends Controller {
             $this->viewParameters['editButton']   = false;
             $this->viewParameters['deleteButton'] = false;
         }
+        else
+        {
+            $this->viewParameters['editButton']   = true;
+            $this->viewParameters['deleteButton'] = true;
+        }
     }
 
     public function createCustomRecord($request, $parameters)
