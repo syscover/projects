@@ -36,6 +36,6 @@ class Historical extends Model {
 
     public function scopeBuilder($query)
     {
-        return $query->leftJoin('006_090_project', '006_093_todo.project_id_093', '=', '006_090_project.id_090');
+        return $query->leftJoin('006_090_project', '006_093_historical.project_id_093', '=', '006_090_project.id_090');
     }
 }

@@ -31,8 +31,8 @@ class ProjectsCreateTableTodo extends Migration {
                 $table->integer('project_id_091')->unsigned()->nullable();
 
                 // selecciona un cliente en caso de no pertenecer a un proyecto
-                $table->integer('customer_id_091')->unsigned()->nullable();
-                $table->string('customer_name_091')->nullable();
+                $table->integer('customer_id_091')->unsigned();
+                $table->string('customer_name_091');
 
                 // descripción de la tarea
                 $table->string('title_091');

@@ -2,6 +2,7 @@
 
 use Syscover\Facturadirecta\Facades\Facturadirecta;
 use Syscover\Projects\Models\Billing;
+use Syscover\Projects\Models\Historical;
 use Syscover\Projects\Models\Project;
 use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\Miscellaneous;
@@ -22,7 +23,7 @@ class TodoController extends Controller {
     protected $folder           = 'todo';
     protected $package          = 'projects';
     protected $aColumns         = ['id_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
-    protected $nameM            = 'name_091';
+    protected $nameM            = 'title_091';
     protected $model            = Todo::class;
     protected $icon             = 'fa fa-hourglass-start';
     protected $objectTrans      = 'todo';
@@ -64,15 +65,28 @@ class TodoController extends Controller {
 
     public function storeCustomRecord($request, $parameters)
     {
-        Todo::create([
+        if($request->has('projectId'))
+        {
+            $project = Project::builder()->find($request->input('projectId'));
+
+            $customerId     = $project->customer_id_090;
+            $customerName   = $project->customer_name_090;
+        }
+        else
+        {
+            $customerId     = $request->input('customerId');
+            $customerName   = $request->input('customerName');
+        }
+
+        $todo = Todo::create([
             'developer_id_091'              => $request->input('developerId'),
             'developer_name_091'            => $request->input('developerName'),
             'title_091'                     => $request->input('title'),
             'description_091'               => $request->has('description')? $request->input('description') : null,
             'type_091'                      => $request->input('type'),
             'project_id_091'                => $request->has('projectId')? $request->input('projectId') : null,
-            'customer_id_091'               => $request->has('customerId')? $request->input('customerId') : null,
-            'customer_name_091'             => $request->has('customerName')? $request->input('customerName') : null,
+            'customer_id_091'               => $customerId,
+            'customer_name_091'             => $customerName,
             'hours_091'                     => $request->has('hours')? $request->input('hours') : null,
             'price_091'                     => $request->has('price')? $request->input('price') : null,
             'request_date_091'              => $request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('requestDate'))->getTimestamp() : null,
@@ -81,6 +95,9 @@ class TodoController extends Controller {
             'end_date_text_091'             => $request->has('endDate')? $request->input('endDate') : null,
             'finished_091'                  => $request->has('endDate')
         ]);
+
+        // check if todo_ is finished
+        $this->endTodo($request, $todo->id_091);
     }
 
     public function editCustomRecord($request, $parameters)
@@ -104,7 +121,7 @@ class TodoController extends Controller {
             return $object;
         }, config('projects.types'));
 
-        $parameters['projects']     = Project::builder()->where('end_date_090', '>', date('U'))->orWhereNull('end_date_090')->get();
+        $parameters['projects'] = Project::builder()->where('end_date_090', '>', date('U'))->orWhereNull('end_date_090')->get();
 
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
@@ -119,6 +136,19 @@ class TodoController extends Controller {
     
     public function updateCustomRecord($request, $parameters)
     {
+        if($request->has('projectId'))
+        {
+            $project = Project::builder()->find($request->input('projectId'));
+
+            $customerId     = $project->customer_id_090;
+            $customerName   = $project->customer_name_090;
+        }
+        else
+        {
+            $customerId     = $request->input('customerId');
+            $customerName   = $request->input('customerName');
+        }
+
         Todo::where('id_091', $parameters['id'])->update([
             'developer_id_091'              => $request->input('developerId'),
             'developer_name_091'            => $request->input('developerName'),
@@ -126,8 +156,8 @@ class TodoController extends Controller {
             'description_091'               => $request->has('description')? $request->input('description') : null,
             'type_091'                      => $request->input('type'),
             'project_id_091'                => $request->has('projectId')? $request->input('projectId') : null,
-            'customer_id_091'               => $request->has('customerId')? $request->input('customerId') : null,
-            'customer_name_091'             => $request->has('customerName')? $request->input('customerName') : null,
+            'customer_id_091'               => $customerId,
+            'customer_name_091'             => $customerName,
             'hours_091'                     => $request->has('hours')? $request->input('hours') : null,
             'price_091'                     => $request->has('price')? $request->input('price') : null,
             'request_date_091'              => $request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('requestDate'))->getTimestamp() : null,
@@ -138,15 +168,40 @@ class TodoController extends Controller {
 
         ]);
 
+        // check if todo_ is finished
+        $this->endTodo($request, $parameters['id']);
+    }
+
+    private function endTodo($request, $id)
+    {
         // if has enDate, so developer has finished tour todo_
         if($request->has('endDate'))
         {
             // get todo_
-            $todo = Todo::find($parameters['id']);
+            $todo = Todo::find($id);
 
             // 1 - project
             if($request->input('type') == 1)
             {
+                Historical::create([
+                    'developer_id_093'              => $todo->developer_id_091,
+                    'developer_name_093'            => $todo->developer_name_091,
+                    'type_093'                      => $todo->type_091,
+                    'project_id_093'                => $todo->project_id_091,
+                    'customer_id_093'               => $todo->customer_id_091,
+                    'customer_name_093'             => $todo->customer_name_091,
+                    'title_093'                     => $todo->title_091,
+                    'description_093'               => $todo->description_091,
+                    'price_093'                     => $todo->price_091,
+                    'request_date_093'              => $todo->request_date_091,
+                    'request_date_text_093'         => $todo->request_date_text_091,
+                    'end_date_093'                  => $todo->end_date_091,
+                    'end_date_text_093'             => $todo->end_date_text_091,
+                    'hours_093'                     => $todo->hours_091
+                ]);
+
+                // delete todo_, after register historical
+                Todo::destroy($todo->id_091);
 
             }
             // 2 - hours

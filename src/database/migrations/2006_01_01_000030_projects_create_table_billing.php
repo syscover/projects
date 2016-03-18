@@ -23,11 +23,11 @@ class ProjectsCreateTableBilling extends Migration {
 
                 // developer / usuario que se la ha asignado la tarea
                 $table->integer('developer_id_092')->unsigned()->nullable();
-                $table->integer('developer_name_092')->nullable();
+                $table->string('developer_name_092')->nullable();
 
                 // cliente al que se le realiza la tarea
-                $table->integer('customer_id_092')->unsigned()->nullable();
-                $table->string('customer_name_092')->nullable();
+                $table->integer('customer_id_092')->unsigned();
+                $table->string('customer_name_092');
 
                 // descripción de la tarea
                 $table->string('title_092');

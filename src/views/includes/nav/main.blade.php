@@ -11,7 +11,7 @@
             <li{!! Miscellaneous::setCurrentPage('projects-billing') !!}><a href="{{ route('projectsBilling') }}"><i class="fa fa-credit-card"></i>{{ trans_choice('projects::pulsar.billing', 2) }}</a></li>
         @endif
         @if(session('userAcl')->allows('projects-historical', 'access'))
-            <li{!! Miscellaneous::setCurrentPage('projects-historical') !!}><a href="{{ route('projectsHistorical') }}"><i class="fa fa-credit-card"></i>{{ trans_choice('projects::pulsar.historical', 2) }}</a></li>
+            <li{!! Miscellaneous::setCurrentPage('projects-historical') !!}><a href="{{ route('projectsHistorical') }}"><i class="fa fa-history"></i>{{ trans_choice('projects::pulsar.historical', 2) }}</a></li>
         @endif
     </ul>
 </li>

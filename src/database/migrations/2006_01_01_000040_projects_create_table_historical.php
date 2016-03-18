@@ -18,12 +18,9 @@ class ProjectsCreateTableHistorical extends Migration {
                 $table->engine = 'InnoDB';
                 $table->increments('id_093')->unsigned();
 
-                // tarea de donde procede este registro
-                $table->integer('todo_id_093')->unsigned();
-
                 // developer / usuario que se la ha asignado la tarea
                 $table->integer('developer_id_093')->unsigned()->nullable();
-                $table->integer('developer_name_093')->nullable();
+                $table->string('developer_name_093')->nullable();
 
                 // puede ser: project o hours
                 // 1 - project
@@ -54,9 +51,6 @@ class ProjectsCreateTableHistorical extends Migration {
 
                 // número de horas realizadas en esta tarea
                 $table->decimal('hours_093', 8, 2)->nullable();
-
-                // si está facturado o no
-                $table->boolean('invoiced_093')->default(false)->unsigned();
 
                 $table->foreign('developer_id_093', 'fk01_006_093_historical')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');

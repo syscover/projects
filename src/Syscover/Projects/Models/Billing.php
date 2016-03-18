@@ -29,9 +29,7 @@ class Billing extends Model {
         'todo'  => Todo::class
     ];
     protected $relationMaps = [];
-    private static $rules   = [
-        'title'  => 'required|between:2,255'
-    ];
+    private static $rules   = [];
 
     public static function validate($data)
     {
