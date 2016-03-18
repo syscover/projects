@@ -25,7 +25,9 @@ class Billing extends Model {
     protected $suffix       = '092';
     public $timestamps      = false;
     protected $fillable     = ['id_092', 'todo_id_092', 'developer_id_092', 'developer_name_092', 'customer_id_092', 'customer_name_092', 'title_092', 'description_092', 'price_092', 'request_date_092', 'request_date_text_092', 'end_date_092', 'end_date_text_092', 'hours_092', 'invoiced_092'];
-    protected $maps         = [];
+    protected $maps         = [
+        'todo'  => Todo::class
+    ];
     protected $relationMaps = [];
     private static $rules   = [
         'title'  => 'required|between:2,255'
@@ -38,11 +40,6 @@ class Billing extends Model {
 
     public function scopeBuilder($query)
     {
-        return $query;
-    }
-
-    protected static function addToGetIndexRecords($parameters)
-    {
-        return Billing::builder();
+        return $query->join('006_091_todo', '006_092_billing.todo_id_092', '=', '006_091_todo.id_091');
     }
 }

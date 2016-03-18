@@ -1,9 +1,8 @@
 <?php namespace Syscover\Projects\Controllers;
 
-use Syscover\Facturadirecta\Facades\Facturadirecta;
-use Syscover\Projects\Models\Project;
+use Illuminate\Http\Request;
+use Syscover\Projects\Models\Todo;
 use Syscover\Pulsar\Controllers\Controller;
-use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Pulsar\Models\User;
 use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Projects\Models\Billing;
@@ -26,10 +25,18 @@ class BillingController extends Controller {
     protected $icon             = 'fa fa-credit-card';
     protected $objectTrans      = 'billing';
     protected $viewParameters   = [
-        'showButton'    => true,
-        'editButton'    => false,
-        'deleteButton'  => false
+        'checkBoxColumn'    => false,
+        'showButton'        => true,
+        'editButton'        => false,
+        'deleteButton'      => false
     ];
+
+    public function indexCustom($parameters)
+    {
+        $parameters['deleteSelectButton'] = false;
+
+        return $parameters;
+    }
 
     public function showCustomRecord($request, $parameters)
     {
@@ -41,6 +48,30 @@ class BillingController extends Controller {
             return $user;
         });
 
+        $parameters['afterButtonFooter'] = '<a id="invoiceButton" class="btn btn-danger marginL10 delete-lang-record" href="' . route('invoiceProjectsBilling', ['id' => $parameters['id'], 'offset' => $parameters['offset']]) . '">' . trans('projects::pulsar.invoice_todo') . '</a>';
+
         return $parameters;
+    }
+
+    public function invoiceRecord(Request $request)
+    {
+        // get parameters from url route
+        $parameters = $request->route()->parameters();
+
+        // get billing object
+        $billing = Billing::builder()->where('id_092', $parameters['id'])->get();
+
+
+
+
+        // destroy todo_ from developer section
+        //Todo::destroy([$billing->todo_id_092]);
+
+        dd($billing);
+
+        return redirect()->route('projectsBilling', ['offset' => $parameters['offset']])->with([
+            'msg'        => 1,
+            'txtMsg'     => trans('projects::pulsar.message_successfully_invoiced')
+        ]);
     }
 }

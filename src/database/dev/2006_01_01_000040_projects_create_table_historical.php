@@ -12,7 +12,7 @@ class ProjectsCreateTableHistorical extends Migration {
      */
     public function up()
     {
-        if(!Schema::hasTable('006_093_historical'))
+        if(! Schema::hasTable('006_093_historical'))
         {
             Schema::create('006_093_historical', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
@@ -61,7 +61,7 @@ class ProjectsCreateTableHistorical extends Migration {
                 $table->foreign('developer_id_093', 'fk01_006_093_historical')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');
                 $table->foreign('project_id_093', 'fk02_006_093_historical')->references('id_090')->on('006_090_project')
-                    ->onDelete('cascade')->onUpdate('cascade');
+                    ->onDelete('set null')->onUpdate('cascade');
             });
         }
     }

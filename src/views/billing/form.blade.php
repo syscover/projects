@@ -52,6 +52,26 @@
                     console.log ('image delete problem')
                 })
             }).froalaEditor('edit.off')
+
+            $('#invoiceButton').on('click', function(e){
+                // stop event
+                e.preventDefault()
+
+                var that = this
+                $.msgbox('{{ trans('projects::pulsar.message_invoice_todo') }}',
+                    {
+                        type:'confirm',
+                        buttons: [
+                            {type: 'submit', value: '{{ trans('pulsar::pulsar.accept') }}'},
+                            {type: 'cancel', value: '{{ trans('pulsar::pulsar.cancel') }}'}
+                        ]
+                    },
+                    function(buttonPressed) {
+                        if(buttonPressed == '{{ trans('pulsar::pulsar.accept') }}')
+                            $(location).attr('href', $(that).attr('href'));
+                    }
+                )
+            })
         })
     </script>
 @stop

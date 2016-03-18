@@ -55,6 +55,7 @@ Route::group(['middleware' => ['web', 'pulsar']], function() {
     Route::any(config('pulsar.appName') . '/projects/billing/{offset?}',                        ['as'=>'projectsBilling',                   'uses'=>'Syscover\Projects\Controllers\BillingController@index',                   'resource' => 'projects-billing',        'action' => 'access']);
     Route::any(config('pulsar.appName') . '/projects/billing/json/data',                        ['as'=>'jsonDataProjectsBilling',           'uses'=>'Syscover\Projects\Controllers\BillingController@jsonData',                'resource' => 'projects-billing',        'action' => 'access']);
     Route::get(config('pulsar.appName') . '/projects/billing/{id}/show/{offset}',               ['as'=>'showProjectsBilling',               'uses'=>'Syscover\Projects\Controllers\BillingController@showRecord',              'resource' => 'projects-billing',        'action' => 'access']);
+    Route::get(config('pulsar.appName') . '/projects/billing/{id}/invoice/{offset}',            ['as'=>'invoiceProjectsBilling',            'uses'=>'Syscover\Projects\Controllers\BillingController@invoiceRecord',           'resource' => 'projects-billing',        'action' => 'create']);
 
 
 //    Route::get(config('pulsar.appName') . '/projects/billing/create/{offset}',                  ['as'=>'createProjectsBilling',             'uses'=>'Syscover\Projects\Controllers\BillingController@createRecord',            'resource' => 'projects-billing',        'action' => 'create']);
