@@ -18,23 +18,22 @@ class TodoController extends Controller {
 
     use TraitController;
 
-    protected $routeSuffix  = 'projectsTodo';
-    protected $folder       = 'todo';
-    protected $package      = 'projects';
-    protected $aColumns     = ['id_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
-    protected $nameM        = 'name_091';
-    protected $model        = Todo::class;
-    protected $icon         = 'fa fa-hourglass-start';
-    protected $objectTrans  = 'todo';
-    protected $jsonParam    = ['edit' => true, 'delete' => true];
+    protected $routeSuffix      = 'projectsTodo';
+    protected $folder           = 'todo';
+    protected $package          = 'projects';
+    protected $aColumns         = ['id_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
+    protected $nameM            = 'name_091';
+    protected $model            = Todo::class;
+    protected $icon             = 'fa fa-hourglass-start';
+    protected $objectTrans      = 'todo';
 
     // delete edit and delete buttons, on finished rows
     public function jsonCustomDataBeforeActions($request, $aObject)
     {
         if($aObject['finished_091'])
         {
-            $this->jsonParam['edit']    = false;
-            $this->jsonParam['delete'] = false;
+            $this->viewParameters['editButton']   = false;
+            $this->viewParameters['deleteButton'] = false;
         }
     }
 

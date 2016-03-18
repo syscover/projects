@@ -10,7 +10,7 @@
     @include('pulsar::includes.html.froala_references')
 
     <script>
-        $(document).on('ready', function() {
+        $(document).ready(function() {
             $('.wysiwyg').froalaEditor({
                 language: '{{ config('app.locale') }}',
                 placeholderText: '{{ trans('pulsar::pulsar.type_something') }}',

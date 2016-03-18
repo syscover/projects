@@ -17,15 +17,19 @@ class BillingController extends Controller {
 
     use TraitController;
 
-    protected $routeSuffix  = 'projectsBilling';
-    protected $folder       = 'billing';
-    protected $package      = 'projects';
-    protected $aColumns     = ['id_092', 'customer_name_092', 'title_092', 'price_092', 'hours_092', 'request_date_092', 'request_date_text_092', 'end_date_092', 'end_date_text_092'];
-    protected $nameM        = 'name_092';
-    protected $model        = Billing::class;
-    protected $icon         = 'fa fa-credit-card';
-    protected $objectTrans  = 'billing';
-    protected $jsonParam    = ['edit' => false, 'delete' => false, 'show' => true];
+    protected $routeSuffix      = 'projectsBilling';
+    protected $folder           = 'billing';
+    protected $package          = 'projects';
+    protected $aColumns         = ['id_092', 'customer_name_092', 'title_092', 'price_092', 'hours_092', 'request_date_092', 'request_date_text_092', 'end_date_092', 'end_date_text_092'];
+    protected $nameM            = 'name_092';
+    protected $model            = Billing::class;
+    protected $icon             = 'fa fa-credit-card';
+    protected $objectTrans      = 'billing';
+    protected $viewParameters   = [
+        'showButton'    => true,
+        'editButton'    => false,
+        'deleteButton'  => false
+    ];
 
     public function createCustomRecord($request, $parameters)
     {
