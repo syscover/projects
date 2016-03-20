@@ -15,6 +15,8 @@ return [
     'billing'                               => 'Billing',
     'consumed_hours'                        => 'Consumed hours',
     'developer'                             => 'Developer|Developers',
+    'developer_historical'                  => 'Developer historical',
+    'developer_todo'                        => 'Developer todo|Developer todos',
     'end_date'                              => 'End date',
     'estimated_end_date'                    => 'Estimated end date',
     'estimated_hours'                       => 'Estimated hours',

@@ -49,6 +49,20 @@ Route::group(['middleware' => ['web', 'pulsar']], function() {
 
     /*
     |--------------------------------------------------------------------------
+    | DEVELOPER TODOS
+    |--------------------------------------------------------------------------
+    */
+    Route::any(config('pulsar.appName') . '/projects/developer/todos/{offset?}',                        ['as'=>'projectsDeveloperTodo',                   'uses'=>'Syscover\Projects\Controllers\TodoController@index',                   'resource' => 'projects-developer-todo',        'action' => 'access']);
+    Route::any(config('pulsar.appName') . '/projects/developer/todos/json/data',                        ['as'=>'jsonDataProjectsDeveloperTodo',           'uses'=>'Syscover\Projects\Controllers\TodoController@jsonData',                'resource' => 'projects-developer-todo',        'action' => 'access']);
+    Route::get(config('pulsar.appName') . '/projects/developer/todos/create/{offset}',                  ['as'=>'createProjectsDeveloperTodo',             'uses'=>'Syscover\Projects\Controllers\TodoController@createRecord',            'resource' => 'projects-developer-todo',        'action' => 'create']);
+    Route::post(config('pulsar.appName') . '/projects/developer/todos/store/{offset}',                  ['as'=>'storeProjectsDeveloperTodo',              'uses'=>'Syscover\Projects\Controllers\TodoController@storeRecord',             'resource' => 'projects-developer-todo',        'action' => 'create']);
+    Route::get(config('pulsar.appName') . '/projects/developer/todos/{id}/edit/{offset}',               ['as'=>'editProjectsDeveloperTodo',               'uses'=>'Syscover\Projects\Controllers\TodoController@editRecord',              'resource' => 'projects-developer-todo',        'action' => 'access']);
+    Route::put(config('pulsar.appName') . '/projects/developer/todos/update/{id}/{offset}',             ['as'=>'updateProjectsDeveloperTodo',             'uses'=>'Syscover\Projects\Controllers\TodoController@updateRecord',            'resource' => 'projects-developer-todo',        'action' => 'edit']);
+    Route::get(config('pulsar.appName') . '/projects/developer/todos/delete/{id}/{offset}',             ['as'=>'deleteProjectsDeveloperTodo',             'uses'=>'Syscover\Projects\Controllers\TodoController@deleteRecord',            'resource' => 'projects-developer-todo',        'action' => 'delete']);
+    Route::delete(config('pulsar.appName') . '/projects/developer/todos/delete/select/records',         ['as'=>'deleteSelectProjectsDeveloperTodo',       'uses'=>'Syscover\Projects\Controllers\TodoController@deleteRecordsSelect',     'resource' => 'projects-developer-todo',        'action' => 'delete']);
+
+    /*
+    |--------------------------------------------------------------------------
     | BILLING
     |--------------------------------------------------------------------------
     */

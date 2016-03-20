@@ -1,5 +1,6 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Illuminate\Http\Request;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
 use Syscover\Projects\Models\Billing;
 use Syscover\Projects\Models\Historical;
@@ -22,11 +23,24 @@ class TodoController extends Controller {
     protected $routeSuffix      = 'projectsTodo';
     protected $folder           = 'todo';
     protected $package          = 'projects';
-    protected $aColumns         = ['id_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
+    protected $aColumns         = ['id_091', 'developer_name_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
     protected $nameM            = 'title_091';
     protected $model            = Todo::class;
     protected $icon             = 'fa fa-hourglass-start';
     protected $objectTrans      = 'todo';
+
+    function __construct(Request $request)
+    {
+        parent::__construct($request);
+
+        $actions = $request->route()->getAction();
+
+        // if request came from Developer Todos
+        if($actions['resource'] === 'projects-developer-todo')
+        {
+            $this->routeSuffix = 'projectsDeveloperTodo';
+        }
+    }
 
     // delete edit and delete buttons, on finished rows
     public function jsonCustomDataBeforeActions($request, $aObject)
@@ -183,6 +197,13 @@ class TodoController extends Controller {
             // 1 - project
             if($request->input('type') == 1)
             {
+                // updates hour projects
+                $project = Project::builder()->find($todo->project_id_091);
+                Project::where('id_090', $todo->project_id_091)->update([
+                    'consumed_hours_090'    => $project->consumed_hours_090 + $todo->hours_091,
+                    'total_hours_090'       => $project->total_hours_090 -  $todo->hours_091
+                ]);
+
                 Historical::create([
                     'developer_id_093'              => $todo->developer_id_091,
                     'developer_name_093'            => $todo->developer_name_091,

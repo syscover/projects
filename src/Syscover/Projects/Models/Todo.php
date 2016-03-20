@@ -40,4 +40,18 @@ class Todo extends Model {
     {
         return $query->leftJoin('006_090_project', '006_091_todo.project_id_091', '=', '006_090_project.id_090');
     }
+
+    public function addToGetIndexRecords($request, $parameters)
+    {
+        // get actions to know where it comes from the request
+        $actions = $request->route()->getAction();
+
+        $query =  $this->builder();
+
+        // filter todos onle from current user
+        if($actions['resource'] === 'projects-developer-todo')
+            $query->where('developer_id_091', auth('pulsar')->user()->id_010);
+
+        return $query;
+    }
 }

@@ -18,13 +18,13 @@
                 $('.datatable-pulsar').dataTable({
                     'iDisplayStart' : {{ $offset }},
                     'aoColumnDefs': [
-                        { 'visible': false, "bSearchable": false, 'aTargets': [6,8]}, // hidden column 1 and prevents search on column 1
-                        { 'iDataSort': 6, 'aTargets': [7] }, // sort column 2 according hidden column 1 data
-                        { 'iDataSort': 8, 'aTargets': [9] }, // sort column 2 according hidden column 1 data
-                        { 'bSortable': false, 'aTargets': [10,11]},
-                        { 'sClass': 'customer-width', 'aTargets': [1]},
-                        { 'sClass': 'checkbox-column', 'aTargets': [10]},
-                        { 'sClass': 'align-center', 'aTargets': [11]}
+                        { 'visible': false, "bSearchable": false, 'aTargets': [7,9]}, // hidden column 1 and prevents search on column 1
+                        { 'iDataSort': 7, 'aTargets': [8] }, // sort column 2 according hidden column 1 data
+                        { 'iDataSort': 9, 'aTargets': [10] }, // sort column 2 according hidden column 1 data
+                        { 'bSortable': false, 'aTargets': [11,12]},
+                        { 'sClass': 'customer-width', 'aTargets': [1, 2]},
+                        { 'sClass': 'checkbox-column', 'aTargets': [11]},
+                        { 'sClass': 'align-center', 'aTargets': [12]}
                     ],
                     "bProcessing": true,
                     "bServerSide": true,
@@ -40,6 +40,7 @@
     <!-- projects::todo_.index -->
     <tr>
         <th data-hide="phone,tablet">ID.</th>
+        <th>{{ trans_choice('projects::pulsar.developer', 1) }}</th>
         <th>{{ trans_choice('pulsar::pulsar.customer', 1) }}</th>
         <th data-hide="phone">{{ trans_choice('projects::pulsar.project', 1) }}</th>
         <th data-hide="phone">{{ trans('pulsar::pulsar.title') }}</th>

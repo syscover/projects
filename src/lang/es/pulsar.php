@@ -15,6 +15,8 @@ return [
     'billing'                               => 'Facturación',
     'consumed_hours'                        => 'Horas consumidas',
     'developer'                             => 'Desarrollador|Desarrolladores',
+    'developer_historical'                  => 'Histórico de desarrollador',
+    'developer_todo'                        => 'Tarea de desarrollador|Tareas de desarrolladores',
     'end_date'                              => 'Fecha de finalización',
     'estimated_end_date'                    => 'Fecha de finalización estimada',
     'estimated_hours'                       => 'Horas estimadas',
