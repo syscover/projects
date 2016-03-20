@@ -82,4 +82,15 @@ Route::group(['middleware' => ['web', 'pulsar']], function() {
     Route::get(config('pulsar.appName') . '/projects/historical/{id}/show/{offset}',               ['as'=>'showProjectsHistorical',               'uses'=>'Syscover\Projects\Controllers\HistoricalController@showRecord',              'resource' => 'projects-historical',        'action' => 'access']);
     Route::get(config('pulsar.appName') . '/projects/historical/{id}/invoice/{offset}',            ['as'=>'invoiceProjectsHistorical',            'uses'=>'Syscover\Projects\Controllers\HistoricalController@invoiceRecord',           'resource' => 'projects-historical',        'action' => 'create']);
     Route::delete(config('pulsar.appName') . '/projects/historical/delete/select/records',         ['as'=>'deleteSelectProjectsHistorical',       'uses'=>'Syscover\Projects\Controllers\HistoricalController@deleteRecordsSelect',     'resource' => 'projects-historical',        'action' => 'delete']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | DEVELOPER HISTORICAL
+    |--------------------------------------------------------------------------
+    */
+    Route::any(config('pulsar.appName') . '/projects/developer/historical/{offset?}',                        ['as'=>'projectsDeveloperHistorical',                   'uses'=>'Syscover\Projects\Controllers\HistoricalController@index',                   'resource' => 'projects-developer-historical',        'action' => 'access']);
+    Route::any(config('pulsar.appName') . '/projects/developer/historical/json/data',                        ['as'=>'jsonDataProjectsDeveloperHistorical',           'uses'=>'Syscover\Projects\Controllers\HistoricalController@jsonData',                'resource' => 'projects-developer-historical',        'action' => 'access']);
+    Route::get(config('pulsar.appName') . '/projects/developer/historical/{id}/show/{offset}',               ['as'=>'showProjectsDeveloperHistorical',               'uses'=>'Syscover\Projects\Controllers\HistoricalController@showRecord',              'resource' => 'projects-developer-historical',        'action' => 'access']);
+    Route::get(config('pulsar.appName') . '/projects/developer/historical/{id}/invoice/{offset}',            ['as'=>'invoiceProjectsDeveloperHistorical',            'uses'=>'Syscover\Projects\Controllers\HistoricalController@invoiceRecord',           'resource' => 'projects-developer-historical',        'action' => 'create']);
+    Route::delete(config('pulsar.appName') . '/projects/developer/historical/delete/select/records',         ['as'=>'deleteSelectProjectsDeveloperHistorical',       'uses'=>'Syscover\Projects\Controllers\HistoricalController@deleteRecordsSelect',     'resource' => 'projects-developer-historical',        'action' => 'delete']);
 });

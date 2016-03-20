@@ -1,5 +1,6 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Illuminate\Http\Request;
 use Syscover\Projects\Models\Historical;
 use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Traits\TraitController;
@@ -27,6 +28,19 @@ class HistoricalController extends Controller {
         'editButton'        => false,
         'deleteButton'      => false
     ];
+
+    function __construct(Request $request)
+    {
+        parent::__construct($request);
+
+        $actions = $request->route()->getAction();
+
+        // if request came from Developer Todos
+        if($actions['resource'] === 'projects-developer-historical')
+        {
+            $this->routeSuffix = 'projectsDeveloperHistorical';
+        }
+    }
 
     public function indexCustom($parameters)
     {

@@ -38,4 +38,18 @@ class Historical extends Model {
     {
         return $query->leftJoin('006_090_project', '006_093_historical.project_id_093', '=', '006_090_project.id_090');
     }
+
+    public function addToGetIndexRecords($request, $parameters)
+    {
+        // get actions to know where it comes from the request
+        $actions = $request->route()->getAction();
+
+        $query =  $this->builder();
+
+        // filter todos onle from current user
+        if($actions['resource'] === 'projects-developer-historical')
+            $query->where('developer_id_093', auth('pulsar')->user()->id_010);
+
+        return $query;
+    }
 }

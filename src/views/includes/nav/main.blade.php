@@ -1,4 +1,4 @@
-<li{!! Miscellaneous::setCurrentOpenPage(['projects-project', 'projects-todo', 'projects-developer-todo', 'projects-billing', 'projects-historical']) !!}>
+<li{!! Miscellaneous::setCurrentOpenPage(['projects-project', 'projects-todo', 'projects-developer-todo', 'projects-billing', 'projects-historical', 'projects-developer-historical']) !!}>
     <a href="javascript:void(0)"><i class="fa fa-code-fork"></i>{{ trans('projects::pulsar.package_name') }}</a>
     <ul class="sub-menu">
         @if(session('userAcl')->allows('projects-project', 'access'))
@@ -16,8 +16,8 @@
         @if(session('userAcl')->allows('projects-historical', 'access'))
             <li{!! Miscellaneous::setCurrentPage('projects-historical') !!}><a href="{{ route('projectsHistorical') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.historical') }}</a></li>
         @endif
-        @if(session('userAcl')->allows('projects-historical', 'access'))
-            <li{!! Miscellaneous::setCurrentPage('projects-historical') !!}><a href="{{ route('projectsHistorical') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.developer_historical') }}</a></li>
+        @if(session('userAcl')->allows('projects-developer-historical', 'access'))
+            <li{!! Miscellaneous::setCurrentPage('projects-developer-historical') !!}><a href="{{ route('projectsDeveloperHistorical') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.developer_historical') }}</a></li>
         @endif
     </ul>
 </li>
