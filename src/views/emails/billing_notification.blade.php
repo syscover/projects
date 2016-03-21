@@ -4,7 +4,7 @@
 <table cellspacing="0" cellpadding="0" width="100%" style="background:#ffffff;margin:0;padding:0;border:0;text-align:left;border-collapse:collapse;border-spacing:0">
     <tr>
         <td class="header_body brown" valign="middle" width="100%" style='background:#ffffff;text-align:left;font-size:15px;line-height:19px;font-family:"Helvetica Neue",helvetica,arial,sans-serif;border-collapse:collapse;padding:0;border-spacing:0;vertical-align:middle;padding-left:10px;width:auto !important;'>
-            {{ trans('projects::pulsar.message_task_finished') }} <strong>{{ $billing->end_date_text_092 }}</strong>
+            {{ trans('projects::pulsar.message_todo_finished') }} <strong>{{ $billing->end_date_text_092 }}</strong>
         </td>
     </tr>
     <tr>

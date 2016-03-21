@@ -26,7 +26,7 @@ return [
     'invoice_todo'                          => 'Facturar tarea',
     'message_invoice_todo'                  => '¿Desea facturar esta tarea?',
     'message_successfully_invoiced'         => 'La tarea ha sido facturada con éxito',
-    'message_task_finished'                 => 'Se ha completado una tarera para ser facturada, con fecha de',
+    'message_todo_finished'                 => 'Se ha completado una tarera para ser facturada, con fecha de',
     'package_name'                          => 'Projects',
     'project'                               => 'Proyecto|Proyectos',
     'project_management_user'               => 'Gestor de proyectos',
