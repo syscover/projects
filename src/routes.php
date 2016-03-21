@@ -93,4 +93,12 @@ Route::group(['middleware' => ['web', 'pulsar']], function() {
     Route::get(config('pulsar.appName') . '/projects/developer/historical/{id}/show/{offset}',               ['as'=>'showProjectsDeveloperHistorical',               'uses'=>'Syscover\Projects\Controllers\HistoricalController@showRecord',              'resource' => 'projects-developer-historical',        'action' => 'access']);
     Route::get(config('pulsar.appName') . '/projects/developer/historical/{id}/invoice/{offset}',            ['as'=>'invoiceProjectsDeveloperHistorical',            'uses'=>'Syscover\Projects\Controllers\HistoricalController@invoiceRecord',           'resource' => 'projects-developer-historical',        'action' => 'create']);
     Route::delete(config('pulsar.appName') . '/projects/developer/historical/delete/select/records',         ['as'=>'deleteSelectProjectsDeveloperHistorical',       'uses'=>'Syscover\Projects\Controllers\HistoricalController@deleteRecordsSelect',     'resource' => 'projects-developer-historical',        'action' => 'delete']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | PREFERENCES
+    |--------------------------------------------------------------------------
+    */
+    Route::any(config('pulsar.appName') . '/projects/preferences',                             ['as'=>'projectsPreference',               'uses'=>'Syscover\Projects\Controllers\PreferenceController@index',             'resource' => 'projects-preference',     'action' => 'access']);
+    Route::put(config('pulsar.appName') . '/projects/preferences/update',                      ['as'=>'updateProjectsPreference',         'uses'=>'Syscover\Projects\Controllers\PreferenceController@updateRecord',      'resource' => 'projects-preference',     'action' => 'edit']);
 });

@@ -19,5 +19,8 @@
         @if(session('userAcl')->allows('projects-developer-historical', 'access'))
             <li{!! Miscellaneous::setCurrentPage('projects-developer-historical') !!}><a href="{{ route('projectsDeveloperHistorical') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.developer_historical') }}</a></li>
         @endif
+        @if(session('userAcl')->allows('projects-preference', 'access'))
+            <li{!! Miscellaneous::setCurrentPage('projects-preference') !!}><a href="{{ route('projectsPreference') }}"><i class="fa fa-cog"></i>{{ trans_choice('pulsar::pulsar.preference', 2) }}</a></li>
+        @endif
     </ul>
 </li>
