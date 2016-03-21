@@ -23,10 +23,11 @@ class HistoricalController extends Controller {
     protected $icon         = 'fa fa-history';
     protected $objectTrans  = 'historical';
     protected $viewParameters   = [
-        'checkBoxColumn'    => false,
-        'showButton'        => true,
-        'editButton'        => false,
-        'deleteButton'      => false
+        'checkBoxColumn'        => false,
+        'showButton'            => true,
+        'editButton'            => false,
+        'deleteButton'          => false,
+        'deleteSelectButton'    => false
     ];
 
     function __construct(Request $request)
@@ -40,13 +41,6 @@ class HistoricalController extends Controller {
         {
             $this->routeSuffix = 'projectsDeveloperHistorical';
         }
-    }
-
-    public function indexCustom($parameters)
-    {
-        $parameters['deleteSelectButton'] = false;
-
-        return $parameters;
     }
 
     public function showCustomRecord($request, $parameters)

@@ -21,10 +21,9 @@
                         { 'visible': false, "bSearchable": false, 'aTargets': [7,9]}, // hidden column 1 and prevents search on column 1
                         { 'iDataSort': 7, 'aTargets': [8] }, // sort column 2 according hidden column 1 data
                         { 'iDataSort': 9, 'aTargets': [10] }, // sort column 2 according hidden column 1 data
-                        { 'bSortable': false, 'aTargets': [11,12]},
+                        { 'bSortable': false, 'aTargets': [11]},
                         { 'sClass': 'customer-width', 'aTargets': [1, 2]},
-                        { 'sClass': 'checkbox-column', 'aTargets': [11]},
-                        { 'sClass': 'align-center', 'aTargets': [12]}
+                        { 'sClass': 'align-center', 'aTargets': [11]}
                     ],
                     "bProcessing": true,
                     "bServerSide": true,
@@ -50,7 +49,6 @@
         <th data-hide="phone">{{ trans('projects::pulsar.request_date') }}</th>
         <th>{{ trans('projects::pulsar.end_date') }}</th>
         <th data-hide="phone">{{ trans('projects::pulsar.end_date') }}</th>
-        <th class="checkbox-column"><input type="checkbox" class="uniform"></th>
         <th>{{ trans_choice('pulsar::pulsar.action', 2) }}</th>
     </tr>
     <!-- ./projects::todo_.index -->

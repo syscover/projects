@@ -26,18 +26,12 @@ class BillingController extends Controller {
     protected $icon             = 'fa fa-credit-card';
     protected $objectTrans      = 'billing';
     protected $viewParameters   = [
-        'checkBoxColumn'    => false,
-        'showButton'        => true,
-        'editButton'        => false,
-        'deleteButton'      => false
+        'checkBoxColumn'        => false,
+        'showButton'            => true,
+        'editButton'            => false,
+        'deleteButton'          => false,
+        'deleteSelectButton'    => false
     ];
-
-    public function indexCustom($parameters)
-    {
-        $parameters['deleteSelectButton'] = false;
-
-        return $parameters;
-    }
 
     public function showCustomRecord($request, $parameters)
     {

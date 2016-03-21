@@ -32,6 +32,13 @@ class TodoController extends Controller {
     protected $model            = Todo::class;
     protected $icon             = 'fa fa-hourglass-start';
     protected $objectTrans      = 'todo';
+    protected $viewParameters   = [
+        'checkBoxColumn'        => false,
+        'showButton'            => false,
+        'editButton'            => true,
+        'deleteButton'          => true,
+        'deleteSelectButton'    => false
+    ];
 
     function __construct(Request $request)
     {
