@@ -31,7 +31,7 @@ class ProjectsCreateTableBilling extends Migration {
 
                 // descripción de la tarea
                 $table->string('title_092');
-                $table->text('description_092');
+                $table->text('description_092')->nullable();
 
                 // fecha de entrega
                 $table->integer('end_date_092')->unsigned()->nullable();

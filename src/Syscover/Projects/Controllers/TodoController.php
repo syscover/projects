@@ -70,12 +70,16 @@ class TodoController extends Controller {
 
     public function createCustomRecord($request, $parameters)
     {
+        // get resourse to know if set developer, depend of view, todos or developer todos
+        $actions                = $request->route()->getAction();
+        $parameters['resource'] = $actions['resource'];
+
         $parameters['types'] = array_map(function($object){
             $object->name = trans_choice($object->name, 1);
             return $object;
         }, config('projects.types'));
 
-        $parameters['projects']     = Project::builder()->where('end_date_090', '>', date('U'))->orWhereNull('end_date_090')->get();
+        $parameters['projects'] = Project::builder()->where('end_date_090', '>', date('U'))->orWhereNull('end_date_090')->get();
 
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
@@ -127,6 +131,10 @@ class TodoController extends Controller {
 
     public function editCustomRecord($request, $parameters)
     {
+        // get resourse to know if set developer, depend of view, todos or developer todos
+        $actions                = $request->route()->getAction();
+        $parameters['resource'] = $actions['resource'];
+
         if($parameters['object']->type_091 == 2)
         {
             $response = Facturadirecta::getClient($parameters['object']->customer_id_091);
@@ -174,6 +182,17 @@ class TodoController extends Controller {
             $customerName   = $request->input('customerName');
         }
 
+        // check that has hours if endDate exist
+        if($request->has('endDate'))
+        {
+            $validation = Billing::validate([
+               'hours'  =>  $request->input('hours')
+            ], ['hoursRule' => true]);
+            if ($validation->fails())
+                return redirect()->route('edit' . ucfirst($this->routeSuffix), ['id' => $parameters['id'], 'offset' => $parameters['offset']])
+                    ->withErrors($validation);
+        }
+
         Todo::where('id_091', $parameters['id'])->update([
             'developer_id_091'              => $request->input('developerId'),
             'developer_name_091'            => $request->input('developerName'),
@@ -194,16 +213,16 @@ class TodoController extends Controller {
         ]);
 
         // check if todo_ is finished
-        $this->endTodo($request, $parameters['id']);
+        $this->endTodo($request, $parameters);
     }
 
-    private function endTodo($request, $id)
+    private function endTodo($request, $parameters)
     {
         // if has enDate, so developer has finished tour todo_
         if($request->has('endDate'))
         {
             // get todo_
-            $todo = Todo::find($id);
+            $todo = Todo::find($parameters['id']);
 
             // 1 - project
             if($request->input('type') == 1)

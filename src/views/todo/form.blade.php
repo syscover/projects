@@ -184,32 +184,48 @@
         'readOnly' => true,
         'fieldSize' => 2
     ])
-    @include('pulsar::includes.html.form_select_group', [
-        'fieldSize' => 5,
-        'label' => trans_choice('projects::pulsar.developer', 1),
-        'id' => 'developerId',
-        'name' => 'developerId',
-        'value' => old('developerId', isset($object->developer_id_091)? $object->developer_id_091 : null),
-        'objects' => $developers,
-        'class' => 'select2',
-        'idSelect' => 'id',
-        'nameSelect' => 'name',
-        'required' => true,
-        'data' => [
-            'language' => config('app.locale'),
-            'width' => '100%',
-            'error-placement' => 'select2-developerId-outer-container'
-        ]
-    ])
-    @include('pulsar::includes.html.form_hidden', [
-        'name' => 'developerName',
-        'value' => old('developerName', isset($object->developer_name_091)? $object->developer_name_091 : null)
-    ])
+    @if($resource == 'projects-developer-todo')
+        @include('pulsar::includes.html.form_text_group', [
+            'fieldSize' =>  5,
+            'label' => trans_choice('projects::pulsar.developer', 1),
+            'name' => 'developerName',
+            'value' => old('developerName', isset($object)? $object->developer_name_091 : auth('pulsar')->user()->name_010 . ' ' . auth('pulsar')->user()->surname_010),
+            'maxLength' => '255',
+            'rangeLength' => '2,255',
+            'readOnly' => true
+        ])
+        @include('pulsar::includes.html.form_hidden', [
+            'name' => 'developerId',
+            'value' => old('developerId', isset($object)? $object->developer_id_091 : auth('pulsar')->user()->id_010)
+        ])
+    @else
+        @include('pulsar::includes.html.form_select_group', [
+            'fieldSize' => 5,
+            'label' => trans_choice('projects::pulsar.developer', 1),
+            'id' => 'developerId',
+            'name' => 'developerId',
+            'value' => old('developerId', isset($object)? $object->developer_id_091 : null),
+            'objects' => $developers,
+            'class' => 'select2',
+            'idSelect' => 'id',
+            'nameSelect' => 'name',
+            'required' => true,
+            'data' => [
+                'language' => config('app.locale'),
+                'width' => '100%',
+                'error-placement' => 'select2-developerId-outer-container'
+            ]
+        ])
+        @include('pulsar::includes.html.form_hidden', [
+            'name' => 'developerName',
+            'value' => old('developerName', isset($object)? $object->developer_name_091 : null)
+        ])
+    @endif
     @include('pulsar::includes.html.form_select_group', [
         'fieldSize' => 5,
         'label' => trans_choice('pulsar::pulsar.type', 1),
         'name' => 'type',
-        'value' => old('type', isset($object->type_091)? $object->type_091 : null),
+        'value' => old('type', isset($object)? $object->type_091 : null),
         'objects' => $types,
         'idSelect' => 'id',
         'nameSelect' => 'name',
@@ -221,7 +237,7 @@
             'label' => trans_choice('pulsar::pulsar.customer', 1),
             'id' => 'customerId',
             'name' => 'customerId',
-            'value' => old('customerId', isset($object->customer_id_091)? $object->customer_id_091 : null),
+            'value' => old('customerId', isset($object)? $object->customer_id_091 : null),
             'objects' => isset($customers)? $customers : null,
             'idSelect' => 'id',
             'nameSelect' => 'name',
@@ -234,7 +250,7 @@
         ])
         @include('pulsar::includes.html.form_hidden', [
             'name' => 'customerName',
-            'value' => old('customerName', isset($object->customer_name_091)? $object->customer_name_091 : null)
+            'value' => old('customerName', isset($object)? $object->customer_name_091 : null)
         ])
     </div>
     <div id="projectFields">
@@ -243,7 +259,7 @@
             'label' => trans_choice('projects::pulsar.project', 1),
             'id' => 'projectId',
             'name' => 'projectId',
-            'value' => old('projectId', isset($object->project_id_091)? $object->project_id_091 : null),
+            'value' => old('projectId', isset($object)? $object->project_id_091 : null),
             'objects' => $projects,
             'class' => 'select2',
             'idSelect' => 'id',
@@ -296,7 +312,7 @@
                     'fieldSize' => 5,
                     'label' => trans('projects::pulsar.request_date'),
                     'name' => 'requestDate',
-                    'value' => old('requestDate', isset($object->request_date_091)? date(config('pulsar.datePattern'), $object->request_date_091) : null),
+                    'value' => old('requestDate', isset($object)? date(config('pulsar.datePattern'), $object->request_date_091) : null),
                     'data' => [
                         'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                         'locale' => config('app.locale'),
@@ -315,7 +331,7 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
         'name' => 'endDate',
-        'value' => old('endDate', isset($object->end_date_091)? date(config('pulsar.datePattern'), $object->end_date_091) : null),
+        'value' => old('endDate', isset($object)? date(config('pulsar.datePattern'), $object->end_date_091) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),

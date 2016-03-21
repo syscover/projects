@@ -31,8 +31,10 @@ class Billing extends Model {
     protected $relationMaps = [];
     private static $rules   = [];
 
-    public static function validate($data)
+    public static function validate($data, $specialRules = [])
     {
+        if(isset($specialRules['hoursRule']) && $specialRules['hoursRule']) static::$rules['hours'] = 'required';
+
         return Validator::make($data, static::$rules);
 	}
 
