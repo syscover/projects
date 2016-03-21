@@ -299,7 +299,8 @@
                     'value' => old('requestDate', isset($object->request_date_091)? date(config('pulsar.datePattern'), $object->request_date_091) : null),
                     'data' => [
                         'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-                        'locale' => config('app.locale')
+                        'locale' => config('app.locale'),
+                        'max-date' => date('U')
                     ]
                 ])
             </div>
@@ -317,7 +318,8 @@
         'value' => old('endDate', isset($object->end_date_091)? date(config('pulsar.datePattern'), $object->end_date_091) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-            'locale' => config('app.locale')
+            'locale' => config('app.locale'),
+            'min-date' => date('U')
         ]
     ])
     @include('pulsar::includes.html.form_text_group', [
