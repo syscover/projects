@@ -13,6 +13,7 @@ return [
     |
     */
     'billing'                               => 'Billing',
+    'billing_user'                          => 'Billing',
     'consumed_hours'                        => 'Consumed hours',
     'developer'                             => 'Developer|Developers',
     'developer_historical'                  => 'Developer historical',
@@ -25,9 +26,12 @@ return [
     'invoice_todo'                          => 'Invoice todo',
     'message_invoice_todo'                  => 'Would you like to invoice this todo?',
     'message_successfully_invoiced'         => 'The todo has been successfully invoiced',
+    'message_task_finished'                 => 'It has completed a task to be billed, dated',
     'package_name'                          => 'Projects',
     'project'                               => 'Project|Projects',
+    'project_management_user'               => 'Project management',
     'request_date'                          => 'Request date',
     'total_hours'                           => 'Total hours',
     'todo'                                  => 'Todo|Todos',
+    'view_billing'                          => 'View billing',
 ];

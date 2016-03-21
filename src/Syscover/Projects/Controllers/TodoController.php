@@ -1,12 +1,16 @@
 <?php namespace Syscover\Projects\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
 use Syscover\Projects\Models\Billing;
 use Syscover\Projects\Models\Historical;
 use Syscover\Projects\Models\Project;
 use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\Miscellaneous;
+use Syscover\Pulsar\Models\EmailAccount;
+use Syscover\Pulsar\Models\Preference;
 use Syscover\Pulsar\Models\User;
 use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Projects\Models\Todo;
@@ -228,7 +232,7 @@ class TodoController extends Controller {
             // 2 - hours
             elseif($request->input('type') == 2)
             {
-                Billing::create([
+                $billing = Billing::create([
                     'todo_id_092'                   => $todo->id_091,
                     'developer_id_092'              => $todo->developer_id_091,
                     'developer_name_092'            => $todo->developer_name_091,
@@ -241,6 +245,33 @@ class TodoController extends Controller {
                     'hours_092'                     => $todo->hours_091,
                     'price_092'                     => $todo->price_091
                 ]);
+
+                // envío de notificación
+                $notificationsAccount   = Preference::getValue('projectsNotificationsAccount', 6);
+                $emailAccount           = EmailAccount::find($notificationsAccount->value_018);
+
+                if($emailAccount == null) return null;
+
+                config(['mail.host'         =>  $emailAccount->outgoing_server_013]);
+                config(['mail.port'         =>  $emailAccount->outgoing_port_013]);
+                config(['mail.from'         =>  ['address' => $emailAccount->email_013, 'name' => $emailAccount->name_013]]);
+                config(['mail.encryption'   =>  $emailAccount->outgoing_secure_013 == 'null'? null : $emailAccount->outgoing_secure_013]);
+                config(['mail.username'     =>  $emailAccount->outgoing_user_013]);
+                config(['mail.password'     =>  Crypt::decrypt($emailAccount->outgoing_pass_013)]);
+
+                $billingUser = User::builder()->find((int)Preference::getValue('projectsBillingUser', 6)->value_018);
+
+                $dataMessage = [
+                    'emailTo'   => $billingUser->email_010,
+                    'nameTo'    => $billingUser->name_010 . ' ' . $billingUser->surname_010,
+                    'subject'   => 'Notificación de facturación de tarea',
+                    'billing'   => $billing,
+                ];
+
+                Mail::send('projects::emails.billing_notification', $dataMessage, function($m) use ($dataMessage) {
+                    $m->to($dataMessage['emailTo'], $dataMessage['nameTo'])
+                        ->subject($dataMessage['subject']);
+                });
             }
         }
     }

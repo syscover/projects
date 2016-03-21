@@ -46,7 +46,7 @@ class ProjectController extends Controller {
 
     public function editCustomRecord($request, $parameters)
     {
-        $response = Facturadirecta::getClient($parameters['object']->customer_id_090);
+        $response   = Facturadirecta::getClient($parameters['object']->customer_id_090);
         $collection = collect();
 
         // check that response does not contain httpStatus 404

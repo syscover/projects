@@ -13,6 +13,7 @@ return [
     |
     */
     'billing'                               => 'Facturación',
+    'billing_user'                          => 'Facturación',
     'consumed_hours'                        => 'Horas consumidas',
     'developer'                             => 'Desarrollador|Desarrolladores',
     'developer_historical'                  => 'Histórico de desarrollador',
@@ -25,9 +26,12 @@ return [
     'invoice_todo'                          => 'Facturar tarea',
     'message_invoice_todo'                  => '¿Desea facturar esta tarea?',
     'message_successfully_invoiced'         => 'La tarea ha sido facturada con éxito',
+    'message_task_finished'                 => 'Se ha completado una tarera para ser facturada, con fecha de',
     'package_name'                          => 'Projects',
     'project'                               => 'Proyecto|Proyectos',
+    'project_management_user'               => 'Gestor de proyectos',
     'request_date'                          => 'Fecha de petición',
     'total_hours'                           => 'Total de horas',
     'todo'                                  => 'Tarea|Tareas',
+    'view_billing'                          => 'Ver facturación',
 ];

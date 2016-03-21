@@ -25,32 +25,14 @@
     <table cellspacing="0" cellpadding="0" class="layout" style="border-spacing:0;background:#ffffff;margin:0;padding:0;border-collapse:collapse;text-align:left;border:0;width:100%"><tr>
             <td style='background:#ffffff;text-align:left;vertical-align:top;font-size:15px;line-height:19px;font-family:"Helvetica Neue",helvetica,arial,sans-serif;color:#000000;padding:0;border-spacing:0;border-collapse:collapse'>
                 <table cellspacing="0" cellpadding="0" class="layout" style="border-spacing:0;background:#ffffff;margin:0;padding:0;border-collapse:collapse;text-align:left;border:0;width:100%">
-                    @include('forms::includes.block.actions_email')
+                    @include('projects::includes.block.actions_billing_notification')
                     <tr>
                         <td class="main_body" style='background:#ffffff;text-align:left;vertical-align:top;font-size:15px;line-height:19px;border-collapse:collapse;color:#000000;border-spacing:0;font-family:"Helvetica Neue",helvetica,arial,sans-serif;padding:20px 0'>
                             @yield('mainContent')
                         </td>
                     </tr>
-                    @include('forms::includes.block.actions_email')
-                    @include('forms::includes.block.sent_to_email')
-                    @if($dataTextMessage->permission_record_405 && $dataMessage->forward_405)
-                        <tr>
-                            <td class="subscription_footer" style='background:#ffffff;text-align:left;vertical-align:top;font-size:15px;line-height:19px;font-family:"Helvetica Neue",helvetica,arial,sans-serif;color:#000000;padding:0;border-spacing:0;border-collapse:collapse'>
-                                <p class="message small grey footer" style='font-family:"Helvetica Neue",helvetica,arial,sans-serif;margin:0 0 15px;line-height:15px;font-size:12px;color:grey;margin-bottom:8px;border-top:1px solid #ddd;margin-top:10px;padding-top:15px'>
-                                    <a href="{{ route('editFormsForm', ['id' => $dataMessage->form_405, 'offset' => 0]) }}" style="color:grey">{{ trans('forms::pulsar.stop_email_form') }}</a> {{ trans('forms::pulsar.stop_email_form2') }}
-                                </p>
-                            </td>
-                        </tr>
-                    @endif
-                    @if(!$dataMessage->forward_405)
-                        <tr>
-                            <td class="subscription_footer" style='background:#ffffff;text-align:left;vertical-align:top;font-size:15px;line-height:19px;font-family:"Helvetica Neue",helvetica,arial,sans-serif;color:#000000;padding:0;border-spacing:0;border-collapse:collapse'>
-                                <p class="message small grey footer" style='font-family:"Helvetica Neue",helvetica,arial,sans-serif;margin:0 0 15px;line-height:15px;font-size:12px;color:grey;margin-bottom:8px;border-top:1px solid #ddd;margin-top:10px;padding-top:15px'>
-                                    <a href="{{ route('deteleFormsRecipient', ['id' => $dataMessage->recipient_405, 'offset' => 0]) }}" style="color:grey">{{ trans('forms::pulsar.stop_email_form') }}</a> {{ trans('forms::pulsar.stop_email_form3') }}
-                                </p>
-                            </td>
-                        </tr>
-                    @endif
+                    @include('projects::includes.block.actions_billing_notification')
+                    @include('projects::includes.block.sent_to_email')
                 </table>
             </td>
         </tr>

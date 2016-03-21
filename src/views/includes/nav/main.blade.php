@@ -1,4 +1,4 @@
-<li{!! Miscellaneous::setCurrentOpenPage(['projects-project', 'projects-todo', 'projects-developer-todo', 'projects-billing', 'projects-historical', 'projects-developer-historical']) !!}>
+<li{!! Miscellaneous::setCurrentOpenPage(['projects-project', 'projects-todo', 'projects-developer-todo', 'projects-billing', 'projects-historical', 'projects-developer-historical', 'projects-preference']) !!}>
     <a href="javascript:void(0)"><i class="fa fa-code-fork"></i>{{ trans('projects::pulsar.package_name') }}</a>
     <ul class="sub-menu">
         @if(session('userAcl')->allows('projects-project', 'access'))
