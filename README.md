@@ -15,31 +15,23 @@ composer update
 **2 - Register service provider, on file config/app.php add to providers array**
 
 ```
-Syscover\Hotels\ProjectsServiceProvider::class,
+Syscover\Projects\ProjectsServiceProvider::class,
 
 ```
 
-**3 - To publish package, you must type on console**
-
+**3 - execute on console:**
 ```
-php artisan vendor:publish --force
-
+composer update
 ```
 
-**7 - Optimized class loader**
+**4 - Optimized class loader**
 
 ```
 php artisan optimize
 
 ```
 
-**8 - Run migrate database**
-
-```
-php artisan migrate
-```
-
-**9 - Run seed database**
+**5 - Run seed database**
 
 ```
 php artisan db:seed --class="ProjectsTableSeeder"
