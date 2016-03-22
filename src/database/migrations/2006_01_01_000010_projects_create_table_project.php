@@ -37,6 +37,10 @@ class ProjectsCreateTableProject extends Migration {
                 $table->integer('init_date_090')->unsigned()->nullable();
                 $table->string('init_date_text_090')->nullable();
 
+                // fecha de inicio del proyecto
+                $table->integer('end_date_090')->unsigned()->nullable();
+                $table->string('end_date_text_090')->nullable();
+
                 // fecha de finalización estimada
                 $table->integer('estimated_end_date_090')->unsigned()->nullable();
                 $table->string('estimated_end_date_text_090')->nullable();

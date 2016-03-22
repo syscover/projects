@@ -126,7 +126,7 @@ class TodoController extends Controller {
         ]);
 
         // check if todo_ is finished
-        $this->endTodo($request, $todo->id_091);
+        $this->endTodo($todo);
     }
 
     public function editCustomRecord($request, $parameters)
@@ -212,20 +212,20 @@ class TodoController extends Controller {
 
         ]);
 
+        // get todo_
+        $todo = Todo::find($parameters['id']);
+
         // check if todo_ is finished
-        $this->endTodo($request, $parameters);
+        $this->endTodo($todo);
     }
 
-    private function endTodo($request, $parameters)
+    private function endTodo($todo)
     {
         // if has enDate, so developer has finished tour todo_
-        if($request->has('endDate'))
+        if($todo->finished_091)
         {
-            // get todo_
-            $todo = Todo::find($parameters['id']);
-
             // 1 - project
-            if($request->input('type') == 1)
+            if($todo->type_091 == 1)
             {
                 // updates hour projects
                 $project = Project::builder()->find($todo->project_id_091);
@@ -256,7 +256,7 @@ class TodoController extends Controller {
 
             }
             // 2 - hours
-            elseif($request->input('type') == 2)
+            elseif($todo->type_091 == 2)
             {
                 $billing = Billing::create([
                     'todo_id_092'                   => $todo->id_091,
@@ -266,6 +266,8 @@ class TodoController extends Controller {
                     'customer_name_092'             => $todo->customer_name_091,
                     'title_092'                     => $todo->title_091,
                     'description_092'               => $todo->description_091,
+                    'request_date_092'              => $todo->request_date_091,
+                    'request_date_text_092'         => $todo->request_date_text_091,
                     'end_date_092'                  => $todo->end_date_091,
                     'end_date_text_092'             => $todo->end_date_text_091,
                     'hours_092'                     => $todo->hours_091,

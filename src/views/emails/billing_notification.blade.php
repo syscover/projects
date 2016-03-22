@@ -19,7 +19,7 @@
         <td class="content_body" style='background:#ffffff;text-align:left;vertical-align:top;font-size:15px;line-height:19px;border-collapse:collapse;color:#000000;border-spacing:0;font-family:"Helvetica Neue",helvetica,arial,sans-serif;padding:0 0 0 55px'>
             <br>
             <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
-                <strong>{{ trans('projects::pulsar.request_date') }}:</strong> XXX
+                <strong>{{ trans('projects::pulsar.request_date') }}:</strong> {{ $billing->request_date_text_092 }}
             </div>
             <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
                 <strong>{{ trans('projects::pulsar.end_date') }}:</strong> {{ $billing->end_date_text_092 }}
@@ -39,9 +39,11 @@
             <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
                 <strong>{{ trans_choice('pulsar::pulsar.hour', 2) }}:</strong> {{ $billing->hours_092 }}
             </div>
-            <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
-                <strong>{{ trans_choice('pulsar::pulsar.price', 1) }}:</strong> {{ isset($billing->price_092)? $billing->price_092 . '€' : null }}
-            </div>
+            @if(isset($billing->price_092))
+                <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
+                    <strong>{{ trans_choice('pulsar::pulsar.price', 1) }}:</strong> {{ $billing->price_092 . '€' }}
+                </div>
+            @endif
         </td>
     </tr>
     <tr>
