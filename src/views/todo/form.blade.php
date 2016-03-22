@@ -63,29 +63,46 @@
             })
 
             // start select2 ajax function
-            // need declare firs, cuntion templates before, select2 function
+            // need declare firs, custom templates before, select2 function
             $.formatCustomer = function(customer) {
                 if(customer.name == undefined)
-                    var markup = '{{ trans('pulsar::pulsar.searching') }}...';
+                {
+                    return '{{ trans('pulsar::pulsar.searching') }}...'
+                }
                 else
-                    var markup = customer.companyCode + ' ' + customer.name;
-
-                return markup;
+                {
+                    if(Array.isArray(customer.tradeName))
+                    {
+                        return customer.companyCode + ' ' + customer.name
+                    }
+                    else
+                    {
+                        return customer.companyCode + ' ' + customer.name + ' (' + customer.tradeName + ')'
+                    }
+                }
             }
 
             $.formatCustomerSelection = function (customer) {
                 if(customer.name == undefined)
                 {
                     @if(isset($customers))
-                        return '{{ $customers->first()->companyCode . ' ' . $customers->first()->name  }}'
+                        return '{{ $customers->first()->companyCode . ' ' . $customers->first()->name . (empty($customers->first()->tradeName)? null : ' ('. $customers->first()->tradeName .')') }}'
                     @else
                         return customer
                     @endif
                 }
                 else
                 {
-                    $('[name=customerName]').val(customer.name)
-                    return customer.companyCode + ' ' + customer.name
+                    if(Array.isArray(customer.tradeName))
+                    {
+                        $('[name=customerName]').val(customer.companyCode + ' ' + customer.name)
+                        return customer.companyCode + ' ' + customer.name
+                    }
+                    else
+                    {
+                        $('[name=customerName]').val(customer.companyCode + ' ' + customer.name + ' (' + customer.tradeName + ')')
+                        return customer.companyCode + ' ' + customer.name + ' (' + customer.tradeName + ')'
+                    }
                 }
             }
 
@@ -316,7 +333,7 @@
                     'data' => [
                         'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                         'locale' => config('app.locale'),
-                        'max-date' => date('U')
+                        'max-date' => date('D M d Y H:i:s O')
                     ]
                 ])
             </div>
@@ -335,7 +352,7 @@
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
-            'min-date' => date('U')
+            'min-date' => date('D M d Y H:i:s O')
         ]
     ])
     @include('pulsar::includes.html.form_text_group', [
