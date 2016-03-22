@@ -45,7 +45,7 @@ class ProjectsCreateTableTodo extends Migration {
                 $table->integer('request_date_091')->unsigned()->nullable();
                 $table->string('request_date_text_091')->nullable();
 
-                // fecha de petición de finalización de tarea
+                // fecha de finalización de tarea
                 $table->integer('end_date_091')->unsigned()->nullable();
                 $table->string('end_date_text_091')->nullable();
 

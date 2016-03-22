@@ -4,7 +4,7 @@
 <table cellspacing="0" cellpadding="0" width="100%" style="background:#ffffff;margin:0;padding:0;border:0;text-align:left;border-collapse:collapse;border-spacing:0">
     <tr>
         <td class="header_body brown" valign="middle" width="100%" style='background:#ffffff;text-align:left;font-size:15px;line-height:19px;font-family:"Helvetica Neue",helvetica,arial,sans-serif;border-collapse:collapse;padding:0;border-spacing:0;vertical-align:middle;padding-left:10px;width:auto !important;'>
-            {{ trans('projects::pulsar.message_todo_finished') }} <strong>{{ $billing->end_date_text_092 }}</strong>
+            <strong>{{ trans('projects::pulsar.message_todo_finished') }}</strong>
         </td>
     </tr>
     <tr>
@@ -19,7 +19,13 @@
         <td class="content_body" style='background:#ffffff;text-align:left;vertical-align:top;font-size:15px;line-height:19px;border-collapse:collapse;color:#000000;border-spacing:0;font-family:"Helvetica Neue",helvetica,arial,sans-serif;padding:0 0 0 55px'>
             <br>
             <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
-                <strong>{{ trans_choice('projects:pulsar.developer', 1) }}:</strong> {{ $billing->developer_name_092 }}
+                <strong>{{ trans('projects::pulsar.request_date') }}:</strong> XXX
+            </div>
+            <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
+                <strong>{{ trans('projects::pulsar.end_date') }}:</strong> {{ $billing->end_date_text_092 }}
+            </div>
+            <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
+                <strong>{{ trans_choice('projects::pulsar.developer', 1) }}:</strong> {{ $billing->developer_name_092 }}
             </div>
             <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
                 <strong>{{ trans_choice('pulsar::pulsar.customer', 1) }}:</strong> {{ $billing->customer_name_092 }}

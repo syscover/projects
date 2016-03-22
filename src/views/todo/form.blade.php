@@ -333,7 +333,7 @@
                     'data' => [
                         'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                         'locale' => config('app.locale'),
-                        'max-date' => date('D M d Y H:i:s O')
+                        'max-date' => date('Y-m-d')
                     ]
                 ])
             </div>
@@ -352,7 +352,7 @@
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
-            'min-date' => date('D M d Y H:i:s O')
+            'min-date' => date('Y-m-d')
         ]
     ])
     @include('pulsar::includes.html.form_text_group', [
