@@ -303,7 +303,6 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.request_date'),
             'name' => 'requestDate',
-            //'value' => date('Y-m-d', $object->request_date_093),
             'readOnly' => $resource == 'projects-developer-historical'? true : false,
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
@@ -316,7 +315,6 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
         'name' => 'endDate',
-        //'value' => date('Y-m-d', $object->end_date_093),
         'readOnly' => $resource == 'projects-developer-historical'? true : false,
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
