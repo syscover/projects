@@ -193,6 +193,7 @@ class TodoController extends Controller {
             $validation = Billing::validate([
                'hours'  =>  $request->input('hours')
             ], ['hoursRule' => true]);
+
             if ($validation->fails())
                 return redirect()->route('edit' . ucfirst($this->routeSuffix), ['id' => $parameters['id'], 'offset' => $parameters['offset']])
                     ->withErrors($validation);

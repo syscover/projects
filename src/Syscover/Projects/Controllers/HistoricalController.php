@@ -45,6 +45,16 @@ class HistoricalController extends Controller {
         {
             $this->routeSuffix = 'projectsDeveloperHistorical';
         }
+        elseif($actions['resource'] === 'projects-historical')
+        {
+            $this->viewParameters = [
+                'checkBoxColumn'        => true,
+                'showButton'            => false,
+                'editButton'            => true,
+                'deleteButton'          => true,
+                'deleteSelectButton'    => true
+            ];
+        }
     }
 
     public function showCustomRecord($request, $parameters)
@@ -90,4 +100,102 @@ class HistoricalController extends Controller {
         return $parameters;
     }
 
+    public function editCustomRecord($request, $parameters)
+    {
+        // get resourse to know if set developer, depend of view, todos or developer todos
+        $actions                = $request->route()->getAction();
+        $parameters['resource'] = $actions['resource'];
+
+        if($parameters['object']->type_093 == 2)
+        {
+            $response = Facturadirecta::getClient($parameters['object']->customer_id_093);
+            $collection = collect();
+
+            // check that response does not contain httpStatus 404
+            if(! isset($response['httpStatus']))
+            {
+                // set id like integer, to compare in select
+                $response['id']             = (int)$response['id'];
+                $parameters['customers']    = $collection->push(Miscellaneous::arrayToObject($response));
+            }
+        }
+
+        // types
+        $parameters['types'] = array_map(function($object){
+            $object->name = trans_choice($object->name, 1);
+            return $object;
+        }, config('projects.types'));
+
+        // projects
+        $parameters['projects'] = Project::builder()
+            ->where('end_date_090', '>', date('U'))
+            ->orWhereNull('end_date_090')
+            ->get();
+
+        // todo: cambiar por listado de programadores
+        $users = User::builder()->get();
+
+        $parameters['developers'] = $users->map(function ($user, $key) {
+            $user->name = $user->name_010 . ' ' . $user->surname_010;
+            return $user;
+        });
+
+        return $parameters;
+    }
+
+    public function updateCustomRecord($request, $parameters)
+    {
+        if($request->has('projectId'))
+        {
+            $project = Project::builder()->find($request->input('projectId'));
+
+            $customerId     = $project->customer_id_090;
+            $customerName   = $project->customer_name_090;
+        }
+        else
+        {
+            $customerId     = $request->input('customerId');
+            $customerName   = $request->input('customerName');
+        }
+
+        // check that has hours if endDate exist
+        if($request->has('endDate'))
+        {
+            $validation = Historical::validate([
+                'hours'  =>  $request->input('hours')
+            ], ['hoursRule' => true]);
+
+            if ($validation->fails())
+                return redirect()->route('edit' . ucfirst($this->routeSuffix), ['id' => $parameters['id'], 'offset' => $parameters['offset']])
+                    ->withErrors($validation);
+        }
+
+        // TODO, contemplar cuando se cambie las horas o de projecto, se recalcule las horas del proyecto
+        // 1 - project
+//        if($request->input('type') == 1)
+//        {
+//            $historical = Historical::builder()->find($parameters['id']);
+//            if($historical->hours_093 != $request->input('hours'))
+//            {
+//                $newHours = $historical->hours_093 - $request->input('hours');
+//            }
+//        }
+
+        Historical::where('id_093', $parameters['id'])->update([
+            'developer_id_093'              => $request->input('developerId'),
+            'developer_name_093'            => $request->input('developerName'),
+            'title_093'                     => $request->input('title'),
+            'description_093'               => $request->has('description')? $request->input('description') : null,
+            'type_093'                      => $request->input('type'),
+            'project_id_093'                => $request->has('projectId')? $request->input('projectId') : null,
+            'customer_id_093'               => $customerId,
+            'customer_name_093'             => $customerName,
+            'hours_093'                     => $request->has('hours')? $request->input('hours') : null,
+            'price_093'                     => $request->has('price')? $request->input('price') : null,
+            'request_date_093'              => $request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('requestDate'))->getTimestamp() : null,
+            'request_date_text_093'         => $request->has('requestDate')? $request->input('requestDate') : null,
+            'end_date_093'                  => $request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('endDate'))->getTimestamp() : null,
+            'end_date_text_093'             => $request->has('endDate')? $request->input('endDate') : null
+        ]);
+    }
 }

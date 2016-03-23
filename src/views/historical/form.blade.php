@@ -2,6 +2,10 @@
 
 @section('head')
     @parent
+    <link rel="stylesheet" href="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
+
+    <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/moment.min.js') }}"></script>
+    <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 
     @include('pulsar::includes.html.froala_references')
 
@@ -13,25 +17,30 @@
                 toolbarInline: false,
                 toolbarSticky: true,
                 tabSpaces: true,
+                @if($resource == 'projects-developer-historical')
                 shortcutsEnabled: [],
                 toolbarButtons: [],
+                @elseif($resource == 'projects-historical')
+                shortcutsEnabled: ['show', 'bold', 'italic', 'underline', 'strikeThrough', 'indent', 'outdent', 'undo', 'redo', 'insertImage', 'createLink'],
+                toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'insertHR', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html'],
+                @endif
                 heightMin: 125,
                 enter: $.FroalaEditor.ENTER_BR,
                 key: '{{ config('pulsar.froalaEditorKey') }}',
                 imageUploadURL: '{{ route('froalaUploadImage') }}',
                 imageUploadParams: {
-                    package: 'cms',
+                    package: 'projects',
                     _token: '{{ csrf_token() }}'
                 },
-                imageManagerLoadURL: '{{ route('froalaLoadImages', ['package' => 'cms']) }}',
+                imageManagerLoadURL: '{{ route('froalaLoadImages', ['package' => 'projects']) }}',
                 imageManagerDeleteURL: '{{ route('froalaDeleteImage') }}',
                 imageManagerDeleteParams: {
-                    package: 'cms',
+                    package: 'projects',
                     _token: '{{ csrf_token() }}'
                 },
                 fileUploadURL: '{{ route('froalaUploadFile') }}',
                 fileUploadParams: {
-                    package: 'cms',
+                    package: 'projects',
                     _token: '{{ csrf_token() }}'
                 }
             }).on('froalaEditor.image.removed', function (e, editor, $img) {
@@ -41,7 +50,7 @@
                     headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
                     url: '{{ route('froalaDeleteImage') }}',
                     data: {
-                        package: 'cms',
+                        package: 'projects',
                         src: $img.attr('src')
                     }
                 })
@@ -51,29 +60,129 @@
                 .fail (function () {
                     console.log ('image delete problem')
                 })
-            }).froalaEditor('edit.off')
-
-            // invoiced action
-            $('#invoiceButton').on('click', function(e){
-                // stop event
-                e.preventDefault()
-
-                var that = this
-                $.msgbox('{{ trans('projects::pulsar.message_invoice_todo') }}',
-                    {
-                        type:'confirm',
-                        buttons: [
-                            {type: 'submit', value: '{{ trans('pulsar::pulsar.accept') }}'},
-                            {type: 'cancel', value: '{{ trans('pulsar::pulsar.cancel') }}'}
-                        ]
-                    },
-                    function(buttonPressed) {
-                        if(buttonPressed == '{{ trans('pulsar::pulsar.accept') }}')
-                            $(location).attr('href', $(that).attr('href'));
-                    }
-                )
             })
 
+            @if($resource == 'projects-developer-historical')
+                $('.wysiwyg').froalaEditor().froalaEditor('edit.off')
+            @endif
+
+            // start change developer
+            $('#developerId').on('change', function() {
+                $('[name=developerName]').val($('#developerId option:selected').text())
+            })
+
+            // start select2 ajax function
+            // need declare firs, custom templates before, select2 function
+            $.formatCustomer = function(customer) {
+                if(customer.name == undefined)
+                {
+                    return '{{ trans('pulsar::pulsar.searching') }}...'
+                }
+                else
+                {
+                    if(Array.isArray(customer.tradeName))
+                    {
+                        return customer.companyCode + ' ' + customer.name
+                    }
+                    else
+                    {
+                        return customer.companyCode + ' ' + customer.name + ' (' + customer.tradeName + ')'
+                    }
+                }
+            }
+
+            $.formatCustomerSelection = function (customer) {
+                if(customer.name == undefined)
+                {
+                    @if(isset($customers))
+                            return '{{ $customers->first()->companyCode . ' ' . $customers->first()->name . (empty($customers->first()->tradeName)? null : ' ('. $customers->first()->tradeName .')') }}'
+                    @else
+                            return customer
+                    @endif
+                }
+                else
+                {
+                    if(Array.isArray(customer.tradeName))
+                    {
+                        $('[name=customerName]').val(customer.companyCode + ' ' + customer.name)
+                        return customer.companyCode + ' ' + customer.name
+                    }
+                    else
+                    {
+                        $('[name=customerName]').val(customer.companyCode + ' ' + customer.name + ' (' + customer.tradeName + ')')
+                        return customer.companyCode + ' ' + customer.name + ' (' + customer.tradeName + ')'
+                    }
+                }
+            }
+
+            // intems per page
+            var itemsPerPage = 25;
+            $('#customerId').select2({
+                ajax: {
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    type: 'POST',
+                    url: '{{ route('apiFacturadirectaCustomers') }}',
+                    data: function (params) {
+                        return {
+                            // search term
+                            term:  params.term,
+                            start: params.page * itemsPerPage,
+                            limit: itemsPerPage
+                        };
+                    },
+                    dataType: 'json',
+                    delay: 300,
+                    processResults: function (data, params) {
+
+                        params.page = params.page || 0;
+
+                        return {
+                            results: data.client,
+                            pagination: {
+                                more: (params.page * itemsPerPage) < data.attributes.total
+                            }
+                        }
+                    },
+                    cache: true
+                },
+                minimumInputLength: 1,
+                templateResult: $.formatCustomer,
+                templateSelection: $.formatCustomerSelection
+            })
+            // end select2 ajax function
+
+            // start change type todo_
+            $('[name=type]').on('change', function() {
+                // 1 - project
+                if($(this).val() == 1)
+                {
+                    $("#todoCustomer").hide()
+                    $("#todoDescription").hide()
+                    $("#todoPrice").hide()
+                    $("#todoRequestDate").hide()
+                    $("#todoProject").fadeIn()
+                }
+                // 2 - hours
+                else if($(this).val() == 2)
+                {
+                    $("#todoProject").hide()
+                    $("#todoRequestDate").fadeIn()
+                    $("#todoCustomer").fadeIn()
+                    $("#todoPrice").fadeIn()
+                    $("#todoDescription").fadeIn()
+
+                }
+                else
+                {
+                    $("#todoProject").hide()
+                    $("#todoCustomer").hide()
+                    $("#todoDescription").hide()
+                    $("#todoPrice").hide()
+                    $("#todoRequestDate").hide()
+                }
+            })
 
             // hide every fields
             $("#todoProject").hide()
@@ -99,7 +208,7 @@
 @stop
 
 @section('rows')
-    <!-- projects::billing.form -->
+    <!-- projects::historical.form -->
     @include('pulsar::includes.html.form_text_group', [
         'label' => 'ID',
         'name' => 'id',
@@ -116,7 +225,11 @@
         'objects' => $developers,
         'idSelect' => 'id',
         'nameSelect' => 'name',
-        'disabled' => true
+        'disabled' => $resource == 'projects-developer-historical'? true : false
+    ])
+    @include('pulsar::includes.html.form_hidden', [
+        'name' => 'developerName',
+        'value' => old('developerName', isset($object)? $object->developer_name_093 : null)
     ])
     @include('pulsar::includes.html.form_select_group', [
         'fieldSize' => 5,
@@ -126,7 +239,7 @@
         'objects' => $types,
         'idSelect' => 'id',
         'nameSelect' => 'name',
-        'disabled' => true
+        'disabled' => $resource == 'projects-developer-historical'? true : false
     ])
     <div id="todoCustomer">
         @include('pulsar::includes.html.form_select_group', [
@@ -138,7 +251,7 @@
             'objects' => isset($customers)? $customers : null,
             'idSelect' => 'id',
             'nameSelect' => 'name',
-            'disabled' => true,
+            'disabled' => $resource == 'projects-developer-historical'? true : false,
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
@@ -161,7 +274,7 @@
             'class' => 'select2',
             'idSelect' => 'id',
             'nameSelect' => 'name',
-            'disabled' => true,
+            'disabled' => $resource == 'projects-developer-historical'? true : false,
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
@@ -173,7 +286,7 @@
         'label' => trans('pulsar::pulsar.title'),
         'name' => 'title',
         'value' => $object->title_093,
-        'readOnly' => true
+        'readOnly' => $resource == 'projects-developer-historical'? true : false
     ])
     <div id="todoDescription">
         @include('pulsar::includes.html.form_wysiwyg_group', [
@@ -182,24 +295,34 @@
             'value' => $object->description_093,
             'labelSize' => 2,
             'fieldSize' => 10,
-            'disabled' => true
+            'disabled' => $resource == 'projects-developer-historical'? true : false
         ])
     </div>
     <div id="todoRequestDate">
-        @include('pulsar::includes.html.form_text_group', [
+        @include('pulsar::includes.html.form_datetimepicker_group', [
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.request_date'),
-            'name' => 'endDate',
-            'value' => $object->request_date_text_093,
-            'readOnly' => true
+            'name' => 'requestDate',
+            //'value' => date('Y-m-d', $object->request_date_093),
+            'readOnly' => $resource == 'projects-developer-historical'? true : false,
+            'data' => [
+                'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+                'locale' => config('app.locale'),
+                'default-date' => date('Y-m-d', $object->request_date_093)
+            ]
         ])
     </div>
-    @include('pulsar::includes.html.form_text_group', [
-       'fieldSize' => 4,
-       'label' => trans('projects::pulsar.end_date'),
-       'name' => 'endDate',
-       'value' => $object->end_date_text_093,
-       'readOnly' => true
+    @include('pulsar::includes.html.form_datetimepicker_group', [
+        'fieldSize' => 4,
+        'label' => trans('projects::pulsar.end_date'),
+        'name' => 'endDate',
+        //'value' => date('Y-m-d', $object->end_date_093),
+        'readOnly' => $resource == 'projects-developer-historical'? true : false,
+        'data' => [
+            'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+            'locale' => config('app.locale'),
+            'default-date' => date('Y-m-d', $object->end_date_093)
+        ]
     ])
     <div id="todoPrice">
         @include('pulsar::includes.html.form_text_group', [
@@ -208,7 +331,7 @@
             'label' => trans_choice('pulsar::pulsar.price', 1),
             'name' => 'price',
             'value' => $object->price_093,
-            'readOnly' => true
+            'readOnly' => $resource == 'projects-developer-historical'? true : false
         ])
     </div>
     @include('pulsar::includes.html.form_text_group', [
@@ -217,7 +340,7 @@
         'label' => trans_choice('pulsar::pulsar.hour', 2),
         'name' => 'hours',
         'value' => $object->hours_093,
-        'readOnly' => true
+        'readOnly' => $resource == 'projects-developer-historical'? true : false
     ])
-    <!-- ./projects::billing.form -->
+    <!-- ./projects::historical.form -->
 @stop

@@ -24,18 +24,18 @@
                 key: '{{ config('pulsar.froalaEditorKey') }}',
                 imageUploadURL: '{{ route('froalaUploadImage') }}',
                 imageUploadParams: {
-                    package: 'cms',
+                    package: 'projects',
                     _token: '{{ csrf_token() }}'
                 },
-                imageManagerLoadURL: '{{ route('froalaLoadImages', ['package' => 'cms']) }}',
+                imageManagerLoadURL: '{{ route('froalaLoadImages', ['package' => 'projects']) }}',
                 imageManagerDeleteURL: '{{ route('froalaDeleteImage') }}',
                 imageManagerDeleteParams: {
-                    package: 'cms',
+                    package: 'projects',
                     _token: '{{ csrf_token() }}'
                 },
                 fileUploadURL: '{{ route('froalaUploadFile') }}',
                 fileUploadParams: {
-                    package: 'cms',
+                    package: 'projects',
                     _token: '{{ csrf_token() }}'
                 }
             }).on('froalaEditor.image.removed', function (e, editor, $img) {
@@ -45,7 +45,7 @@
                     headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
                     url: '{{ route('froalaDeleteImage') }}',
                     data: {
-                        package: 'cms',
+                        package: 'projects',
                         src: $img.attr('src')
                     }
                 })
@@ -318,7 +318,7 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.request_date'),
             'name' => 'requestDate',
-            'value' => old('requestDate', isset($object)? date(config('pulsar.datePattern'), $object->request_date_091) : null),
+            'value' => old('requestDate', isset($object)? date(config('pulsar.datePattern'), date('Y-m-d', $object->request_date_091)) : null),
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                 'locale' => config('app.locale'),
@@ -330,7 +330,7 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
         'name' => 'endDate',
-        'value' => old('endDate', isset($object)? date(config('pulsar.datePattern'), $object->end_date_091) : null),
+        'value' => old('endDate', isset($object)? date(config('pulsar.datePattern'), date('Y-m-d', $object->end_date_091)) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
