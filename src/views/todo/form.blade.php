@@ -322,7 +322,7 @@
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                 'locale' => config('app.locale'),
                 'max-date' => date('Y-m-d'),
-                'default-date' => old('requestDate', isset($object)? date('Y-m-d', $object->request_date_091) : null)
+                'default-date' => old('requestDate', isset($object->request_date_091)? date('Y-m-d', $object->request_date_091) : null)
             ]
         ])
     </div>
@@ -334,7 +334,7 @@
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
             'min-date' => date('Y-m-d'),
-            'default-date' => old('endDate', isset($object)? date('Y-m-d', $object->end_date_091) : null)
+            'default-date' => old('endDate', isset($object->end_date_091)? date('Y-m-d', $object->end_date_091) : null)
         ]
     ])
     <div id="todoPrice">
