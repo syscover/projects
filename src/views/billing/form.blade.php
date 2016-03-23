@@ -117,6 +117,13 @@
         'disabled' => true
     ])
     @include('pulsar::includes.html.form_text_group', [
+        'fieldSize' => 4,
+        'label' => trans('projects::pulsar.request_date'),
+        'name' => 'endDate',
+        'value' => $object->request_date_text_092,
+        'readOnly' => true
+    ])
+    @include('pulsar::includes.html.form_text_group', [
        'fieldSize' => 4,
        'label' => trans('projects::pulsar.end_date'),
        'name' => 'endDate',
@@ -126,18 +133,18 @@
     @include('pulsar::includes.html.form_text_group', [
         'fieldSize' => 4,
         'type' => 'number',
+        'label' => trans_choice('pulsar::pulsar.price', 1),
+        'name' => 'price',
+        'value' => $object->price_092,
+        'readOnly' => true
+    ])
+    @include('pulsar::includes.html.form_text_group', [
+        'fieldSize' => 4,
+        'type' => 'number',
         'label' => trans_choice('pulsar::pulsar.hour', 2),
         'name' => 'hours',
         'value' => $object->hours_092,
         'readOnly' => true
-    ])
-    @include('pulsar::includes.html.form_text_group', [
-         'fieldSize' => 4,
-         'type' => 'number',
-         'label' => trans_choice('pulsar::pulsar.price', 1),
-         'name' => 'price',
-         'value' => $object->price_092,
-         'readOnly' => true
     ])
     <!-- ./projects::billing.form -->
 @stop

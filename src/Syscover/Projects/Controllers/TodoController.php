@@ -4,15 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
-use Syscover\Projects\Models\Billing;
-use Syscover\Projects\Models\Historical;
-use Syscover\Projects\Models\Project;
 use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Pulsar\Models\EmailAccount;
 use Syscover\Pulsar\Models\Preference;
 use Syscover\Pulsar\Models\User;
 use Syscover\Pulsar\Traits\TraitController;
+use Syscover\Projects\Models\Billing;
+use Syscover\Projects\Models\Historical;
+use Syscover\Projects\Models\Project;
 use Syscover\Projects\Models\Todo;
 
 /**
@@ -74,12 +74,17 @@ class TodoController extends Controller {
         $actions                = $request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
+        // types
         $parameters['types'] = array_map(function($object){
             $object->name = trans_choice($object->name, 1);
             return $object;
         }, config('projects.types'));
 
-        $parameters['projects'] = Project::builder()->where('end_date_090', '>', date('U'))->orWhereNull('end_date_090')->get();
+        // projects
+        $parameters['projects'] = Project::builder()
+            ->where('end_date_090', '>', date('U'))
+            ->orWhereNull('end_date_090')
+            ->get();
 
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();

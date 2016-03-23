@@ -27,19 +27,16 @@ class ProjectsCreateTableHistorical extends Migration {
                 // 2 - hours
                 $table->tinyInteger('type_093')->unsigned();
 
-                // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto
-                $table->integer('project_id_093')->unsigned()->nullable();
-
                 // selecciona un cliente en caso de no pertenecer a un proyecto
                 $table->integer('customer_id_093')->unsigned();
                 $table->string('customer_name_093');
 
+                // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto
+                $table->integer('project_id_093')->unsigned()->nullable();
+
                 // descripción de la tarea
                 $table->string('title_093');
                 $table->text('description_093')->nullable();
-
-                // precio de la tarea, en el cado de haberse definido
-                $table->decimal('price_093', 10, 2)->nullable();
 
                 // fecha de petición de la tarea
                 $table->integer('request_date_093')->unsigned()->nullable();
@@ -51,6 +48,9 @@ class ProjectsCreateTableHistorical extends Migration {
 
                 // número de horas realizadas en esta tarea
                 $table->decimal('hours_093', 8, 2)->nullable();
+
+                // precio de la tarea, en el cado de haberse definido
+                $table->decimal('price_093', 10, 2)->nullable();
 
                 $table->foreign('developer_id_093', 'fk01_006_093_historical')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');

@@ -149,42 +149,49 @@
                 // 1 - project
                 if($(this).val() == 1)
                 {
-                    $("#hoursFields").hide()
-                    $("#descriptionTodo").hide()
-                    $("#priceRequestTodo").hide()
-                    $("#projectFields").fadeIn()
+                    $("#todoCustomer").hide()
+                    $("#todoDescription").hide()
+                    $("#todoPrice").hide()
+                    $("#todoRequestDate").hide()
+                    $("#todoProject").fadeIn()
                 }
                 // 2 - hours
                 else if($(this).val() == 2)
                 {
-                    $("#projectFields").hide()
-                    $("#hoursFields").fadeIn()
-                    $("#priceRequestTodo").fadeIn()
-                    $("#descriptionTodo").fadeIn()
+                    $("#todoProject").hide()
+                    $("#todoRequestDate").fadeIn()
+                    $("#todoCustomer").fadeIn()
+                    $("#todoPrice").fadeIn()
+                    $("#todoDescription").fadeIn()
+
                 }
                 else
                 {
-                    $("#projectFields").hide()
-                    $("#hoursFields").hide()
-                    $("#descriptionTodo").hide()
-                    $("#priceRequestTodo").hide()
+                    $("#todoProject").hide()
+                    $("#todoCustomer").hide()
+                    $("#todoDescription").hide()
+                    $("#todoPrice").hide()
+                    $("#todoRequestDate").hide()
                 }
             })
 
             // hide every fields
-            $("#projectFields").hide()
-            $("#hoursFields").hide()
-            $("#descriptionTodo").hide()
-            $("#priceRequestTodo").hide()
+            $("#todoProject").hide()
+            $("#todoCustomer").hide()
+            $("#todoDescription").hide()
+            $("#todoPrice").hide()
+            $("#todoRequestDate").hide()
 
             @if(isset($object))
                 @if($object->type_091 == 1)
                     // 1 - project
-                    $("#projectFields").show()
+                    $("#todoProject").show()
                 @else
-                    $("#hoursFields").show()
-                    $("#priceRequestTodo").show()
-                    $("#descriptionTodo").show()
+                    // 2 - hour
+                    $("#todoCustomer").show()
+                    $("#todoPrice").show()
+                    $("#todoDescription").show()
+                    $("#todoRequestDate").show()
                 @endif
             @endif
             // end change type todo_
@@ -248,7 +255,7 @@
         'nameSelect' => 'name',
         'required' => true
     ])
-    <div id="hoursFields">
+    <div id="todoCustomer">
         @include('pulsar::includes.html.form_select_group', [
             'fieldSize' => 5,
             'label' => trans_choice('pulsar::pulsar.customer', 1),
@@ -270,7 +277,7 @@
             'value' => old('customerName', isset($object)? $object->customer_name_091 : null)
         ])
     </div>
-    <div id="projectFields">
+    <div id="todoProject">
         @include('pulsar::includes.html.form_select_group', [
             'fieldSize' => 5,
             'label' => trans_choice('projects::pulsar.project', 1),
@@ -297,7 +304,7 @@
         'rangeLength' => '2,255',
         'required' => true
     ])
-    <div id="descriptionTodo">
+    <div id="todoDescription">
         @include('pulsar::includes.html.form_wysiwyg_group', [
             'label' => trans_choice('pulsar::pulsar.description', 1),
             'name' => 'description',
@@ -306,44 +313,19 @@
             'fieldSize' => 10
         ])
     </div>
-    <div id="priceRequestTodo">
-        @include('pulsar::includes.html.form_section_header', [
-            'label' => trans_choice('pulsar::pulsar.date', 2),
-            'icon' => 'fa fa-hourglass-half',
-            'containerId' => 'headerContent'
+    <div id="todoRequestDate">
+        @include('pulsar::includes.html.form_datetimepicker_group', [
+            'fieldSize' => 4,
+            'label' => trans('projects::pulsar.request_date'),
+            'name' => 'requestDate',
+            'value' => old('requestDate', isset($object)? date(config('pulsar.datePattern'), $object->request_date_091) : null),
+            'data' => [
+                'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
+                'locale' => config('app.locale'),
+                'max-date' => date('Y-m-d')
+            ]
         ])
-        <div class="row">
-            <div class="col-md-6">
-                @include('pulsar::includes.html.form_text_group', [
-                     'labelSize' => 4,
-                     'fieldSize' => 5,
-                     'type' => 'number',
-                     'label' => trans_choice('pulsar::pulsar.price', 1),
-                     'name' => 'price',
-                     'value' => old('price', isset($object)? $object->price_091 : null)
-                ])
-            </div>
-            <div class="col-md-6">
-                @include('pulsar::includes.html.form_datetimepicker_group', [
-                    'labelSize' => 4,
-                    'fieldSize' => 5,
-                    'label' => trans('projects::pulsar.request_date'),
-                    'name' => 'requestDate',
-                    'value' => old('requestDate', isset($object)? date(config('pulsar.datePattern'), $object->request_date_091) : null),
-                    'data' => [
-                        'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-                        'locale' => config('app.locale'),
-                        'max-date' => date('Y-m-d')
-                    ]
-                ])
-            </div>
-        </div>
     </div>
-    @include('pulsar::includes.html.form_section_header', [
-        'label' => trans_choice('pulsar::pulsar.work', 2),
-        'icon' => 'fa fa-keyboard-o',
-        'containerId' => 'headerContent'
-    ])
     @include('pulsar::includes.html.form_datetimepicker_group', [
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
@@ -355,6 +337,15 @@
             'min-date' => date('Y-m-d')
         ]
     ])
+    <div id="todoPrice">
+        @include('pulsar::includes.html.form_text_group', [
+            'fieldSize' => 4,
+            'type' => 'number',
+            'label' => trans_choice('pulsar::pulsar.price', 1),
+            'name' => 'price',
+            'value' => old('price', isset($object)? $object->price_091 : null)
+        ])
+    </div>
     @include('pulsar::includes.html.form_text_group', [
         'fieldSize' => 4,
         'type' => 'number',
