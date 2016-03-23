@@ -318,11 +318,11 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.request_date'),
             'name' => 'requestDate',
-            'value' => old('requestDate', isset($object)? date(config('pulsar.datePattern'), date('Y-m-d', $object->request_date_091)) : null),
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                 'locale' => config('app.locale'),
-                'max-date' => date('Y-m-d')
+                'max-date' => date('Y-m-d'),
+                'default-date' => old('requestDate', isset($object)? date('Y-m-d', $object->request_date_091) : null)
             ]
         ])
     </div>
@@ -330,11 +330,11 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
         'name' => 'endDate',
-        'value' => old('endDate', isset($object)? date(config('pulsar.datePattern'), date('Y-m-d', $object->end_date_091)) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
-            'min-date' => date('Y-m-d')
+            'min-date' => date('Y-m-d'),
+            'default-date' => old('endDate', isset($object)? date('Y-m-d', $object->end_date_091) : null)
         ]
     ])
     <div id="todoPrice">

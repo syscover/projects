@@ -237,20 +237,20 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.init_date'),
         'name' => 'initDate',
-        'value' => old('initDate', isset($object->init_date_090)? date(config('pulsar.datePattern'), $object->init_date_090) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-            'locale' => config('app.locale')
+            'locale' => config('app.locale'),
+            'default-date' => old('initDate', isset($object->init_date_090)? date('Y-m-d', $object->init_date_090) : null)
         ]
     ])
     @include('pulsar::includes.html.form_datetimepicker_group', [
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.estimated_end_date'),
         'name' => 'estimatedEndDate',
-        'value' => old('estimatedEndDate', isset($object->estimated_end_date_090)? date(config('pulsar.datePattern'), $object->estimated_end_date_090) : null),
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-            'locale' => config('app.locale')
+            'locale' => config('app.locale'),
+            'default-date' => old('estimatedEndDate', isset($object->estimated_end_date_090)? date('Y-m-d', $object->estimated_end_date_090) : null)
         ]
     ])
     @if($action == 'create')
@@ -258,10 +258,10 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.end_date'),
             'name' => 'endDate',
-            'value' => old('endDate', isset($object->end_date_090)? date(config('pulsar.datePattern'), $object->end_date_090) : null),
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-                'locale' => config('app.locale')
+                'locale' => config('app.locale'),
+                'default-date' => old('endDate', isset($object->end_date_090)? date('Y-m-d', $object->end_date_090) : null),
             ]
         ])
     @endif
