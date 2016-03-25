@@ -1,6 +1,5 @@
 <?php namespace Syscover\Projects\Controllers;
 
-use Illuminate\Http\Request;
 use Syscover\Projects\Models\Historical;
 use Syscover\Projects\Models\Todo;
 use Syscover\Pulsar\Controllers\Controller;
@@ -33,7 +32,7 @@ class BillingController extends Controller {
         'deleteSelectButton'    => false
     ];
 
-    public function showCustomRecord($request, $parameters)
+    public function showCustomRecord($parameters)
     {
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
@@ -48,10 +47,10 @@ class BillingController extends Controller {
         return $parameters;
     }
 
-    public function invoiceRecord(Request $request)
+    public function invoiceRecord()
     {
         // get parameters from url route
-        $parameters = $request->route()->parameters();
+        $parameters = $this->request->route()->parameters();
 
         // get billing object
         $billing = Billing::builder()->find($parameters['id']);

@@ -1,6 +1,5 @@
 <?php namespace Syscover\Projects\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
@@ -40,11 +39,11 @@ class TodoController extends Controller {
         'deleteSelectButton'    => false
     ];
 
-    function __construct(Request $request)
+    function __construct()
     {
-        parent::__construct($request);
+        parent::__construct();
 
-        $actions = $request->route()->getAction();
+        $actions = $this->request->route()->getAction();
 
         // if request came from Developer Todos
         if($actions['resource'] === 'projects-developer-todo')
@@ -54,7 +53,7 @@ class TodoController extends Controller {
     }
 
     // delete edit and delete buttons, on finished rows
-    public function jsonCustomDataBeforeActions($request, $aObject)
+    public function jsonCustomDataBeforeActions($aObject, $actionUrlParameters, $parameters)
     {
         if($aObject['finished_091'])
         {
@@ -68,10 +67,10 @@ class TodoController extends Controller {
         }
     }
 
-    public function createCustomRecord($request, $parameters)
+    public function createCustomRecord($parameters)
     {
         // get resourse to know if set developer, depend of view, todos or developer todos
-        $actions                = $request->route()->getAction();
+        $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
         // types
@@ -97,47 +96,47 @@ class TodoController extends Controller {
         return $parameters;
     }
 
-    public function storeCustomRecord($request, $parameters)
+    public function storeCustomRecord($parameters)
     {
-        if($request->has('projectId'))
+        if($this->request->has('projectId'))
         {
-            $project = Project::builder()->find($request->input('projectId'));
+            $project = Project::builder()->find($this->request->input('projectId'));
 
             $customerId     = $project->customer_id_090;
             $customerName   = $project->customer_name_090;
         }
         else
         {
-            $customerId     = $request->input('customerId');
-            $customerName   = $request->input('customerName');
+            $customerId     = $this->request->input('customerId');
+            $customerName   = $this->request->input('customerName');
         }
 
         $todo = Todo::create([
-            'developer_id_091'              => $request->input('developerId'),
-            'developer_name_091'            => $request->input('developerName'),
-            'title_091'                     => $request->input('title'),
-            'description_091'               => $request->has('description')? $request->input('description') : null,
-            'type_091'                      => $request->input('type'),
-            'project_id_091'                => $request->has('projectId')? $request->input('projectId') : null,
+            'developer_id_091'              => $this->request->input('developerId'),
+            'developer_name_091'            => $this->request->input('developerName'),
+            'title_091'                     => $this->request->input('title'),
+            'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
+            'type_091'                      => $this->request->input('type'),
+            'project_id_091'                => $this->request->has('projectId')? $this->request->input('projectId') : null,
             'customer_id_091'               => $customerId,
             'customer_name_091'             => $customerName,
-            'hours_091'                     => $request->has('hours')? $request->input('hours') : null,
-            'price_091'                     => $request->has('price')? $request->input('price') : null,
-            'request_date_091'              => $request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('requestDate'))->getTimestamp() : null,
-            'request_date_text_091'         => $request->has('requestDate')? $request->input('requestDate') : null,
-            'end_date_091'                  => $request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('endDate'))->getTimestamp() : null,
-            'end_date_text_091'             => $request->has('endDate')? $request->input('endDate') : null,
-            'finished_091'                  => $request->has('endDate')
+            'hours_091'                     => $this->request->has('hours')? $this->request->input('hours') : null,
+            'price_091'                     => $this->request->has('price')? $this->request->input('price') : null,
+            'request_date_091'              => $this->request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('requestDate'))->getTimestamp() : null,
+            'request_date_text_091'         => $this->request->has('requestDate')? $this->request->input('requestDate') : null,
+            'end_date_091'                  => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
+            'end_date_text_091'             => $this->request->has('endDate')? $this->request->input('endDate') : null,
+            'finished_091'                  => $this->request->has('endDate')
         ]);
 
         // check if todo_ is finished
         $this->endTodo($todo);
     }
 
-    public function editCustomRecord($request, $parameters)
+    public function editCustomRecord($parameters)
     {
         // get resourse to know if set developer, depend of view, todos or developer todos
-        $actions                = $request->route()->getAction();
+        $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
         if($parameters['object']->type_091 == 2)
@@ -172,26 +171,26 @@ class TodoController extends Controller {
         return $parameters;
     }
     
-    public function updateCustomRecord($request, $parameters)
+    public function updateCustomRecord($parameters)
     {
-        if($request->has('projectId'))
+        if($this->request->has('projectId'))
         {
-            $project = Project::builder()->find($request->input('projectId'));
+            $project = Project::builder()->find($this->request->input('projectId'));
 
             $customerId     = $project->customer_id_090;
             $customerName   = $project->customer_name_090;
         }
         else
         {
-            $customerId     = $request->input('customerId');
-            $customerName   = $request->input('customerName');
+            $customerId     = $this->request->input('customerId');
+            $customerName   = $this->request->input('customerName');
         }
 
         // check that has hours if endDate exist
-        if($request->has('endDate'))
+        if($this->request->has('endDate'))
         {
             $validation = Billing::validate([
-               'hours'  =>  $request->input('hours')
+               'hours'  =>  $this->request->input('hours')
             ], ['hoursRule' => true]);
 
             if ($validation->fails())
@@ -200,21 +199,21 @@ class TodoController extends Controller {
         }
 
         Todo::where('id_091', $parameters['id'])->update([
-            'developer_id_091'              => $request->input('developerId'),
-            'developer_name_091'            => $request->input('developerName'),
-            'title_091'                     => $request->input('title'),
-            'description_091'               => $request->has('description')? $request->input('description') : null,
-            'type_091'                      => $request->input('type'),
-            'project_id_091'                => $request->has('projectId')? $request->input('projectId') : null,
+            'developer_id_091'              => $this->request->input('developerId'),
+            'developer_name_091'            => $this->request->input('developerName'),
+            'title_091'                     => $this->request->input('title'),
+            'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
+            'type_091'                      => $this->request->input('type'),
+            'project_id_091'                => $this->request->has('projectId')? $this->request->input('projectId') : null,
             'customer_id_091'               => $customerId,
             'customer_name_091'             => $customerName,
-            'hours_091'                     => $request->has('hours')? $request->input('hours') : null,
-            'price_091'                     => $request->has('price')? $request->input('price') : null,
-            'request_date_091'              => $request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('requestDate'))->getTimestamp() : null,
-            'request_date_text_091'         => $request->has('requestDate')? $request->input('requestDate') : null,
-            'end_date_091'                  => $request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('endDate'))->getTimestamp() : null,
-            'end_date_text_091'             => $request->has('endDate')? $request->input('endDate') : null,
-            'finished_091'                  => $request->has('endDate')
+            'hours_091'                     => $this->request->has('hours')? $this->request->input('hours') : null,
+            'price_091'                     => $this->request->has('price')? $this->request->input('price') : null,
+            'request_date_091'              => $this->request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('requestDate'))->getTimestamp() : null,
+            'request_date_text_091'         => $this->request->has('requestDate')? $this->request->input('requestDate') : null,
+            'end_date_091'                  => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
+            'end_date_text_091'             => $this->request->has('endDate')? $this->request->input('endDate') : null,
+            'finished_091'                  => $this->request->has('endDate')
 
         ]);
 

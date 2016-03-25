@@ -41,10 +41,10 @@ class PreferenceController extends Controller {
         return $parameters;
     }
     
-    public function updateCustomRecord($request, $parameters)
+    public function updateCustomRecord($parameters)
     {
-        Preference::setValue('projectsProjectManagementUser', 6, $request->input('projectManagementUser'));
-        Preference::setValue('projectsBillingUser', 6, $request->input('billingUser'));
-        Preference::setValue('projectsNotificationsAccount', 6, $request->input('notificationsAccount'));
+        Preference::setValue('projectsProjectManagementUser', 6, $this->request->input('projectManagementUser'));
+        Preference::setValue('projectsBillingUser', 6, $this->request->input('billingUser'));
+        Preference::setValue('projectsNotificationsAccount', 6, $this->request->input('notificationsAccount'));
     }
 }

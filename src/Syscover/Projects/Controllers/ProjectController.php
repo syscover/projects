@@ -25,26 +25,26 @@ class ProjectController extends Controller {
     protected $icon         = 'fa fa-rocket';
     protected $objectTrans  = 'project';
 
-    public function storeCustomRecord($request, $parameters)
+    public function storeCustomRecord($parameters)
     {
         Project::create([
-            'customer_id_090'               => $request->input('customerId'),
-            'customer_name_090'             => $request->input('customerName'),
-            'name_090'                      => $request->input('name'),
-            'description_090'               => $request->has('description')? $request->input('description') : null,
-            'estimated_hours_090'           => $request->has('estimatedHours')? $request->input('estimatedHours') : 0,
+            'customer_id_090'               => $this->request->input('customerId'),
+            'customer_name_090'             => $this->request->input('customerName'),
+            'name_090'                      => $this->request->input('name'),
+            'description_090'               => $this->request->has('description')? $this->request->input('description') : null,
+            'estimated_hours_090'           => $this->request->has('estimatedHours')? $this->request->input('estimatedHours') : 0,
             'consumed_hours_090'            => 0,
-            'total_hours_090'               => $request->has('estimatedHours')? $request->input('estimatedHours') : 0,
-            'init_date_090'                 => $request->has('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('initDate'))->getTimestamp() : null,
-            'init_date_text_090'            => $request->has('initDate')? $request->input('initDate') : null,
-            'estimated_end_date_090'        => $request->has('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('estimatedEndDate'))->getTimestamp() : null,
-            'estimated_end_date_text_090'   => $request->has('estimatedEndDate')? $request->input('estimatedEndDate') : null,
+            'total_hours_090'               => $this->request->has('estimatedHours')? $this->request->input('estimatedHours') : 0,
+            'init_date_090'                 => $this->request->has('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('initDate'))->getTimestamp() : null,
+            'init_date_text_090'            => $this->request->has('initDate')? $this->request->input('initDate') : null,
+            'estimated_end_date_090'        => $this->request->has('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('estimatedEndDate'))->getTimestamp() : null,
+            'estimated_end_date_text_090'   => $this->request->has('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
             'end_date_090'                  => null,
             'end_date_text_090'             => null,
         ]);
     }
 
-    public function editCustomRecord($request, $parameters)
+    public function editCustomRecord($parameters)
     {
         $response   = Facturadirecta::getClient($parameters['object']->customer_id_090);
         $collection = collect();
@@ -60,19 +60,19 @@ class ProjectController extends Controller {
         return $parameters;
     }
     
-    public function updateCustomRecord($request, $parameters)
+    public function updateCustomRecord($parameters)
     {
         Project::where('id_090', $parameters['id'])->update([
-            'customer_id_090'               => $request->input('customerId'),
-            'customer_name_090'             => $request->input('customerName'),
-            'name_090'                      => $request->input('name'),
-            'description_090'               => $request->has('description')? $request->input('description') : null,
-            'estimated_hours_090'           => $request->has('estimatedHours')? $request->input('estimatedHours') : 0,
-            'total_hours_090'               => (float)$request->input('estimatedHours') - (float)$request->input('consumedHours'),
-            'init_date_090'                 => $request->has('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('initDate'))->getTimestamp() : null,
-            'init_date_text_090'            => $request->has('initDate')? $request->input('initDate') : null,
-            'estimated_end_date_090'        => $request->has('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $request->input('estimatedEndDate'))->getTimestamp() : null,
-            'estimated_end_date_text_090'   => $request->has('estimatedEndDate')? $request->input('estimatedEndDate') : null,
+            'customer_id_090'               => $this->request->input('customerId'),
+            'customer_name_090'             => $this->request->input('customerName'),
+            'name_090'                      => $this->request->input('name'),
+            'description_090'               => $this->request->has('description')? $this->request->input('description') : null,
+            'estimated_hours_090'           => $this->request->has('estimatedHours')? $this->request->input('estimatedHours') : 0,
+            'total_hours_090'               => (float)$this->request->input('estimatedHours') - (float)$this->request->input('consumedHours'),
+            'init_date_090'                 => $this->request->has('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('initDate'))->getTimestamp() : null,
+            'init_date_text_090'            => $this->request->has('initDate')? $this->request->input('initDate') : null,
+            'estimated_end_date_090'        => $this->request->has('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('estimatedEndDate'))->getTimestamp() : null,
+            'estimated_end_date_text_090'   => $this->request->has('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
         ]);
     }
 }
