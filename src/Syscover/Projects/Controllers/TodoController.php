@@ -1,5 +1,6 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
@@ -39,9 +40,9 @@ class TodoController extends Controller {
         'deleteSelectButton'    => false
     ];
 
-    function __construct()
+    function __construct(Request $request)
     {
-        parent::__construct();
+        parent::__construct($request);
 
         $actions = $this->request->route()->getAction();
 

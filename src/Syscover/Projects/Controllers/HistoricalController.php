@@ -1,5 +1,6 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Illuminate\Http\Request;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
 use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\Miscellaneous;
@@ -33,9 +34,9 @@ class HistoricalController extends Controller {
         'deleteSelectButton'    => false
     ];
 
-    function __construct()
+    function __construct(Request $request)
     {
-        parent::__construct();
+        parent::__construct($request);
 
         $actions = $this->request->route()->getAction();
 
