@@ -1,4 +1,4 @@
-# Projects to Laravel 5.2
+# Projects for Laravel 5.2
 
 ## Installation
 
