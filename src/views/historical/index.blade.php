@@ -25,11 +25,11 @@
                         { 'iDataSort': 9, 'aTargets': [10] }, // sort column 2 according hidden column 1 data
                         { 'bSortable': false, 'aTargets': [11, 12]},
                         { 'sClass': 'checkbox-column', 'aTargets': [11]},
-                        { 'sClass': 'customer-width', 'aTargets': [2]},
+                        { 'sClass': 'customer-width', 'aTargets': [1,2]},
                         { 'sClass': 'align-center', 'aTargets': [11, 12]}
                     @endif
                     @if($resource == 'projects-developer-historical')
-                        { 'visible': false, "bSearchable": false, 'aTargets': [7,9]}, // hidden column 1 and prevents search on column 1
+                        { 'visible': false, "bSearchable": false, 'aTargets': [1,7,9]}, // hidden column 1 and prevents search on column 1
                         { 'iDataSort': 7, 'aTargets': [8] }, // sort column 2 according hidden column 1 data
                         { 'iDataSort': 9, 'aTargets': [10] }, // sort column 2 according hidden column 1 data
                         { 'bSortable': false, 'aTargets': [11]},
