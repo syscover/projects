@@ -24,7 +24,7 @@ class PreferenceController extends Controller {
     protected $icon         = 'fa fa-cog';
     protected $objectTrans  = 'preference';
 
-    public function indexCustom($parameters)
+    public function customIndex($parameters)
     {
         $users = User::builder()->get();
         $parameters['users'] = $users->map(function ($user, $key) {
