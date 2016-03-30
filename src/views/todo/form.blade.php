@@ -333,7 +333,6 @@
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
-            'min-date' => date('Y-m-d'),
             'default-date' => old('endDate', isset($object->end_date_091)? date('Y-m-d', $object->end_date_091) : null)
         ]
     ])
