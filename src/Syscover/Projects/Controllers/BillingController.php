@@ -42,7 +42,7 @@ class BillingController extends Controller {
             return $user;
         });
 
-        $parameters['afterButtonFooter'] = '<a id="invoiceButton" class="btn btn-danger marginL10 delete-lang-record" href="' . route('invoiceProjectsBilling', ['id' => $parameters['id'], 'offset' => $parameters['offset']]) . '">' . trans('projects::pulsar.invoice_todo') . '</a>';
+        $parameters['afterButtonFooter'] = '<a id="invoiceButton" class="btn btn-danger margin-l10 delete-lang-record" href="' . route('invoiceProjectsBilling', ['id' => $parameters['id'], 'offset' => $parameters['offset']]) . '">' . trans('projects::pulsar.invoice_todo') . '</a>';
 
         return $parameters;
     }
