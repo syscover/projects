@@ -25,6 +25,7 @@ class BillingController extends Controller {
     protected $icon             = 'fa fa-credit-card';
     protected $objectTrans      = 'billing';
     protected $viewParameters   = [
+        'newButton'             => false,
         'checkBoxColumn'        => false,
         'showButton'            => true,
         'editButton'            => false,

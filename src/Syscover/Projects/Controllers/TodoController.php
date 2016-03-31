@@ -33,6 +33,7 @@ class TodoController extends Controller {
     protected $icon             = 'fa fa-hourglass-start';
     protected $objectTrans      = 'todo';
     protected $viewParameters   = [
+        'newButton'             => true,
         'checkBoxColumn'        => false,
         'showButton'            => false,
         'editButton'            => true,

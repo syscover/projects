@@ -27,6 +27,7 @@ class HistoricalController extends Controller {
     protected $icon         = 'fa fa-history';
     protected $objectTrans  = 'historical';
     protected $viewParameters   = [
+        'newButton'             => false,
         'checkBoxColumn'        => false,
         'showButton'            => true,
         'editButton'            => false,
@@ -48,6 +49,7 @@ class HistoricalController extends Controller {
         elseif($actions['resource'] === 'projects-historical')
         {
             $this->viewParameters = [
+                'newButton'             => false,
                 'checkBoxColumn'        => true,
                 'showButton'            => false,
                 'editButton'            => true,
@@ -55,6 +57,11 @@ class HistoricalController extends Controller {
                 'deleteSelectButton'    => true
             ];
         }
+    }
+
+    public function customIndex($parameters)
+    {
+
     }
 
     public function showCustomRecord($parameters)
