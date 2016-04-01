@@ -47,7 +47,7 @@ class TodoController extends Controller {
 
         $actions = $this->request->route()->getAction();
 
-        // if request came from Developer Todos
+        // if request comes from Developer Todos
         if($actions['resource'] === 'projects-developer-todo')
         {
             $this->routeSuffix = 'projectsDeveloperTodo';

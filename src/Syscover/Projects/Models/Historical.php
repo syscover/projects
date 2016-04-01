@@ -48,7 +48,7 @@ class Historical extends Model {
 
         $query =  $this->builder();
 
-        // filter todos onle from current user
+        // filter todos only from current user
         if($actions['resource'] === 'projects-developer-historical')
             $query->where('developer_id_093', auth('pulsar')->user()->id_010);
 
