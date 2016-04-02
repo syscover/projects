@@ -21,7 +21,7 @@ class HistoricalController extends Controller {
     protected $routeSuffix  = 'projectsHistorical';
     protected $folder       = 'historical';
     protected $package      = 'projects';
-    protected $aColumns     = ['id_093', 'developer_name_093', 'customer_name_093', 'name_090', 'title_093', 'price_093', 'hours_093', 'request_date_093', 'request_date_text_093', 'end_date_093', 'end_date_text_093'];
+    protected $aColumns     = ['id_093', 'developer_name_093', 'end_date_093', 'end_date_text_093', 'customer_name_093', 'name_090', 'title_093', 'price_093', 'hours_093', 'request_date_093', 'request_date_text_093'];
     protected $nameM        = 'title_093';
     protected $model        = Historical::class;
     protected $icon         = 'fa fa-history';
