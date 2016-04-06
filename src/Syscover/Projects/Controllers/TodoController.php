@@ -294,18 +294,33 @@ class TodoController extends Controller {
                 config(['mail.username'     =>  $emailAccount->outgoing_user_013]);
                 config(['mail.password'     =>  Crypt::decrypt($emailAccount->outgoing_pass_013)]);
 
-                $billingUser = User::builder()->find((int)Preference::getValue('projectsBillingUser', 6)->value_018);
+                $users = User::builder()
+                    ->where('profile_010', (int)Preference::getValue('projectsBillingProfile', 6)->value_018)
+                    ->where('access_010', true)
+                    ->get();
+
+                $nameTo = '';
+
+                foreach($users as $key => $user)
+                {
+                    $nameTo .= $user->name_010 . ' ' . $user->surname_010;
+
+                    if($key < count($users)-1)
+                        $nameTo .= ', ';
+                }
 
                 $dataMessage = [
-                    'emailTo'   => $billingUser->email_010,
-                    'nameTo'    => $billingUser->name_010 . ' ' . $billingUser->surname_010,
+                    'nameTo'    => $nameTo,
+                    'users'     => $users,
                     'subject'   => 'Notificación de facturación de tarea',
                     'billing'   => $billing,
                 ];
 
                 Mail::send('projects::emails.billing_notification', $dataMessage, function($m) use ($dataMessage) {
-                    $m->to($dataMessage['emailTo'], $dataMessage['nameTo'])
-                        ->subject($dataMessage['subject']);
+                    $m->subject($dataMessage['subject']);
+
+                    foreach($dataMessage['users'] as $user)
+                        $m->to($user->email_010, $user->name_010 . ' ' . $user->surname_010);
                 });
             }
         }

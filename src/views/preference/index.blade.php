@@ -12,22 +12,10 @@
     @include('pulsar::includes.html.form_select_group', [
         'labelSize' => 3,
         'fieldSize' => 5,
-        'label' => trans('projects::pulsar.project_management_user'),
-        'name' => 'projectManagementUser',
-        'value' => (int)$projectManagementUser->value_018,
-        'objects' => $users,
-        'idSelect' => 'id',
-        'nameSelect' => 'name',
-        'class' => 'select2',
-        'required' => true
-    ])
-    @include('pulsar::includes.html.form_select_group', [
-        'labelSize' => 3,
-        'fieldSize' => 5,
-        'label' => trans('projects::pulsar.billing_user'),
-        'name' => 'billingUser',
-        'value' => (int)$billingUser->value_018,
-        'objects' => $users,
+        'label' => trans('projects::pulsar.billing_profile'),
+        'name' => 'billingProfile',
+        'value' => (int)$billingProfile->value_018,
+        'objects' => $profiles,
         'idSelect' => 'id',
         'nameSelect' => 'name',
         'class' => 'select2',

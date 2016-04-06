@@ -3,7 +3,7 @@
 return [
 
     'billing'                               => 'Facturación',
-    'billing_user'                          => 'Facturación',
+    'billing_profile'                       => 'Perfil de facturación',
     'consumed_hours'                        => 'Horas consumidas',
     'user_history'                          => 'Histórico de usuario',
     'user_todo'                             => 'Tarea de usuario|Tareas de usuarios',

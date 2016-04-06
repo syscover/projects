@@ -3,7 +3,7 @@
 return [
 
     'billing'                               => 'Billing',
-    'billing_user'                          => 'Billing',
+    'billing_profile'                       => 'Billing profile',
     'consumed_hours'                        => 'Consumed hours',
     'user_history'                          => 'User history',
     'user_todo'                             => 'User todo|User todos',

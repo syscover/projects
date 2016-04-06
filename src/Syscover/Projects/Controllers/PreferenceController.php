@@ -3,7 +3,7 @@
 use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Models\EmailAccount;
 use Syscover\Pulsar\Models\Preference;
-use Syscover\Pulsar\Models\User;
+use Syscover\Pulsar\Models\Profile;
 use Syscover\Pulsar\Traits\TraitController;
 
 /**
@@ -26,14 +26,8 @@ class PreferenceController extends Controller {
 
     public function customIndex($parameters)
     {
-        $users = User::builder()->get();
-        $parameters['users'] = $users->map(function ($user, $key) {
-            $user->name = $user->name_010 . ' ' . $user->surname_010;
-            return $user;
-        });
-
-        $parameters['projectManagementUser']        = Preference::getValue('projectsProjectManagementUser', 6);
-        $parameters['billingUser']                  = Preference::getValue('projectsBillingUser', 6);
+        $parameters['profiles']                     = Profile::all();
+        $parameters['billingProfile']               = Preference::getValue('projectsBillingProfile', 6);
 
         $parameters['accounts']                     = EmailAccount::all();
         $parameters['notificationsAccount']         = Preference::getValue('projectsNotificationsAccount', 6);
@@ -43,8 +37,7 @@ class PreferenceController extends Controller {
     
     public function updateCustomRecord($parameters)
     {
-        Preference::setValue('projectsProjectManagementUser', 6, $this->request->input('projectManagementUser'));
-        Preference::setValue('projectsBillingUser', 6, $this->request->input('billingUser'));
+        Preference::setValue('projectsBillingProfile', 6, $this->request->input('billingProfile'));
         Preference::setValue('projectsNotificationsAccount', 6, $this->request->input('notificationsAccount'));
     }
 }
