@@ -28,7 +28,7 @@
                         { 'sClass': 'customer-width', 'aTargets': [1,4]},
                         { 'sClass': 'align-center', 'aTargets': [11, 12]}
                     @endif
-                    @if($resource == 'projects-developer-history')
+                    @if($resource == 'projects-user-history')
                         { 'visible': false, "bSearchable": false, 'aTargets': [1,2,9]}, // hidden column 1 and prevents search on column 1
                         { 'iDataSort': 2, 'aTargets': [3] }, // sort column 2 according hidden column 1 data
                         { 'iDataSort': 9, 'aTargets': [10] }, // sort column 2 according hidden column 1 data
@@ -51,7 +51,7 @@
     <!-- projects::history.index -->
     <tr>
         <th data-hide="phone,tablet">ID.</th>
-        <th data-hide="phone">{{ trans_choice('projects::pulsar.developer', 1) }}</th>
+        <th data-hide="phone">{{ trans_choice('pulsar::pulsar.user', 1) }}</th>
         <th data-hide="phone">{{ trans('projects::pulsar.end_date') }}</th>
         <th>{{ trans('projects::pulsar.end_date') }}</th>
         <th>{{ trans_choice('pulsar::pulsar.customer', 1) }}</th>

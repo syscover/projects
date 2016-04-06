@@ -10,7 +10,7 @@ use Sofa\Eloquence\Mappable;
  * Class Billing
  *
  * Model with properties
- * <br><b>[id, todo_id, developer_id, developer_name, customer_id, customer_name, title, description, price, request_date, request_date_text, end_date, end_date_text, hours, invoiced]</b>
+ * <br><b>[id, todo_id, user_id, user_name, customer_id, customer_name, title, description, price, request_date, request_date_text, end_date, end_date_text, hours, invoiced]</b>
  *
  * @package     Syscover\Projects\Models
  */
@@ -24,7 +24,7 @@ class Billing extends Model {
     protected $primaryKey   = 'id_092';
     protected $suffix       = '092';
     public $timestamps      = false;
-    protected $fillable     = ['id_092', 'todo_id_092', 'developer_id_092', 'developer_name_092', 'customer_id_092', 'customer_name_092', 'title_092', 'description_092', 'price_092', 'request_date_092', 'request_date_text_092', 'end_date_092', 'end_date_text_092', 'hours_092', 'invoiced_092'];
+    protected $fillable     = ['id_092', 'todo_id_092', 'user_id_092', 'user_name_092', 'customer_id_092', 'customer_name_092', 'title_092', 'description_092', 'price_092', 'request_date_092', 'request_date_text_092', 'end_date_092', 'end_date_text_092', 'hours_092', 'invoiced_092'];
     protected $maps         = [
         'todo'  => Todo::class
     ];

@@ -38,7 +38,7 @@ class BillingController extends Controller {
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
 
-        $parameters['developers'] = $users->map(function ($user, $key) {
+        $parameters['users'] = $users->map(function ($user, $key) {
             $user->name = $user->name_010 . ' ' . $user->surname_010;
             return $user;
         });
@@ -57,8 +57,8 @@ class BillingController extends Controller {
         $billing = Billing::builder()->find($parameters['id']);
 
         History::create([
-            'developer_id_093'              => $billing->developer_id_091,
-            'developer_name_093'            => $billing->developer_name_091,
+            'user_id_093'              => $billing->user_id_091,
+            'user_name_093'            => $billing->user_name_091,
             'type_093'                      => $billing->type_091,
             'project_id_093'                => null, // this history can not to have project
             'customer_id_093'               => $billing->customer_id_091,
@@ -76,7 +76,7 @@ class BillingController extends Controller {
         // destroy billing
         Billing::destroy($billing->id_092);
 
-        // destroy todo_ from developer section
+        // destroy todo_ from user section
         Todo::destroy($billing->todo_id_092);
 
         return redirect()->route('projectsBilling', ['offset' => $parameters['offset']])->with([

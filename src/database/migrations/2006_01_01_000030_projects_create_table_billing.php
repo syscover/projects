@@ -21,9 +21,9 @@ class ProjectsCreateTableBilling extends Migration {
                 // tarea de donde procede este registro
                 $table->integer('todo_id_092')->unsigned();
 
-                // developer / usuario que se la ha asignado la tarea
-                $table->integer('developer_id_092')->unsigned()->nullable();
-                $table->string('developer_name_092')->nullable();
+                // usuario que se la ha asignado la tarea
+                $table->integer('user_id_092')->unsigned()->nullable();
+                $table->string('user_name_092')->nullable();
 
                 // cliente al que se le realiza la tarea
                 $table->integer('customer_id_092')->unsigned();
@@ -50,7 +50,7 @@ class ProjectsCreateTableBilling extends Migration {
                 // si está facturado o no
                 $table->boolean('invoiced_092')->default(false);
 
-                $table->foreign('developer_id_092', 'fk01_006_092_billing')->references('id_010')->on('001_010_user')
+                $table->foreign('user_id_092', 'fk01_006_092_billing')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');
                 $table->foreign('todo_id_092', 'fk02_006_092_billing')->references('id_091')->on('006_091_todo')
                     ->onDelete('restrict')->onUpdate('cascade');

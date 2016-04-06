@@ -27,7 +27,7 @@ class TodoController extends Controller {
     protected $routeSuffix      = 'projectsTodo';
     protected $folder           = 'todo';
     protected $package          = 'projects';
-    protected $aColumns         = ['id_091', 'developer_name_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
+    protected $aColumns         = ['id_091', 'user_name_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
     protected $nameM            = 'title_091';
     protected $model            = Todo::class;
     protected $icon             = 'fa fa-hourglass-start';
@@ -47,10 +47,10 @@ class TodoController extends Controller {
 
         $actions = $this->request->route()->getAction();
 
-        // if request comes from Developer Todos
-        if($actions['resource'] === 'projects-developer-todo')
+        // if request comes from user Todos
+        if($actions['resource'] === 'projects-user-todo')
         {
-            $this->routeSuffix = 'projectsDeveloperTodo';
+            $this->routeSuffix = 'projectsUserTodo';
         }
     }
 
@@ -71,7 +71,7 @@ class TodoController extends Controller {
 
     public function createCustomRecord($parameters)
     {
-        // get resourse to know if set developer, depend of view, todos or developer todos
+        // get resourse to know if set user, depend of view, todos or user todos
         $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
@@ -90,7 +90,7 @@ class TodoController extends Controller {
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
 
-        $parameters['developers'] = $users->map(function ($user, $key) {
+        $parameters['user'] = $users->map(function ($user, $key) {
             $user->name = $user->name_010 . ' ' . $user->surname_010;
             return $user;
         });
@@ -114,8 +114,8 @@ class TodoController extends Controller {
         }
 
         $todo = Todo::create([
-            'developer_id_091'              => $this->request->input('developerId'),
-            'developer_name_091'            => $this->request->input('developerName'),
+            'user_id_091'              => $this->request->input('userId'),
+            'user_name_091'            => $this->request->input('userName'),
             'title_091'                     => $this->request->input('title'),
             'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
             'type_091'                      => $this->request->input('type'),
@@ -137,7 +137,7 @@ class TodoController extends Controller {
 
     public function editCustomRecord($parameters)
     {
-        // get resourse to know if set developer, depend of view, todos or developer todos
+        // get resourse to know if set user, depend of view, todos or user todos
         $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
@@ -165,7 +165,7 @@ class TodoController extends Controller {
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
 
-        $parameters['developers'] = $users->map(function ($user, $key) {
+        $parameters['users'] = $users->map(function ($user, $key) {
             $user->name = $user->name_010 . ' ' . $user->surname_010;
             return $user;
         });
@@ -201,8 +201,8 @@ class TodoController extends Controller {
         }
 
         Todo::where('id_091', $parameters['id'])->update([
-            'developer_id_091'              => $this->request->input('developerId'),
-            'developer_name_091'            => $this->request->input('developerName'),
+            'user_id_091'              => $this->request->input('userId'),
+            'user_name_091'            => $this->request->input('userName'),
             'title_091'                     => $this->request->input('title'),
             'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
             'type_091'                      => $this->request->input('type'),
@@ -228,7 +228,7 @@ class TodoController extends Controller {
 
     private function endTodo($todo)
     {
-        // if has enDate, so developer has finished tour todo_
+        // if has enDate, so user has finished tour todo_
         if($todo->finished_091)
         {
             // 1 - project
@@ -242,8 +242,8 @@ class TodoController extends Controller {
                 ]);
 
                 History::create([
-                    'developer_id_093'              => $todo->developer_id_091,
-                    'developer_name_093'            => $todo->developer_name_091,
+                    'user_id_093'              => $todo->user_id_091,
+                    'user_name_093'            => $todo->user_name_091,
                     'type_093'                      => $todo->type_091,
                     'project_id_093'                => $todo->project_id_091,
                     'customer_id_093'               => $todo->customer_id_091,
@@ -267,8 +267,8 @@ class TodoController extends Controller {
             {
                 $billing = Billing::create([
                     'todo_id_092'                   => $todo->id_091,
-                    'developer_id_092'              => $todo->developer_id_091,
-                    'developer_name_092'            => $todo->developer_name_091,
+                    'user_id_092'              => $todo->user_id_091,
+                    'user_name_092'            => $todo->user_name_091,
                     'customer_id_092'               => $todo->customer_id_091,
                     'customer_name_092'             => $todo->customer_name_091,
                     'title_092'                     => $todo->title_091,

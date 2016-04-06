@@ -57,9 +57,9 @@
                 })
             })
 
-            // start change developer
-            $('#developerId').on('change', function() {
-                $('[name=developerName]').val($('#developerId option:selected').text())
+            // start change user
+            $('#userId').on('change', function() {
+                $('[name=userName]').val($('#userId option:selected').text())
             })
 
             // start select2 ajax function
@@ -208,28 +208,28 @@
         'readOnly' => true,
         'fieldSize' => 2
     ])
-    @if($resource == 'projects-developer-todo')
+    @if($resource == 'projects-user-todo')
         @include('pulsar::includes.html.form_text_group', [
             'fieldSize' =>  5,
-            'label' => trans_choice('projects::pulsar.developer', 1),
-            'name' => 'developerName',
-            'value' => old('developerName', isset($object)? $object->developer_name_091 : auth('pulsar')->user()->name_010 . ' ' . auth('pulsar')->user()->surname_010),
+            'label' => trans_choice('pulsar::pulsar.user', 1),
+            'name' => 'userName',
+            'value' => old('userName', isset($object)? $object->user_name_091 : auth('pulsar')->user()->name_010 . ' ' . auth('pulsar')->user()->surname_010),
             'maxLength' => '255',
             'rangeLength' => '2,255',
             'readOnly' => true
         ])
         @include('pulsar::includes.html.form_hidden', [
-            'name' => 'developerId',
-            'value' => old('developerId', isset($object)? $object->developer_id_091 : auth('pulsar')->user()->id_010)
+            'name' => 'userId',
+            'value' => old('userId', isset($object)? $object->user_id_091 : auth('pulsar')->user()->id_010)
         ])
     @else
         @include('pulsar::includes.html.form_select_group', [
             'fieldSize' => 5,
-            'label' => trans_choice('projects::pulsar.developer', 1),
-            'id' => 'developerId',
-            'name' => 'developerId',
-            'value' => old('developerId', isset($object)? $object->developer_id_091 : null),
-            'objects' => $developers,
+            'label' => trans_choice('pulsar::pulsar.user', 1),
+            'id' => 'userId',
+            'name' => 'userId',
+            'value' => old('userId', isset($object)? $object->user_id_091 : null),
+            'objects' => $users,
             'class' => 'select2',
             'idSelect' => 'id',
             'nameSelect' => 'name',
@@ -237,12 +237,12 @@
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
-                'error-placement' => 'select2-developerId-outer-container'
+                'error-placement' => 'select2-userId-outer-container'
             ]
         ])
         @include('pulsar::includes.html.form_hidden', [
-            'name' => 'developerName',
-            'value' => old('developerName', isset($object)? $object->developer_name_091 : null)
+            'name' => 'userName',
+            'value' => old('userName', isset($object)? $object->user_name_091 : null)
         ])
     @endif
     @include('pulsar::includes.html.form_select_group', [

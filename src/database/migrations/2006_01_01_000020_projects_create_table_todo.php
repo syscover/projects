@@ -18,9 +18,9 @@ class ProjectsCreateTableTodo extends Migration {
                 $table->engine = 'InnoDB';
                 $table->increments('id_091')->unsigned();
 
-                // developer / usuario que se la ha asignado la tarea
-                $table->integer('developer_id_091')->unsigned()->nullable();
-                $table->string('developer_name_091')->nullable();
+                // usuario que se la ha asignado la tarea
+                $table->integer('user_id_091')->unsigned()->nullable();
+                $table->string('user_name_091')->nullable();
 
                 // puede ser: project o hours
                 // 1 - project
@@ -55,7 +55,7 @@ class ProjectsCreateTableTodo extends Migration {
                 // indica si la tarea se ha finalizado
                 $table->boolean('finished_091');
 
-                $table->foreign('developer_id_091', 'fk01_006_091_todo')->references('id_010')->on('001_010_user')
+                $table->foreign('user_id_091', 'fk01_006_091_todo')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');
                 $table->foreign('project_id_091', 'fk02_006_091_todo')->references('id_090')->on('006_090_project')
                     ->onDelete('cascade')->onUpdate('cascade');

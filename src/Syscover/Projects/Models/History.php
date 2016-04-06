@@ -10,7 +10,7 @@ use Sofa\Eloquence\Mappable;
  * Class History
  *
  * Model with properties
- * <br><b>[id, customer_id, customer_name, developer_id, developer_name, title, description, type, project_id, hours, price, request_date, request_date_text, end_date, end_date_text, invoiced]</b>
+ * <br><b>[id, customer_id, customer_name, user_id, user_name, title, description, type, project_id, hours, price, request_date, request_date_text, end_date, end_date_text, invoiced]</b>
  *
  * @package Syscover\Projects\Models
  */
@@ -24,7 +24,7 @@ class History extends Model {
     protected $primaryKey   = 'id_093';
     protected $suffix       = '093';
     public $timestamps      = false;
-    protected $fillable     = ['id_093', 'customer_id_093', 'customer_name_093', 'developer_id_093', 'developer_name_093', 'title_093', 'description_093', 'type_093', 'project_id_093', 'hours_093', 'price_093', 'request_date_093', 'request_date_text_093', 'end_date_093', 'end_date_text_093', 'invoiced_093'];
+    protected $fillable     = ['id_093', 'customer_id_093', 'customer_name_093', 'user_id_093', 'user_name_093', 'title_093', 'description_093', 'type_093', 'project_id_093', 'hours_093', 'price_093', 'request_date_093', 'request_date_text_093', 'end_date_093', 'end_date_text_093', 'invoiced_093'];
     protected $maps         = [];
     protected $relationMaps = [];
     private static $rules   = [];
@@ -49,8 +49,8 @@ class History extends Model {
         $query =  $this->builder();
 
         // filter todos only from current user
-        if($actions['resource'] === 'projects-developer-history')
-            $query->where('developer_id_093', auth('pulsar')->user()->id_010);
+        if($actions['resource'] === 'projects-user-history')
+            $query->where('user_id_093', auth('pulsar')->user()->id_010);
 
         return $query;
     }

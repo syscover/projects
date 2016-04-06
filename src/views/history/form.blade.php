@@ -17,7 +17,7 @@
                 toolbarInline: false,
                 toolbarSticky: true,
                 tabSpaces: true,
-                @if($resource == 'projects-developer-history')
+                @if($resource == 'projects-user-history')
                 shortcutsEnabled: [],
                 toolbarButtons: [],
                 @elseif($resource == 'projects-history')
@@ -62,13 +62,13 @@
                 })
             })
 
-            @if($resource == 'projects-developer-history')
+            @if($resource == 'projects-user-history')
                 $('.wysiwyg').froalaEditor().froalaEditor('edit.off')
             @endif
 
-            // start change developer
-            $('#developerId').on('change', function() {
-                $('[name=developerName]').val($('#developerId option:selected').text())
+            // start change user
+            $('#userId').on('change', function() {
+                $('[name=userName]').val($('#userId option:selected').text())
             })
 
             // start select2 ajax function
@@ -218,18 +218,18 @@
     ])
     @include('pulsar::includes.html.form_select_group', [
         'fieldSize' => 5,
-        'label' => trans_choice('projects::pulsar.developer', 1),
-        'id' => 'developerId',
-        'name' => 'developerId',
-        'value' => $object->developer_id_093,
-        'objects' => $developers,
+        'label' => trans_choice('pulsar::pulsar.user', 1),
+        'id' => 'userId',
+        'name' => 'userId',
+        'value' => $object->user_id_093,
+        'objects' => $users,
         'idSelect' => 'id',
         'nameSelect' => 'name',
-        'disabled' => $resource == 'projects-developer-history'? true : false
+        'disabled' => $resource == 'projects-user-history'? true : false
     ])
     @include('pulsar::includes.html.form_hidden', [
-        'name' => 'developerName',
-        'value' => old('developerName', isset($object)? $object->developer_name_093 : null)
+        'name' => 'userName',
+        'value' => old('userName', isset($object)? $object->user_name_093 : null)
     ])
     @include('pulsar::includes.html.form_select_group', [
         'fieldSize' => 5,
@@ -239,7 +239,7 @@
         'objects' => $types,
         'idSelect' => 'id',
         'nameSelect' => 'name',
-        'disabled' => $resource == 'projects-developer-history'? true : false
+        'disabled' => $resource == 'projects-user-history'? true : false
     ])
     <div id="todoCustomer">
         @include('pulsar::includes.html.form_select_group', [
@@ -251,7 +251,7 @@
             'objects' => isset($customers)? $customers : null,
             'idSelect' => 'id',
             'nameSelect' => 'name',
-            'disabled' => $resource == 'projects-developer-history'? true : false,
+            'disabled' => $resource == 'projects-user-history'? true : false,
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
@@ -274,7 +274,7 @@
             'class' => 'select2',
             'idSelect' => 'id',
             'nameSelect' => 'name',
-            'disabled' => $resource == 'projects-developer-history'? true : false,
+            'disabled' => $resource == 'projects-user-history'? true : false,
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
@@ -286,7 +286,7 @@
         'label' => trans('pulsar::pulsar.title'),
         'name' => 'title',
         'value' => $object->title_093,
-        'readOnly' => $resource == 'projects-developer-history'? true : false
+        'readOnly' => $resource == 'projects-user-history'? true : false
     ])
     <div id="todoDescription">
         @include('pulsar::includes.html.form_wysiwyg_group', [
@@ -295,7 +295,7 @@
             'value' => $object->description_093,
             'labelSize' => 2,
             'fieldSize' => 10,
-            'disabled' => $resource == 'projects-developer-history'? true : false
+            'disabled' => $resource == 'projects-user-history'? true : false
         ])
     </div>
     <div id="todoRequestDate">
@@ -303,7 +303,7 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.request_date'),
             'name' => 'requestDate',
-            'readOnly' => $resource == 'projects-developer-history'? true : false,
+            'readOnly' => $resource == 'projects-user-history'? true : false,
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                 'locale' => config('app.locale'),
@@ -315,7 +315,7 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
         'name' => 'endDate',
-        'readOnly' => $resource == 'projects-developer-history'? true : false,
+        'readOnly' => $resource == 'projects-user-history'? true : false,
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
@@ -329,7 +329,7 @@
             'label' => trans_choice('pulsar::pulsar.price', 1),
             'name' => 'price',
             'value' => $object->price_093,
-            'readOnly' => $resource == 'projects-developer-history'? true : false
+            'readOnly' => $resource == 'projects-user-history'? true : false
         ])
     </div>
     @include('pulsar::includes.html.form_text_group', [
@@ -338,7 +338,7 @@
         'label' => trans_choice('pulsar::pulsar.hour', 2),
         'name' => 'hours',
         'value' => $object->hours_093,
-        'readOnly' => $resource == 'projects-developer-history'? true : false
+        'readOnly' => $resource == 'projects-user-history'? true : false
     ])
     <!-- /.projects::history.form -->
 @stop

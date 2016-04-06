@@ -21,7 +21,7 @@ class HistoryController extends Controller {
     protected $routeSuffix  = 'projectsHistory';
     protected $folder       = 'history';
     protected $package      = 'projects';
-    protected $aColumns     = ['id_093', 'developer_name_093', 'end_date_093', 'end_date_text_093', 'customer_name_093', 'name_090', 'title_093', 'price_093', 'hours_093', 'request_date_093', 'request_date_text_093'];
+    protected $aColumns     = ['id_093', 'user_name_093', 'end_date_093', 'end_date_text_093', 'customer_name_093', 'name_090', 'title_093', 'price_093', 'hours_093', 'request_date_093', 'request_date_text_093'];
     protected $nameM        = 'title_093';
     protected $model        = History::class;
     protected $icon         = 'fa fa-history';
@@ -41,10 +41,10 @@ class HistoryController extends Controller {
 
         $actions = $this->request->route()->getAction();
 
-        // if request came from Developer Todos
-        if($actions['resource'] === 'projects-developer-history')
+        // if request came from User Todos
+        if($actions['resource'] === 'projects-user-history')
         {
-            $this->routeSuffix = 'projectsDeveloperHistory';
+            $this->routeSuffix = 'projectsUserHistory';
         }
         elseif($actions['resource'] === 'projects-history')
         {
@@ -66,7 +66,7 @@ class HistoryController extends Controller {
 
     public function showCustomRecord($parameters)
     {
-        // get resourse to know if set developer, depend of view, todos or developer todos
+        // get resourse to know if set user, depend of view, todos or user todos
         $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
@@ -99,7 +99,7 @@ class HistoryController extends Controller {
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
 
-        $parameters['developers'] = $users->map(function ($user, $key) {
+        $parameters['user'] = $users->map(function ($user, $key) {
             $user->name = $user->name_010 . ' ' . $user->surname_010;
             return $user;
         });
@@ -109,7 +109,7 @@ class HistoryController extends Controller {
 
     public function editCustomRecord($parameters)
     {
-        // get resourse to know if set developer, depend of view, todos or developer todos
+        // get resourse to know if set user, depend of view, todos or user todos
         $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
@@ -142,7 +142,7 @@ class HistoryController extends Controller {
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
 
-        $parameters['developers'] = $users->map(function ($user, $key) {
+        $parameters['users'] = $users->map(function ($user, $key) {
             $user->name = $user->name_010 . ' ' . $user->surname_010;
             return $user;
         });
@@ -189,8 +189,8 @@ class HistoryController extends Controller {
 //        }
 
         History::where('id_093', $parameters['id'])->update([
-            'developer_id_093'              => $this->request->input('developerId'),
-            'developer_name_093'            => $this->request->input('developerName'),
+            'user_id_093'              => $this->request->input('userId'),
+            'user_name_093'            => $this->request->input('userName'),
             'title_093'                     => $this->request->input('title'),
             'description_093'               => $this->request->has('description')? $this->request->input('description') : null,
             'type_093'                      => $this->request->input('type'),

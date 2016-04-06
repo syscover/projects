@@ -39,7 +39,7 @@
     <!-- projects::todo_.index -->
     <tr>
         <th data-hide="phone,tablet">ID.</th>
-        <th>{{ trans_choice('projects::pulsar.developer', 1) }}</th>
+        <th>{{ trans_choice('pulsar::pulsar.user', 1) }}</th>
         <th>{{ trans_choice('pulsar::pulsar.customer', 1) }}</th>
         <th data-hide="phone">{{ trans_choice('projects::pulsar.project', 1) }}</th>
         <th data-hide="phone">{{ trans('pulsar::pulsar.title') }}</th>

@@ -87,11 +87,11 @@
     ])
     @include('pulsar::includes.html.form_select_group', [
         'fieldSize' => 5,
-        'label' => trans_choice('projects::pulsar.developer', 1),
-        'id' => 'developerId',
-        'name' => 'developerId',
-        'value' => $object->developer_id_092,
-        'objects' => $developers,
+        'label' => trans_choice('pulsar::pulsar.user', 1),
+        'id' => 'userId',
+        'name' => 'userId',
+        'value' => $object->user_id_092,
+        'objects' => $users,
         'idSelect' => 'id',
         'nameSelect' => 'name',
         'disabled' => true

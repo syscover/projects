@@ -25,7 +25,7 @@
                 <strong>{{ trans('projects::pulsar.end_date') }}:</strong> {{ $billing->end_date_text_092 }}
             </div>
             <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
-                <strong>{{ trans_choice('projects::pulsar.developer', 1) }}:</strong> {{ $billing->developer_name_092 }}
+                <strong>{{ trans_choice('pulsar::pulsar.user', 1) }}:</strong> {{ $billing->user_name_092 }}
             </div>
             <div class="formatted_content" style="padding-bottom:19px;padding:0 !important;border:none !important;margin:0 0 5px !important;max-width:none !important">
                 <strong>{{ trans_choice('pulsar::pulsar.customer', 1) }}:</strong> {{ $billing->customer_name_092 }}
