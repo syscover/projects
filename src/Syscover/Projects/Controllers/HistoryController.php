@@ -99,7 +99,7 @@ class HistoryController extends Controller {
         // todo: cambiar por listado de programadores
         $users = User::builder()->get();
 
-        $parameters['user'] = $users->map(function ($user, $key) {
+        $parameters['users'] = $users->map(function ($user, $key) {
             $user->name = $user->name_010 . ' ' . $user->surname_010;
             return $user;
         });
