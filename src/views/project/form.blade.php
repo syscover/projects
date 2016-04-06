@@ -253,7 +253,7 @@
             'default-date' => old('estimatedEndDate', isset($object->estimated_end_date_090)? date('Y-m-d', $object->estimated_end_date_090) : null)
         ]
     ])
-    @if($action == 'create')
+    @if($action == 'update')
         @include('pulsar::includes.html.form_datetimepicker_group', [
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.end_date'),

@@ -83,8 +83,7 @@ class TodoController extends Controller {
 
         // projects
         $parameters['projects'] = Project::builder()
-            ->where('end_date_090', '>', date('U'))
-            ->orWhereNull('end_date_090')
+            ->whereNull('end_date_090')
             ->get();
 
         // todo: cambiar por listado de programadores

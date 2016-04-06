@@ -73,6 +73,8 @@ class ProjectController extends Controller {
             'init_date_text_090'            => $this->request->has('initDate')? $this->request->input('initDate') : null,
             'estimated_end_date_090'        => $this->request->has('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('estimatedEndDate'))->getTimestamp() : null,
             'estimated_end_date_text_090'   => $this->request->has('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
+            'end_date_090'                  => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
+            'end_date_text_090'             => $this->request->has('endDate')? $this->request->input('endDate') : null,
         ]);
     }
 }
