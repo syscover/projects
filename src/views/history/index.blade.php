@@ -2,7 +2,7 @@
 
 @section('head')
     @parent
-    <!-- projects::historical.index -->
+    <!-- projects::history.index -->
     <style>
         .customer-width {
             max-width: 100px;
@@ -19,7 +19,7 @@
                     'iDisplayStart' : {{ $offset }},
                     'aaSorting': [[ 0, "desc" ]],
                     'aoColumnDefs': [
-                    @if($resource == 'projects-historical')
+                    @if($resource == 'projects-history')
                         { 'visible': false, "bSearchable": false, 'aTargets': [2,9]}, // hidden column 1 and prevents search on column 1
                         { 'iDataSort': 2, 'aTargets': [3] }, // sort column 2 according hidden column 1 data
                         { 'iDataSort': 9, 'aTargets': [10] }, // sort column 2 according hidden column 1 data
@@ -28,7 +28,7 @@
                         { 'sClass': 'customer-width', 'aTargets': [1,4]},
                         { 'sClass': 'align-center', 'aTargets': [11, 12]}
                     @endif
-                    @if($resource == 'projects-developer-historical')
+                    @if($resource == 'projects-developer-history')
                         { 'visible': false, "bSearchable": false, 'aTargets': [1,2,9]}, // hidden column 1 and prevents search on column 1
                         { 'iDataSort': 2, 'aTargets': [3] }, // sort column 2 according hidden column 1 data
                         { 'iDataSort': 9, 'aTargets': [10] }, // sort column 2 according hidden column 1 data
@@ -44,11 +44,11 @@
             }
         });
     </script>
-    <!-- ./projects::historical.index -->
+    <!-- /.projects::history.index -->
 @stop
 
 @section('tHead')
-    <!-- projects::historical.index -->
+    <!-- projects::history.index -->
     <tr>
         <th data-hide="phone,tablet">ID.</th>
         <th data-hide="phone">{{ trans_choice('projects::pulsar.developer', 1) }}</th>
@@ -61,10 +61,10 @@
         <th data-hide="phone">{{ trans_choice('pulsar::pulsar.hour', 1) }}</th>
         <th>{{ trans('projects::pulsar.request_date') }}</th>
         <th data-hide="phone">{{ trans('projects::pulsar.request_date') }}</th>
-        @if($resource == 'projects-historical')
+        @if($resource == 'projects-history')
             <th class="checkbox-column"><input type="checkbox" class="uniform"></th>
         @endif
         <th>{{ trans_choice('pulsar::pulsar.action', 2) }}</th>
     </tr>
-    <!-- ./projects::historical.index -->
+    <!-- /.projects::history.index -->
 @stop

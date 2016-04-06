@@ -11,7 +11,7 @@ use Syscover\Pulsar\Models\Preference;
 use Syscover\Pulsar\Models\User;
 use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Projects\Models\Billing;
-use Syscover\Projects\Models\Historical;
+use Syscover\Projects\Models\History;
 use Syscover\Projects\Models\Project;
 use Syscover\Projects\Models\Todo;
 
@@ -241,7 +241,7 @@ class TodoController extends Controller {
                     'total_hours_090'       => $project->total_hours_090 -  $todo->hours_091
                 ]);
 
-                Historical::create([
+                History::create([
                     'developer_id_093'              => $todo->developer_id_091,
                     'developer_name_093'            => $todo->developer_name_091,
                     'type_093'                      => $todo->type_091,
@@ -258,7 +258,7 @@ class TodoController extends Controller {
                     'hours_093'                     => $todo->hours_091
                 ]);
 
-                // delete todo_, after register historical
+                // delete todo_, after register history
                 Todo::destroy($todo->id_091);
 
             }

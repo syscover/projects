@@ -7,25 +7,25 @@ use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Pulsar\Models\User;
 use Syscover\Projects\Models\Project;
-use Syscover\Projects\Models\Historical;
+use Syscover\Projects\Models\History;
 
 /**
- * Class HistoricalController
+ * Class HistoryController
  * @package Syscover\Project\Controllers
  */
 
-class HistoricalController extends Controller {
+class HistoryController extends Controller {
 
     use TraitController;
 
-    protected $routeSuffix  = 'projectsHistorical';
-    protected $folder       = 'historical';
+    protected $routeSuffix  = 'projectsHistory';
+    protected $folder       = 'history';
     protected $package      = 'projects';
     protected $aColumns     = ['id_093', 'developer_name_093', 'end_date_093', 'end_date_text_093', 'customer_name_093', 'name_090', 'title_093', 'price_093', 'hours_093', 'request_date_093', 'request_date_text_093'];
     protected $nameM        = 'title_093';
-    protected $model        = Historical::class;
+    protected $model        = History::class;
     protected $icon         = 'fa fa-history';
-    protected $objectTrans  = 'historical';
+    protected $objectTrans  = 'history';
     protected $viewParameters   = [
         'newButton'             => false,
         'checkBoxColumn'        => false,
@@ -42,11 +42,11 @@ class HistoricalController extends Controller {
         $actions = $this->request->route()->getAction();
 
         // if request came from Developer Todos
-        if($actions['resource'] === 'projects-developer-historical')
+        if($actions['resource'] === 'projects-developer-history')
         {
-            $this->routeSuffix = 'projectsDeveloperHistorical';
+            $this->routeSuffix = 'projectsDeveloperHistory';
         }
-        elseif($actions['resource'] === 'projects-historical')
+        elseif($actions['resource'] === 'projects-history')
         {
             $this->viewParameters = [
                 'newButton'             => false,
@@ -168,7 +168,7 @@ class HistoricalController extends Controller {
         // check that has hours if endDate exist
         if($this->request->has('endDate'))
         {
-            $validation = Historical::validate([
+            $validation = History::validate([
                 'hours'  =>  $this->request->input('hours')
             ], ['hoursRule' => true]);
 
@@ -181,14 +181,14 @@ class HistoricalController extends Controller {
         // 1 - project
 //        if($this->request->input('type') == 1)
 //        {
-//            $historical = Historical::builder()->find($parameters['id']);
-//            if($historical->hours_093 != $this->request->input('hours'))
+//            $history = History::builder()->find($parameters['id']);
+//            if($history->hours_093 != $this->request->input('hours'))
 //            {
-//                $newHours = $historical->hours_093 - $this->request->input('hours');
+//                $newHours = $history->hours_093 - $this->request->input('hours');
 //            }
 //        }
 
-        Historical::where('id_093', $parameters['id'])->update([
+        History::where('id_093', $parameters['id'])->update([
             'developer_id_093'              => $this->request->input('developerId'),
             'developer_name_093'            => $this->request->input('developerName'),
             'title_093'                     => $this->request->input('title'),

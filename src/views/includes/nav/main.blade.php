@@ -1,4 +1,4 @@
-<li{!! Miscellaneous::setCurrentOpenPage(['projects-project', 'projects-todo', 'projects-developer-todo', 'projects-billing', 'projects-historical', 'projects-developer-historical', 'projects-preference']) !!}>
+<li{!! Miscellaneous::setCurrentOpenPage(['projects-project', 'projects-todo', 'projects-developer-todo', 'projects-billing', 'projects-history', 'projects-developer-history', 'projects-preference']) !!}>
     <a href="javascript:void(0)"><i class="fa fa-code-fork"></i>{{ trans('projects::pulsar.package_name') }}</a>
     <ul class="sub-menu">
         @if(session('userAcl')->allows('projects-project', 'access'))
@@ -13,11 +13,11 @@
         @if(session('userAcl')->allows('projects-billing', 'access'))
             <li{!! Miscellaneous::setCurrentPage('projects-billing') !!}><a href="{{ route('projectsBilling') }}"><i class="fa fa-credit-card"></i>{{ trans_choice('projects::pulsar.billing', 2) }}</a></li>
         @endif
-        @if(session('userAcl')->allows('projects-historical', 'access'))
-            <li{!! Miscellaneous::setCurrentPage('projects-historical') !!}><a href="{{ route('projectsHistorical') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.historical') }}</a></li>
+        @if(session('userAcl')->allows('projects-history', 'access'))
+            <li{!! Miscellaneous::setCurrentPage('projects-history') !!}><a href="{{ route('projectsHistory') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.history') }}</a></li>
         @endif
-        @if(session('userAcl')->allows('projects-developer-historical', 'access'))
-            <li{!! Miscellaneous::setCurrentPage('projects-developer-historical') !!}><a href="{{ route('projectsDeveloperHistorical') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.developer_historical') }}</a></li>
+        @if(session('userAcl')->allows('projects-developer-history', 'access'))
+            <li{!! Miscellaneous::setCurrentPage('projects-developer-history') !!}><a href="{{ route('projectsDeveloperHistory') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.developer_history') }}</a></li>
         @endif
         @if(session('userAcl')->allows('projects-preference', 'access'))
             <li{!! Miscellaneous::setCurrentPage('projects-preference') !!}><a href="{{ route('projectsPreference') }}"><i class="fa fa-cog"></i>{{ trans_choice('pulsar::pulsar.preference', 2) }}</a></li>

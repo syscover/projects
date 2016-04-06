@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ProjectsCreateTableHistorical extends Migration {
+class ProjectsCreateTableHistory extends Migration {
 
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class ProjectsCreateTableHistorical extends Migration {
      */
     public function up()
     {
-        if(! Schema::hasTable('006_093_historical'))
+        if(! Schema::hasTable('006_093_history'))
         {
-            Schema::create('006_093_historical', function (Blueprint $table) {
+            Schema::create('006_093_history', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
                 $table->increments('id_093')->unsigned();
 
@@ -52,9 +52,9 @@ class ProjectsCreateTableHistorical extends Migration {
                 // precio de la tarea, en el cado de haberse definido
                 $table->decimal('price_093', 10, 2)->nullable();
 
-                $table->foreign('developer_id_093', 'fk01_006_093_historical')->references('id_010')->on('001_010_user')
+                $table->foreign('developer_id_093', 'fk01_006_093_history')->references('id_010')->on('001_010_user')
                     ->onDelete('set null')->onUpdate('cascade');
-                $table->foreign('project_id_093', 'fk02_006_093_historical')->references('id_090')->on('006_090_project')
+                $table->foreign('project_id_093', 'fk02_006_093_history')->references('id_090')->on('006_090_project')
                     ->onDelete('set null')->onUpdate('cascade');
             });
         }
@@ -67,9 +67,9 @@ class ProjectsCreateTableHistorical extends Migration {
      */
     public function down()
     {
-        if (Schema::hasTable('006_093_historical'))
+        if (Schema::hasTable('006_093_history'))
         {
-            Schema::drop('006_093_historical');
+            Schema::drop('006_093_history');
         }
     }
 }

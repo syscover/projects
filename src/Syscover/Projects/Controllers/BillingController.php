@@ -1,6 +1,6 @@
 <?php namespace Syscover\Projects\Controllers;
 
-use Syscover\Projects\Models\Historical;
+use Syscover\Projects\Models\History;
 use Syscover\Projects\Models\Todo;
 use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Models\User;
@@ -56,11 +56,11 @@ class BillingController extends Controller {
         // get billing object
         $billing = Billing::builder()->find($parameters['id']);
 
-        Historical::create([
+        History::create([
             'developer_id_093'              => $billing->developer_id_091,
             'developer_name_093'            => $billing->developer_name_091,
             'type_093'                      => $billing->type_091,
-            'project_id_093'                => null, // this historical can not to have project
+            'project_id_093'                => null, // this history can not to have project
             'customer_id_093'               => $billing->customer_id_091,
             'customer_name_093'             => $billing->customer_name_091,
             'title_093'                     => $billing->title_091,

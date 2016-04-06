@@ -17,10 +17,10 @@
                 toolbarInline: false,
                 toolbarSticky: true,
                 tabSpaces: true,
-                @if($resource == 'projects-developer-historical')
+                @if($resource == 'projects-developer-history')
                 shortcutsEnabled: [],
                 toolbarButtons: [],
-                @elseif($resource == 'projects-historical')
+                @elseif($resource == 'projects-history')
                 shortcutsEnabled: ['show', 'bold', 'italic', 'underline', 'strikeThrough', 'indent', 'outdent', 'undo', 'redo', 'insertImage', 'createLink'],
                 toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'insertHR', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html'],
                 @endif
@@ -62,7 +62,7 @@
                 })
             })
 
-            @if($resource == 'projects-developer-historical')
+            @if($resource == 'projects-developer-history')
                 $('.wysiwyg').froalaEditor().froalaEditor('edit.off')
             @endif
 
@@ -208,7 +208,7 @@
 @stop
 
 @section('rows')
-    <!-- projects::historical.form -->
+    <!-- projects::history.form -->
     @include('pulsar::includes.html.form_text_group', [
         'label' => 'ID',
         'name' => 'id',
@@ -225,7 +225,7 @@
         'objects' => $developers,
         'idSelect' => 'id',
         'nameSelect' => 'name',
-        'disabled' => $resource == 'projects-developer-historical'? true : false
+        'disabled' => $resource == 'projects-developer-history'? true : false
     ])
     @include('pulsar::includes.html.form_hidden', [
         'name' => 'developerName',
@@ -239,7 +239,7 @@
         'objects' => $types,
         'idSelect' => 'id',
         'nameSelect' => 'name',
-        'disabled' => $resource == 'projects-developer-historical'? true : false
+        'disabled' => $resource == 'projects-developer-history'? true : false
     ])
     <div id="todoCustomer">
         @include('pulsar::includes.html.form_select_group', [
@@ -251,7 +251,7 @@
             'objects' => isset($customers)? $customers : null,
             'idSelect' => 'id',
             'nameSelect' => 'name',
-            'disabled' => $resource == 'projects-developer-historical'? true : false,
+            'disabled' => $resource == 'projects-developer-history'? true : false,
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
@@ -274,7 +274,7 @@
             'class' => 'select2',
             'idSelect' => 'id',
             'nameSelect' => 'name',
-            'disabled' => $resource == 'projects-developer-historical'? true : false,
+            'disabled' => $resource == 'projects-developer-history'? true : false,
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
@@ -286,7 +286,7 @@
         'label' => trans('pulsar::pulsar.title'),
         'name' => 'title',
         'value' => $object->title_093,
-        'readOnly' => $resource == 'projects-developer-historical'? true : false
+        'readOnly' => $resource == 'projects-developer-history'? true : false
     ])
     <div id="todoDescription">
         @include('pulsar::includes.html.form_wysiwyg_group', [
@@ -295,7 +295,7 @@
             'value' => $object->description_093,
             'labelSize' => 2,
             'fieldSize' => 10,
-            'disabled' => $resource == 'projects-developer-historical'? true : false
+            'disabled' => $resource == 'projects-developer-history'? true : false
         ])
     </div>
     <div id="todoRequestDate">
@@ -303,7 +303,7 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.request_date'),
             'name' => 'requestDate',
-            'readOnly' => $resource == 'projects-developer-historical'? true : false,
+            'readOnly' => $resource == 'projects-developer-history'? true : false,
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
                 'locale' => config('app.locale'),
@@ -315,7 +315,7 @@
         'fieldSize' => 4,
         'label' => trans('projects::pulsar.end_date'),
         'name' => 'endDate',
-        'readOnly' => $resource == 'projects-developer-historical'? true : false,
+        'readOnly' => $resource == 'projects-developer-history'? true : false,
         'data' => [
             'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
             'locale' => config('app.locale'),
@@ -329,7 +329,7 @@
             'label' => trans_choice('pulsar::pulsar.price', 1),
             'name' => 'price',
             'value' => $object->price_093,
-            'readOnly' => $resource == 'projects-developer-historical'? true : false
+            'readOnly' => $resource == 'projects-developer-history'? true : false
         ])
     </div>
     @include('pulsar::includes.html.form_text_group', [
@@ -338,7 +338,7 @@
         'label' => trans_choice('pulsar::pulsar.hour', 2),
         'name' => 'hours',
         'value' => $object->hours_093,
-        'readOnly' => $resource == 'projects-developer-historical'? true : false
+        'readOnly' => $resource == 'projects-developer-history'? true : false
     ])
-    <!-- ./projects::historical.form -->
+    <!-- /.projects::history.form -->
 @stop

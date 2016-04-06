@@ -7,7 +7,7 @@ use Sofa\Eloquence\Eloquence;
 use Sofa\Eloquence\Mappable;
 
 /**
- * Class Historical
+ * Class History
  *
  * Model with properties
  * <br><b>[id, customer_id, customer_name, developer_id, developer_name, title, description, type, project_id, hours, price, request_date, request_date_text, end_date, end_date_text, invoiced]</b>
@@ -15,12 +15,12 @@ use Sofa\Eloquence\Mappable;
  * @package Syscover\Projects\Models
  */
 
-class Historical extends Model {
+class History extends Model {
 
     use TraitModel;
     use Eloquence, Mappable;
 
-	protected $table        = '006_093_historical';
+	protected $table        = '006_093_history';
     protected $primaryKey   = 'id_093';
     protected $suffix       = '093';
     public $timestamps      = false;
@@ -38,7 +38,7 @@ class Historical extends Model {
 
     public function scopeBuilder($query)
     {
-        return $query->leftJoin('006_090_project', '006_093_historical.project_id_093', '=', '006_090_project.id_090');
+        return $query->leftJoin('006_090_project', '006_093_history.project_id_093', '=', '006_090_project.id_090');
     }
 
     public function addToGetIndexRecords($request, $parameters)
@@ -49,7 +49,7 @@ class Historical extends Model {
         $query =  $this->builder();
 
         // filter todos only from current user
-        if($actions['resource'] === 'projects-developer-historical')
+        if($actions['resource'] === 'projects-developer-history')
             $query->where('developer_id_093', auth('pulsar')->user()->id_010);
 
         return $query;
