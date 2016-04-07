@@ -33,6 +33,9 @@ class ProjectsCreateTableProject extends Migration {
                 $table->decimal('consumed_hours_090', 10, 2);
                 $table->decimal('total_hours_090', 10, 2);
 
+                // presupuesto del proyecto
+                //$table->decimal('price_090', 10, 2)->nullable();
+
                 // fecha de inicio del proyecto
                 $table->integer('init_date_090')->unsigned()->nullable();
                 $table->string('init_date_text_090')->nullable();

@@ -32,7 +32,7 @@
             }
         });
     </script>
-    <!-- ./projects::todo_.index -->
+    <!-- /.projects::todo_.index -->
 @stop
 
 @section('tHead')
@@ -51,5 +51,5 @@
         <th data-hide="phone">{{ trans('projects::pulsar.end_date') }}</th>
         <th>{{ trans_choice('pulsar::pulsar.action', 2) }}</th>
     </tr>
-    <!-- ./projects::todo_.index -->
+    <!-- /.projects::todo_.index -->
 @stop

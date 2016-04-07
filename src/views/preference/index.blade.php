@@ -4,7 +4,7 @@
     @parent
     <!-- projects::preferences.index -->
     @include('pulsar::includes.js.success_message')
-    <!-- ./projects::preferences.index -->
+    <!-- /.projects::preferences.index -->
 @stop
 
 @section('rows')
@@ -32,5 +32,5 @@
         'nameSelect' => 'name_013',
         'required' => true
     ])
-    <!-- ./projects::preferences.index -->
+    <!-- /.projects::preferences.index -->
 @stop

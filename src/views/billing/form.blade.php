@@ -146,5 +146,5 @@
         'value' => $object->hours_092,
         'readOnly' => true
     ])
-    <!-- ./projects::billing.form -->
+    <!-- /.projects::billing.form -->
 @stop
