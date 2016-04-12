@@ -17,6 +17,5 @@
         "psr-4": {
             "Syscover\\Projects\\": "src/Syscover/Projects"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
