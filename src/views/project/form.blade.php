@@ -185,7 +185,7 @@
         'fieldSize' => 10
     ])
     @include('pulsar::includes.html.form_section_header', [
-        'label' => trans_choice('pulsar::pulsar.hour', 2),
+        'label' => trans_choice('pulsar::pulsar.budget', 1),
         'icon' => 'fa fa-clock-o',
         'containerId' => 'headerContent'
     ])
@@ -225,6 +225,14 @@
             ])
         </div>
         <div class="col-md-6">
+            @include('pulsar::includes.html.form_text_group', [
+                 'labelSize' => 4,
+                 'fieldSize' => 5,
+                 'type' => 'number',
+                 'label' => trans_choice('pulsar::pulsar.price', 1),
+                 'name' => 'price',
+                 'value' => old('price', isset($object)? $object->price_090 : null)
+            ])
         </div>
     </div>
 
