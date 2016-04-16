@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'billing'                               => 'Billing',
     'billing_profile'                       => 'Billing profile',
     'consumed_hours'                        => 'Consumed hours',

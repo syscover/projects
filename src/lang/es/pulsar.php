@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'billing'                               => 'Facturación',
     'billing_profile'                       => 'Perfil de facturación',
     'consumed_hours'                        => 'Horas consumidas',
