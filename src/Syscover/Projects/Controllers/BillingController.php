@@ -1,10 +1,9 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Syscover\Pulsar\Core\Controller;
 use Syscover\Projects\Models\History;
 use Syscover\Projects\Models\Todo;
-use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Models\User;
-use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Projects\Models\Billing;
 
 /**
@@ -12,10 +11,8 @@ use Syscover\Projects\Models\Billing;
  * @package Syscover\Project\Controllers
  */
 
-class BillingController extends Controller {
-
-    use TraitController;
-
+class BillingController extends Controller
+{
     protected $routeSuffix      = 'projectsBilling';
     protected $folder           = 'billing';
     protected $package          = 'projects';

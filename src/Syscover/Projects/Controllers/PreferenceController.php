@@ -1,20 +1,17 @@
 <?php namespace Syscover\Projects\Controllers;
 
-use Syscover\Pulsar\Controllers\Controller;
+use Syscover\Pulsar\Core\Controller;
 use Syscover\Pulsar\Models\EmailAccount;
 use Syscover\Pulsar\Models\Preference;
 use Syscover\Pulsar\Models\Profile;
-use Syscover\Pulsar\Traits\TraitController;
 
 /**
  * Class PreferenceController
  * @package Syscover\Projects\Controllers
  */
 
-class PreferenceController extends Controller {
-
-    use TraitController;
-
+class PreferenceController extends Controller
+{
     protected $routeSuffix  = 'projectsPreference';
     protected $folder       = 'preference';
     protected $package      = 'projects';

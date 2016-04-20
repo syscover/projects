@@ -1,10 +1,8 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Syscover\Pulsar\Core\Controller;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
-use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\Miscellaneous;
-use Syscover\Pulsar\Models\User;
-use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Projects\Models\Project;
 
 /**
@@ -12,10 +10,8 @@ use Syscover\Projects\Models\Project;
  * @package Syscover\Project\Controllers
  */
 
-class ProjectController extends Controller {
-
-    use TraitController;
-
+class ProjectController extends Controller
+{
     protected $routeSuffix  = 'projectsProject';
     protected $folder       = 'project';
     protected $package      = 'projects';

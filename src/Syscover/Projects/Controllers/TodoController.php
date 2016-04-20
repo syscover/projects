@@ -1,15 +1,14 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Syscover\Pulsar\Core\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
-use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Pulsar\Models\EmailAccount;
 use Syscover\Pulsar\Models\Preference;
 use Syscover\Pulsar\Models\User;
-use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Projects\Models\Billing;
 use Syscover\Projects\Models\History;
 use Syscover\Projects\Models\Project;
@@ -20,10 +19,8 @@ use Syscover\Projects\Models\Todo;
  * @package Syscover\Project\Controllers
  */
 
-class TodoController extends Controller {
-
-    use TraitController;
-
+class TodoController extends Controller
+{
     protected $routeSuffix      = 'projectsTodo';
     protected $folder           = 'todo';
     protected $package          = 'projects';

@@ -1,10 +1,9 @@
 <?php namespace Syscover\Projects\Controllers;
 
+use Syscover\Pulsar\Core\Controller;
 use Illuminate\Http\Request;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
-use Syscover\Pulsar\Controllers\Controller;
 use Syscover\Pulsar\Libraries\Miscellaneous;
-use Syscover\Pulsar\Traits\TraitController;
 use Syscover\Pulsar\Models\User;
 use Syscover\Projects\Models\Project;
 use Syscover\Projects\Models\History;
@@ -14,10 +13,8 @@ use Syscover\Projects\Models\History;
  * @package Syscover\Project\Controllers
  */
 
-class HistoryController extends Controller {
-
-    use TraitController;
-
+class HistoryController extends Controller
+{
     protected $routeSuffix  = 'projectsHistory';
     protected $folder       = 'history';
     protected $package      = 'projects';
