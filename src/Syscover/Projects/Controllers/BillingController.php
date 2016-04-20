@@ -27,7 +27,8 @@ class BillingController extends Controller
         'showButton'            => true,
         'editButton'            => false,
         'deleteButton'          => false,
-        'deleteSelectButton'    => false
+        'deleteSelectButton'    => false,
+        'relatedButton'         => false,
     ];
 
     public function showCustomRecord($parameters)

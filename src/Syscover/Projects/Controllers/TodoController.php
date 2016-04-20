@@ -35,7 +35,8 @@ class TodoController extends Controller
         'showButton'            => false,
         'editButton'            => true,
         'deleteButton'          => true,
-        'deleteSelectButton'    => false
+        'deleteSelectButton'    => false,
+        'relatedButton'         => false,
     ];
 
     function __construct(Request $request)

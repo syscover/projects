@@ -29,7 +29,8 @@ class HistoryController extends Controller
         'showButton'            => true,
         'editButton'            => false,
         'deleteButton'          => false,
-        'deleteSelectButton'    => false
+        'deleteSelectButton'    => false,
+        'relatedButton'         => false,
     ];
 
     function __construct(Request $request)
