@@ -3,7 +3,7 @@
 @section('head')
     @parent
     <!-- projects::preferences.index -->
-    @include('pulsar::includes.js.success_message')
+    @include('pulsar::includes.js.messages')
     <!-- /.projects::preferences.index -->
 @stop
 
