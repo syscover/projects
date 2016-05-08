@@ -38,10 +38,7 @@ class InvoicedController extends Controller
         }, config('projects.types'));
 
         // projects
-        $parameters['projects'] = Project::builder()
-            ->where('end_date_090', '>', date('U'))
-            ->orWhereNull('end_date_090')
-            ->get();
+        $parameters['projects'] = Project::builder()->get();
 
         return $parameters;
     }

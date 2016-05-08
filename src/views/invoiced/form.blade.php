@@ -2,10 +2,12 @@
 
 @section('head')
     @parent
+    <!-- projects::invoiced.form -->
     <link rel="stylesheet" href="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
 
     <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/moment.min.js') }}"></script>
     <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <!-- /.projects::invoiced.form -->
 @stop
 
 @section('rows')
@@ -64,7 +66,7 @@
             'class' => 'select2',
             'idSelect' => 'id',
             'nameSelect' => 'name',
-            'disabled' => $resource == 'projects-user-history'? true : false,
+            'disabled' => true,
             'data' => [
                 'language' => config('app.locale'),
                 'width' => '100%',
@@ -81,6 +83,5 @@
         'value' => $object->price_094,
         'readOnly' => true
     ])
-
-    <!-- /.projects::history.form -->
+    <!-- /.projects::invoiced.form -->
 @stop

@@ -273,6 +273,14 @@
                 'default-date' => old('endDate', isset($object->end_date_090)? date('Y-m-d', $object->end_date_090) : null),
             ]
         ])
+    @include('pulsar::includes.html.form_checkbox_group', [
+        'fieldSize' => 4,
+        'label' => trans('projects::pulsar.invoiced'),
+        'name' => 'invoiced',
+        'value' => 1,
+        'checked' => $object->invoiced_090,
+        'disabled' => true
+    ])
     @endif
     <!-- /.projects::projects.form -->
 @stop

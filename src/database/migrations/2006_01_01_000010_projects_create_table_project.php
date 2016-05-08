@@ -51,6 +51,9 @@ class ProjectsCreateTableProject extends Migration {
                 // fecha de finalización real
                 $table->integer('end_date_090')->unsigned()->nullable();
                 $table->string('end_date_text_090')->nullable();
+
+                // indica si la tarea se ha facturado
+                $table->boolean('invoiced_090');
             });
         }
     }

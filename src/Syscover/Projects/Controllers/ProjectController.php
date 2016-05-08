@@ -4,6 +4,7 @@ use Syscover\Pulsar\Core\Controller;
 use Syscover\Facturadirecta\Facades\Facturadirecta;
 use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Projects\Models\Project;
+use Syscover\Projects\Models\Invoiced;
 
 /**
  * Class ProjectController
@@ -15,7 +16,7 @@ class ProjectController extends Controller
     protected $routeSuffix  = 'projectsProject';
     protected $folder       = 'project';
     protected $package      = 'projects';
-    protected $aColumns     = ['id_090', 'customer_name_090', 'name_090', 'total_hours_090', 'estimated_end_date_090', 'estimated_end_date_text_090'];
+    protected $aColumns     = ['id_090', 'customer_name_090', 'name_090', 'total_hours_090', 'estimated_end_date_090', 'estimated_end_date_text_090', ['data' => 'invoiced_090', 'type' => 'check']];
     protected $nameM        = 'name_090';
     protected $model        = Project::class;
     protected $icon         = 'fa fa-rocket';
@@ -74,5 +75,27 @@ class ProjectController extends Controller
             'end_date_090'                  => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
             'end_date_text_090'             => $this->request->has('endDate')? $this->request->input('endDate') : null,
         ]);
+
+        // start create check and create invoiced
+        $project = Project::builder()->find($parameters['id']);
+        
+        // create invoiced from project
+        if($this->request->has('endDate') && ! $project->invoiced_090)
+        {
+            Invoiced::create([
+                'date_094'                      => date('U'),
+                'date_text_094'                 => date(config('pulsar.datePattern')),
+                'customer_id_094'               => $this->request->input('customerId'),
+                'customer_name_094'             => $this->request->input('customerName'),
+                'type_094'                      => 1, // project
+                'project_id_094'                => $parameters['id'],
+                'history_id_094'                => null,
+                'price_094'                     => $this->request->has('price')? $this->request->input('price') : 0
+            ]);
+
+            Project::where('id_090', $parameters['id'])->update([
+                'invoiced_090' => true
+            ]);
+        }
     }
 }

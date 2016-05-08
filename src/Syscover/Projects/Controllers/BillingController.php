@@ -82,7 +82,7 @@ class BillingController extends Controller
             'hours_093'                     => $billing->hours_091
         ]);
         
-        // create invoiced from todo
+        // create invoiced from todo_
         Invoiced::create([
             'date_094'                      => date('U'),
             'date_text_094'                 => date(config('pulsar.datePattern')),
