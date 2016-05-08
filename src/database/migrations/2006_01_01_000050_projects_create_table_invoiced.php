@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ProjectsCreateTableHistory extends Migration {
+class ProjectsCreateTableInvoiced extends Migration {
 
     /**
      * Table to record all invoiced quantity, to keep track on projects and hours worked
