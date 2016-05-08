@@ -10,6 +10,7 @@ return [
     'estimated_end_date'                    => 'Estimated end date',
     'estimated_hours'                       => 'Estimated hours',
     'history'                               => 'History',
+    'hour_price'                            => 'Hour price',
     'init_date'                             => 'Init date',
     'invoice_todo'                          => 'Invoice todo',
     'invoiced'                              => 'Invoiced',

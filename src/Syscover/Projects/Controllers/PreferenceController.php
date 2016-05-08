@@ -29,6 +29,8 @@ class PreferenceController extends Controller
         $parameters['accounts']                     = EmailAccount::all();
         $parameters['notificationsAccount']         = Preference::getValue('projectsNotificationsAccount', 6);
 
+        $parameters['hourPrice']                    = Preference::getValue('projectsHourPrice', 6);
+
         return $parameters;
     }
     
@@ -36,5 +38,6 @@ class PreferenceController extends Controller
     {
         Preference::setValue('projectsBillingProfile', 6, $this->request->input('billingProfile'));
         Preference::setValue('projectsNotificationsAccount', 6, $this->request->input('notificationsAccount'));
+        Preference::setValue('projectsHourPrice', 6, $this->request->input('hourPrice'));
     }
 }

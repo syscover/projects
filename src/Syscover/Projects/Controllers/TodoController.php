@@ -111,8 +111,8 @@ class TodoController extends Controller
         }
 
         $todo = Todo::create([
-            'user_id_091'              => $this->request->input('userId'),
-            'user_name_091'            => $this->request->input('userName'),
+            'user_id_091'                   => $this->request->input('userId'),
+            'user_name_091'                 => $this->request->input('userName'),
             'title_091'                     => $this->request->input('title'),
             'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
             'type_091'                      => $this->request->input('type'),
@@ -198,8 +198,8 @@ class TodoController extends Controller
         }
 
         Todo::where('id_091', $parameters['id'])->update([
-            'user_id_091'              => $this->request->input('userId'),
-            'user_name_091'            => $this->request->input('userName'),
+            'user_id_091'                   => $this->request->input('userId'),
+            'user_name_091'                 => $this->request->input('userName'),
             'title_091'                     => $this->request->input('title'),
             'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
             'type_091'                      => $this->request->input('type'),
@@ -239,8 +239,8 @@ class TodoController extends Controller
                 ]);
 
                 History::create([
-                    'user_id_093'              => $todo->user_id_091,
-                    'user_name_093'            => $todo->user_name_091,
+                    'user_id_093'                   => $todo->user_id_091,
+                    'user_name_093'                 => $todo->user_name_091,
                     'type_093'                      => $todo->type_091,
                     'project_id_093'                => $todo->project_id_091,
                     'customer_id_093'               => $todo->customer_id_091,
@@ -264,8 +264,8 @@ class TodoController extends Controller
             {
                 $billing = Billing::create([
                     'todo_id_092'                   => $todo->id_091,
-                    'user_id_092'              => $todo->user_id_091,
-                    'user_name_092'            => $todo->user_name_091,
+                    'user_id_092'                   => $todo->user_id_091,
+                    'user_name_092'                 => $todo->user_name_091,
                     'customer_id_092'               => $todo->customer_id_091,
                     'customer_name_092'             => $todo->customer_name_091,
                     'title_092'                     => $todo->title_091,

@@ -10,6 +10,7 @@ return [
     'estimated_end_date'                    => 'Fecha de finalización estimada',
     'estimated_hours'                       => 'Horas estimadas',
     'history'                               => 'Histórico',
+    'hour_price'                            => 'Precio hora',
     'init_date'                             => 'Fecha de inicio',
     'invoice_todo'                          => 'Facturar tarea',
     'invoiced'                              => 'Facturado',

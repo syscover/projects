@@ -14,7 +14,7 @@ class ProjectsCreateTableInvoiced extends Migration {
     {
         if(! Schema::hasTable('006_094_invoiced'))
         {
-            Schema::create('006_094_history', function (Blueprint $table) {
+            Schema::create('006_094_invoiced', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
                 $table->increments('id_094')->unsigned();
 

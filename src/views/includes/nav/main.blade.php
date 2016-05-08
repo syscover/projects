@@ -1,4 +1,4 @@
-<li{!! is_current_resource(['projects-project', 'projects-todo', 'projects-user-todo', 'projects-billing', 'projects-history', 'projects-user-history', 'projects-preference']) !!}>
+<li{!! is_current_resource(['projects-project', 'projects-todo', 'projects-user-todo', 'projects-billing', 'projects-history', 'projects-user-history', 'projects-invoiced', 'projects-preference']) !!}>
     <a href="javascript:void(0)"><i class="fa fa-code-fork"></i>{{ trans('projects::pulsar.package_name') }}</a>
     <ul class="sub-menu">
         @if(is_allowed('projects-project', 'access'))

@@ -32,5 +32,14 @@
         'nameSelect' => 'name_013',
         'required' => true
     ])
+    @include('pulsar::includes.html.form_text_group', [
+        'labelSize' => 3,
+        'fieldSize' => 4,
+        'type' => 'number',
+        'label' => trans('projects::pulsar.hour_price'),
+        'name' => 'hourPrice',
+        'value' => (float)$hourPrice->value_018,
+        'required' => true
+    ])
     <!-- /.projects::preferences.index -->
 @stop
