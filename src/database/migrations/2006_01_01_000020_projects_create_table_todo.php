@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class ProjectsCreateTableTodo extends Migration {
 
     /**
-     * Run the migrations.
+     * Lista de tareas por hacer o ya realizadas a falta de ser facturadas
      *
      * @return void
      */
@@ -24,7 +24,7 @@ class ProjectsCreateTableTodo extends Migration {
 
                 // puede ser: project o hours
                 // 1 - project
-                // 2 - hours
+                // 2 - hour
                 $table->tinyInteger('type_091')->unsigned();
 
                 // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto

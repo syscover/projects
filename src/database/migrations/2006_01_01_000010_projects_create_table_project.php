@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class ProjectsCreateTableProject extends Migration {
 
     /**
-     * Run the migrations.
+     * Lista de proyectos
      *
      * @return void
      */

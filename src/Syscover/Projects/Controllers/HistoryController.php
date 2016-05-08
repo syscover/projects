@@ -52,7 +52,8 @@ class HistoryController extends Controller
                 'showButton'            => false,
                 'editButton'            => true,
                 'deleteButton'          => true,
-                'deleteSelectButton'    => true
+                'deleteSelectButton'    => true,
+                'relatedButton'         => false,
             ];
         }
     }

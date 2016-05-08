@@ -14,6 +14,7 @@ class ProjectsResourceTableSeeder extends Seeder {
             ['id_007' => 'projects-user-todo',              'name_007' => 'User Todo',              'package_007' => '6'],
             ['id_007' => 'projects-billing',                'name_007' => 'Billing',                'package_007' => '6'],
             ['id_007' => 'projects-history',                'name_007' => 'History',                'package_007' => '6'],
+            ['id_007' => 'projects-invoiced',               'name_007' => 'Invoiced',               'package_007' => '6'],
             ['id_007' => 'projects-user-history',           'name_007' => 'User history',           'package_007' => '6'],
             ['id_007' => 'projects-preference',             'name_007' => 'Preferences',            'package_007' => '6'],
         ]);

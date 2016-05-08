@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 class ProjectsCreateTableBilling extends Migration {
 
     /**
-     * Run the migrations.
+     * Tareas a falta de facturar
      *
      * @return void
      */
