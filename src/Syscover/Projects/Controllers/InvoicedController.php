@@ -9,11 +9,11 @@ use Syscover\Projects\Models\Project;
 use Syscover\Projects\Models\History;
 
 /**
- * Class HistoryController
+ * Class InvoicedController
  * @package Syscover\Project\Controllers
  */
 
-class HistoryController extends Controller
+class InvoicedController extends Controller
 {
     protected $routeSuffix  = 'projectsHistory';
     protected $folder       = 'history';
@@ -56,6 +56,11 @@ class HistoryController extends Controller
                 'relatedButton'         => false,
             ];
         }
+    }
+
+    public function customIndex($parameters)
+    {
+
     }
 
     public function showCustomRecord($parameters)

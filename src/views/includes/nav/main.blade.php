@@ -19,6 +19,9 @@
         @if(is_allowed('projects-user-history', 'access'))
             <li{!! is_current_resource('projects-user-history') !!}><a href="{{ route('projectsUserHistory') }}"><i class="fa fa-history"></i>{{ trans('projects::pulsar.user_history') }}</a></li>
         @endif
+        @if(is_allowed('projects-invoiced', 'access'))
+            <li{!! is_current_resource('projects-invoiced') !!}><a href="{{ route('projectsInvoiced') }}"><i class="fa fa-money"></i>{{ trans('projects::pulsar.invoiced') }}</a></li>
+        @endif
         @if(is_allowed('projects-preference', 'access'))
             <li{!! is_current_resource('projects-preference') !!}><a href="{{ route('projectsPreference') }}"><i class="fa fa-cog"></i>{{ trans_choice('pulsar::pulsar.preference', 2) }}</a></li>
         @endif

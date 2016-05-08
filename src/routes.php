@@ -97,6 +97,19 @@ Route::group(['middleware' => ['web', 'pulsar']], function() {
 
     /*
     |--------------------------------------------------------------------------
+    | INVOICED
+    |--------------------------------------------------------------------------
+    */
+    Route::any(config('pulsar.appName') . '/projects/invoiced/{offset?}',                        ['as'=>'projectsInvoiced',                   'uses'=>'Syscover\Projects\Controllers\InvoicedController@index',                   'resource' => 'projects-invoiced',        'action' => 'access']);
+    Route::any(config('pulsar.appName') . '/projects/invoiced/json/data',                        ['as'=>'jsonDataProjectsInvoiced',           'uses'=>'Syscover\Projects\Controllers\InvoicedController@jsonData',                'resource' => 'projects-invoiced',        'action' => 'access']);
+    Route::get(config('pulsar.appName') . '/projects/invoiced/{id}/edit/{offset}',               ['as'=>'editProjectsInvoiced',               'uses'=>'Syscover\Projects\Controllers\InvoicedController@editRecord',              'resource' => 'projects-invoiced',        'action' => 'access']);
+    Route::put(config('pulsar.appName') . '/projects/invoiced/update/{id}/{offset}',             ['as'=>'updateProjectsInvoiced',             'uses'=>'Syscover\Projects\Controllers\InvoicedController@updateRecord',            'resource' => 'projects-invoiced',        'action' => 'edit']);
+    Route::get(config('pulsar.appName') . '/projects/invoiced/delete/{id}/{offset}',             ['as'=>'deleteProjectsInvoiced',             'uses'=>'Syscover\Projects\Controllers\InvoicedController@deleteRecord',            'resource' => 'projects-invoiced',        'action' => 'delete']);
+    Route::delete(config('pulsar.appName') . '/projects/invoiced/delete/select/records',         ['as'=>'deleteSelectProjectsInvoiced',       'uses'=>'Syscover\Projects\Controllers\InvoicedController@deleteRecordsSelect',     'resource' => 'projects-invoiced',        'action' => 'delete']);
+
+
+    /*
+    |--------------------------------------------------------------------------
     | PREFERENCES
     |--------------------------------------------------------------------------
     */
