@@ -12,6 +12,7 @@ return [
     'history'                               => 'Histórico',
     'init_date'                             => 'Fecha de inicio',
     'invoice_todo'                          => 'Facturar tarea',
+    'invoiced'                              => 'Facturado',
     'message_invoice_todo'                  => '¿Desea facturar esta tarea?',
     'message_successfully_invoiced'         => 'La tarea ha sido facturada con éxito',
     'message_todo_finished'                 => 'Se ha completado una tarera para ser facturada, con fecha de',

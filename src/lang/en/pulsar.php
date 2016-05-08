@@ -12,6 +12,7 @@ return [
     'history'                               => 'History',
     'init_date'                             => 'Init date',
     'invoice_todo'                          => 'Invoice todo',
+    'invoiced'                              => 'Invoiced',
     'message_invoice_todo'                  => 'Would you like to invoice this todo?',
     'message_successfully_invoiced'         => 'The todo has been successfully invoiced',
     'message_todo_finished'                 => 'A task has been completed and is ready to be billed',
