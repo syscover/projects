@@ -1,6 +1,7 @@
 <?php namespace Syscover\Projects\Controllers;
 
 use Syscover\Pulsar\Core\Controller;
+use Illuminate\Http\Request;
 use Syscover\Projects\Models\Project;
 use Syscover\Projects\Models\Invoiced;
 
@@ -19,15 +20,18 @@ class InvoicedController extends Controller
     protected $model        = Invoiced::class;
     protected $icon         = 'projects-invoiced';
     protected $objectTrans  = 'invoiced';
-    protected $viewParameters   = [
-        'newButton'             => false,
-        'checkBoxColumn'        => false,
-        'showButton'            => true,
-        'editButton'            => false,
-        'deleteButton'          => false,
-        'deleteSelectButton'    => false,
-        'relatedButton'         => false,
-    ];
+    
+    function __construct(Request $request)
+    {
+        parent::__construct($request);
+
+        $this->viewParameters['newButton']          = false;
+        $this->viewParameters['checkBoxColumn']     = false;
+        $this->viewParameters['showButton']         = true;
+        $this->viewParameters['editButton']         = false;
+        $this->viewParameters['deleteButton']       = false;
+        $this->viewParameters['deleteSelectButton'] = false;
+    }
 
     public function showCustomRecord($parameters)
     {

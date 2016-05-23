@@ -29,19 +29,13 @@ class TodoController extends Controller
     protected $model            = Todo::class;
     protected $icon             = 'fa fa-hourglass-start';
     protected $objectTrans      = 'todo';
-    protected $viewParameters   = [
-        'newButton'             => true,
-        'checkBoxColumn'        => false,
-        'showButton'            => false,
-        'editButton'            => true,
-        'deleteButton'          => true,
-        'deleteSelectButton'    => false,
-        'relatedButton'         => false,
-    ];
-
+    
     function __construct(Request $request)
     {
         parent::__construct($request);
+
+        $this->viewParameters['checkBoxColumn']     = false;
+        $this->viewParameters['deleteSelectButton'] = false;
 
         $actions = $this->request->route()->getAction();
 

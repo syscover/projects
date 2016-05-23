@@ -23,19 +23,17 @@ class HistoryController extends Controller
     protected $model        = History::class;
     protected $icon         = 'fa fa-history';
     protected $objectTrans  = 'history';
-    protected $viewParameters   = [
-        'newButton'             => false,
-        'checkBoxColumn'        => false,
-        'showButton'            => true,
-        'editButton'            => false,
-        'deleteButton'          => false,
-        'deleteSelectButton'    => false,
-        'relatedButton'         => false,
-    ];
-
+    
     function __construct(Request $request)
     {
         parent::__construct($request);
+
+        $this->viewParameters['newButton']          = false;
+        $this->viewParameters['checkBoxColumn']     = false;
+        $this->viewParameters['showButton']         = true;
+        $this->viewParameters['editButton']         = false;
+        $this->viewParameters['deleteButton']       = false;
+        $this->viewParameters['deleteSelectButton'] = false;
 
         $actions = $this->request->route()->getAction();
 

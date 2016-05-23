@@ -21,7 +21,7 @@ class ProjectController extends Controller
     protected $model        = Project::class;
     protected $icon         = 'fa fa-rocket';
     protected $objectTrans  = 'project';
-
+    
     public function storeCustomRecord($parameters)
     {
         Project::create([

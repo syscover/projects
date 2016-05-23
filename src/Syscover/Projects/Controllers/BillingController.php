@@ -1,6 +1,7 @@
 <?php namespace Syscover\Projects\Controllers;
 
 use Syscover\Pulsar\Core\Controller;
+use Illuminate\Http\Request;
 use Syscover\Projects\Models\History;
 use Syscover\Projects\Models\Todo;
 use Syscover\Pulsar\Models\Preference;
@@ -23,15 +24,18 @@ class BillingController extends Controller
     protected $model            = Billing::class;
     protected $icon             = 'fa fa-credit-card';
     protected $objectTrans      = 'billing';
-    protected $viewParameters   = [
-        'newButton'             => false,
-        'checkBoxColumn'        => false,
-        'showButton'            => true,
-        'editButton'            => false,
-        'deleteButton'          => false,
-        'deleteSelectButton'    => false,
-        'relatedButton'         => false,
-    ];
+
+    function __construct(Request $request)
+    {
+        parent::__construct($request);
+
+        $this->viewParameters['newButton']          = false;
+        $this->viewParameters['checkBoxColumn']     = false;
+        $this->viewParameters['showButton']         = true;
+        $this->viewParameters['editButton']         = false;
+        $this->viewParameters['deleteButton']       = false;
+        $this->viewParameters['deleteSelectButton'] = false;
+    }
 
     public function showCustomRecord($parameters)
     {

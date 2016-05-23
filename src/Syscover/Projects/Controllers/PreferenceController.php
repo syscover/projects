@@ -1,6 +1,7 @@
 <?php namespace Syscover\Projects\Controllers;
 
 use Syscover\Pulsar\Core\Controller;
+use Illuminate\Http\Request;
 use Syscover\Pulsar\Models\EmailAccount;
 use Syscover\Pulsar\Models\Preference;
 use Syscover\Pulsar\Models\Profile;
@@ -20,6 +21,13 @@ class PreferenceController extends Controller
     protected $model        = Preference::class;
     protected $icon         = 'fa fa-cog';
     protected $objectTrans  = 'preference';
+
+    function __construct(Request $request)
+    {
+        parent::__construct($request);
+
+        $this->viewParameters['cancelButton'] = false;
+    }
 
     public function customIndex($parameters)
     {
