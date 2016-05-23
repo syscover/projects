@@ -305,11 +305,11 @@
             'fieldSize' => 4,
             'label' => trans('projects::pulsar.request_date'),
             'name' => 'requestDate',
+            'value' => old('requestDate', isset($object->request_date_093)? date(config('pulsar.datePattern'), $object->request_date_093) : null),
             'readOnly' => $resource == 'projects-user-history'? true : false,
             'data' => [
                 'format' => Miscellaneous::convertFormatDate(config('pulsar.datePattern')),
-                'locale' => config('app.locale'),
-                'default-date' => date('Y-m-d', $object->request_date_093)
+                'locale' => config('app.locale')
             ]
         ])
     </div>

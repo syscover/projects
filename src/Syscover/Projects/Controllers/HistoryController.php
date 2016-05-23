@@ -44,15 +44,12 @@ class HistoryController extends Controller
         }
         elseif($actions['resource'] === 'projects-history')
         {
-            $this->viewParameters = [
-                'newButton'             => false,
-                'checkBoxColumn'        => true,
-                'showButton'            => false,
-                'editButton'            => true,
-                'deleteButton'          => true,
-                'deleteSelectButton'    => true,
-                'relatedButton'         => false,
-            ];
+            $this->viewParameters['newButton']          = false;
+            $this->viewParameters['checkBoxColumn']     = true;
+            $this->viewParameters['showButton']         = false;
+            $this->viewParameters['editButton']         = true;
+            $this->viewParameters['deleteButton']       = true;
+            $this->viewParameters['deleteSelectButton'] = true;
         }
     }
 
@@ -179,22 +176,22 @@ class HistoryController extends Controller
 //                $newHours = $history->hours_093 - $this->request->input('hours');
 //            }
 //        }
-
+        
         History::where('id_093', $parameters['id'])->update([
             'user_id_093'              => $this->request->input('userId'),
             'user_name_093'            => $this->request->input('userName'),
-            'title_093'                     => $this->request->input('title'),
-            'description_093'               => $this->request->has('description')? $this->request->input('description') : null,
-            'type_093'                      => $this->request->input('type'),
-            'project_id_093'                => $this->request->has('projectId')? $this->request->input('projectId') : null,
-            'customer_id_093'               => $customerId,
-            'customer_name_093'             => $customerName,
-            'hours_093'                     => $this->request->has('hours')? $this->request->input('hours') : null,
-            'price_093'                     => $this->request->has('price')? $this->request->input('price') : null,
-            'request_date_093'              => $this->request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('requestDate'))->getTimestamp() : null,
-            'request_date_text_093'         => $this->request->has('requestDate')? $this->request->input('requestDate') : null,
-            'end_date_093'                  => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
-            'end_date_text_093'             => $this->request->has('endDate')? $this->request->input('endDate') : null
+            'title_093'                => $this->request->input('title'),
+            'description_093'          => $this->request->has('description')? $this->request->input('description') : null,
+            'type_093'                 => $this->request->input('type'),
+            'project_id_093'           => $this->request->has('projectId')? $this->request->input('projectId') : null,
+            'customer_id_093'          => $customerId,
+            'customer_name_093'        => $customerName,
+            'hours_093'                => $this->request->has('hours')? $this->request->input('hours') : null,
+            'price_093'                => $this->request->has('price')? $this->request->input('price') : null,
+            'request_date_093'         => $this->request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('requestDate'))->getTimestamp() : null,
+            'request_date_text_093'    => $this->request->has('requestDate')? $this->request->input('requestDate') : null,
+            'end_date_093'             => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
+            'end_date_text_093'        => $this->request->has('endDate')? $this->request->input('endDate') : null
         ]);
     }
 }
