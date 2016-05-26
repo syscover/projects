@@ -51,7 +51,7 @@ class ProjectController extends Controller
         if(! isset($response['httpStatus']))
         {
             // set id like integer, to compare in select
-            $response['id']             = (int)$response['id'];
+            $response['id']             = (int) $response['id'];
             $parameters['customers']    = $collection->push(Miscellaneous::arrayToObject($response));
         }
 
@@ -66,7 +66,7 @@ class ProjectController extends Controller
             'name_090'                      => $this->request->input('name'),
             'description_090'               => $this->request->has('description')? $this->request->input('description') : null,
             'estimated_hours_090'           => $this->request->has('estimatedHours')? $this->request->input('estimatedHours') : 0,
-            'total_hours_090'               => (float)$this->request->input('estimatedHours') - (float)$this->request->input('consumedHours'),
+            'total_hours_090'               => (float) $this->request->input('estimatedHours') - (float)$this->request->input('consumedHours'),
             'price_090'                     => $this->request->has('price')? $this->request->input('price') : null,
             'init_date_090'                 => $this->request->has('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('initDate'))->getTimestamp() : null,
             'init_date_text_090'            => $this->request->has('initDate')? $this->request->input('initDate') : null,
