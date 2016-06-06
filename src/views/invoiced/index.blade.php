@@ -16,19 +16,19 @@
             if ($.fn.dataTable)
             {
                 $('.datatable-pulsar').dataTable({
-                    'iDisplayStart' : {{ $offset }},
-                    'aaSorting': [[ 0, "desc" ]],
-                    'aoColumnDefs': [
-                        { 'visible': false, "bSearchable": false, 'aTargets': [1]}, // hidden column 1 and prevents search on column 1
-                        { 'iDataSort': 1, 'aTargets': [2] }, // sort column 2 according hidden column 1 data
-                        { 'bSortable': false, 'aTargets': [5]},
+                    'displayStart' : {{ $offset }},
+                    'sorting': [[0, 'desc']],
+                    'columnDefs': [
+                        { 'visible': false, 'searchable': false, 'targets': [1]}, // hidden column 1 and prevents search on column 1
+                        { 'dataSort': 1, 'targets': [2] }, // sort column 2 according hidden column 1 data
+                        { 'sortable': false, 'targets': [5]},
 
-                        //{ 'sClass': 'customer-width', 'aTargets': [1,4]},
-                        { 'sClass': 'align-center', 'aTargets': [5]}
+                        //{ 'class': 'customer-width', 'targets': [1,4]},
+                        { 'class': 'align-center', 'targets': [5]}
                     ],
-                    "bProcessing": true,
-                    "bServerSide": true,
-                    "sAjaxSource": "{{ route('jsonData' . ucfirst($routeSuffix)) }}"
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": "{{ route('jsonData' . ucfirst($routeSuffix)) }}"
                 }).fnSetFilteringDelay();
             }
         });
