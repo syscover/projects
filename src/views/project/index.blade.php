@@ -8,17 +8,23 @@
             if ($.fn.dataTable)
             {
                 $('.datatable-pulsar').dataTable({
-                    'displayStart' : {{ $offset }},
-                    'columnDefs': [
-                        { 'visible': false, 'searchable': false, 'targets': [4]}, // hidden column 1 and prevents search on column 1
-                        { 'dataSort': 4, 'targets': [5] }, // sort column 2 according hidden column 1 data
-                        { 'sortable': false, 'targets': [7,8]},
-                        { 'class': 'checkbox-column', 'targets': [7]},
-                        { 'class': 'align-center', 'targets': [6,8]}
+                    "displayStart": {{ $offset }},
+                    "columnDefs": [
+                        { "visible": false, "searchable": false, "targets": [4]}, // hidden column 1 and prevents search on column 1
+                        { "dataSort": 4, "targets": [5] }, // sort column 2 according hidden column 1 data
+                        { "sortable": false, "targets": [7,8]},
+                        { "class": "checkbox-column", "targets": [7]},
+                        { "class": "align-center", "targets": [6,8]}
                     ],
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('jsonData' . ucfirst($routeSuffix)) }}"
+                    "ajax": {
+                        "url": "{{ route('jsonData' . ucfirst($routeSuffix)) }}",
+                        "type": "POST",
+                        "headers": {
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        }
+                    }
                 }).fnSetFilteringDelay();
             }
         });

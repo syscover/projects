@@ -16,18 +16,24 @@
             if ($.fn.dataTable)
             {
                 $('.datatable-pulsar').dataTable({
-                    'displayStart' : {{ $offset }},
-                    'columnDefs': [
-                        { 'visible': false, 'searchable': false, 'targets': [7,9]}, // hidden column 1 and prevents search on column 1
-                        { 'dataSort': 7, 'targets': [8] }, // sort column 2 according hidden column 1 data
-                        { 'dataSort': 9, 'targets': [10] }, // sort column 2 according hidden column 1 data
-                        { 'sortable': false, 'targets': [11]},
-                        { 'class': 'customer-width', 'targets': [1, 2]},
-                        { 'class': 'align-center', 'targets': [11]}
+                    "displayStart": {{ $offset }},
+                    "columnDefs": [
+                        { "visible": false, "searchable": false, "targets": [7,9]}, // hidden column 1 and prevents search on column 1
+                        { "dataSort": 7, "targets": [8] }, // sort column 2 according hidden column 1 data
+                        { "dataSort": 9, "targets": [10] }, // sort column 2 according hidden column 1 data
+                        { "sortable": false, "targets": [11]},
+                        { "class": 'customer-width', "targets": [1, 2]},
+                        { "class": "align-center", "targets": [11]}
                     ],
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('jsonData' . ucfirst($routeSuffix)) }}"
+                    "ajax": {
+                        "url": "{{ route('jsonData' . ucfirst($routeSuffix)) }}",
+                        "type": "POST",
+                        "headers": {
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        }
+                    }
                 }).fnSetFilteringDelay();
             }
         });

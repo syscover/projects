@@ -16,30 +16,36 @@
             if ($.fn.dataTable)
             {
                 $('.datatable-pulsar').dataTable({
-                    'displayStart' : {{ $offset }},
-                    'sorting': [[0, 'desc']],
-                    'columnDefs': [
+                    "displayStart": {{ $offset }},
+                    "sorting": [[0, "desc"]],
+                    "columnDefs": [
                     @if($resource == 'projects-history')
-                        { 'visible': false, 'searchable': false, 'targets': [2,9]}, // hidden column 1 and prevents search on column 1
-                        { 'dataSort': 2, 'targets': [3] }, // sort column 2 according hidden column 1 data
-                        { 'dataSort': 9, 'targets': [10] }, // sort column 2 according hidden column 1 data
-                        { 'sortable': false, 'targets': [11, 12]},
-                        { 'class': 'checkbox-column', 'targets': [11]},
-                        { 'class': 'customer-width', 'targets': [1,4]},
-                        { 'class': 'align-center', 'targets': [11, 12]}
+                        { "visible": false, "searchable": false, "targets": [2,9]}, // hidden column 1 and prevents search on column 1
+                        { "dataSort": 2, "targets": [3] }, // sort column 2 according hidden column 1 data
+                        { "dataSort": 9, "targets": [10] }, // sort column 2 according hidden column 1 data
+                        { "sortable": false, "targets": [11, 12]},
+                        { "class": "checkbox-column", "targets": [11]},
+                        { "class": 'customer-width', "targets": [1,4]},
+                        { "class": "align-center", "targets": [11, 12]}
                     @endif
                     @if($resource == 'projects-user-history')
-                        { 'visible': false, 'searchable': false, 'targets': [1,2,9]}, // hidden column 1 and prevents search on column 1
-                        { 'dataSort': 2, 'targets': [3] }, // sort column 2 according hidden column 1 data
-                        { 'dataSort': 9, 'targets': [10] }, // sort column 2 according hidden column 1 data
-                        { 'sortable': false, 'targets': [11]},
-                        { 'class': 'customer-width', 'targets': [4]},
-                        { 'class': 'align-center', 'targets': [11]}
+                        { "visible": false, "searchable": false, "targets": [1,2,9]}, // hidden column 1 and prevents search on column 1
+                        { "dataSort": 2, "targets": [3] }, // sort column 2 according hidden column 1 data
+                        { "dataSort": 9, "targets": [10] }, // sort column 2 according hidden column 1 data
+                        { "sortable": false, "targets": [11]},
+                        { "class": 'customer-width', "targets": [4]},
+                        { "class": "align-center", "targets": [11]}
                     @endif
                     ],
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('jsonData' . ucfirst($routeSuffix)) }}"
+                    "ajax": {
+                        "url": "{{ route('jsonData' . ucfirst($routeSuffix)) }}",
+                        "type": "POST",
+                        "headers": {
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        }
+                    }
                 }).fnSetFilteringDelay();
             }
         });
