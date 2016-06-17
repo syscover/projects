@@ -65,7 +65,7 @@
             })
 
             @if($resource == 'projects-user-history')
-                $('.wysiwyg').froalaEditor().froalaEditor('edit.off')
+                $('.wysiwyg').froalaEditor().froalaEditor('edit.off');
             @endif
 
             // start change user
