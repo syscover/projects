@@ -286,7 +286,7 @@ class TodoController extends Controller
                 config(['mail.password'     =>  Crypt::decrypt($emailAccount->outgoing_pass_013)]);
 
                 $users = User::builder()
-                    ->where('profile_010', (int)Preference::getValue('projectsBillingProfile', 6)->value_018)
+                    ->where('profile_id_010', (int)Preference::getValue('projectsBillingProfile', 6)->value_018)
                     ->where('access_010', true)
                     ->get();
 
