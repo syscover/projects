@@ -109,7 +109,7 @@ class TodoController extends Controller
             'user_name_091'                 => $this->request->input('userName'),
             'title_091'                     => $this->request->input('title'),
             'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
-            'type_091'                      => $this->request->input('type'),
+            'type_id_091'                   => $this->request->input('type'),
             'project_id_091'                => $this->request->has('projectId')? $this->request->input('projectId') : null,
             'customer_id_091'               => $customerId,
             'customer_name_091'             => $customerName,
@@ -132,7 +132,7 @@ class TodoController extends Controller
         $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
-        if($parameters['object']->type_091 == 2)
+        if($parameters['object']->type_id_091 == 2)
         {
             $response = Facturadirecta::getClient($parameters['object']->customer_id_091);
             $collection = collect();
@@ -196,7 +196,7 @@ class TodoController extends Controller
             'user_name_091'                 => $this->request->input('userName'),
             'title_091'                     => $this->request->input('title'),
             'description_091'               => $this->request->has('description')? $this->request->input('description') : null,
-            'type_091'                      => $this->request->input('type'),
+            'type_id_091'                   => $this->request->input('type'),
             'project_id_091'                => $this->request->has('projectId')? $this->request->input('projectId') : null,
             'customer_id_091'               => $customerId,
             'customer_name_091'             => $customerName,
@@ -223,7 +223,7 @@ class TodoController extends Controller
         if($todo->finished_091)
         {
             // 1 - project
-            if($todo->type_091 == 1)
+            if($todo->type_id_091 == 1)
             {
                 // updates hour projects
                 $project = Project::builder()->find($todo->project_id_091);
@@ -235,7 +235,7 @@ class TodoController extends Controller
                 History::create([
                     'user_id_093'                   => $todo->user_id_091,
                     'user_name_093'                 => $todo->user_name_091,
-                    'type_093'                      => $todo->type_091,
+                    'type_id_093'                   => $todo->type_id_091,
                     'project_id_093'                => $todo->project_id_091,
                     'customer_id_093'               => $todo->customer_id_091,
                     'customer_name_093'             => $todo->customer_name_091,
@@ -254,7 +254,7 @@ class TodoController extends Controller
 
             }
             // 2 - hours
-            elseif($todo->type_091 == 2)
+            elseif($todo->type_id_091 == 2)
             {
                 $billing = Billing::create([
                     'todo_id_092'                   => $todo->id_091,

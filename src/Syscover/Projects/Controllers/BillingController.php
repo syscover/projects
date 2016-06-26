@@ -72,7 +72,7 @@ class BillingController extends Controller
         $history = History::create([
             'user_id_093'                   => $billing->user_id_091,
             'user_name_093'                 => $billing->user_name_091,
-            'type_093'                      => $billing->type_091,
+            'type_id_093'                   => $billing->type_id_091,
             'project_id_093'                => null, // this history can not to have project
             'customer_id_093'               => $billing->customer_id_091,
             'customer_name_093'             => $billing->customer_name_091,
@@ -92,7 +92,7 @@ class BillingController extends Controller
             'date_text_094'                 => date(config('pulsar.datePattern')),
             'customer_id_094'               => $billing->customer_id_091,
             'customer_name_094'             => $billing->customer_name_091,
-            'type_094'                      => $billing->type_091,
+            'type_id_094'                   => $billing->type_id_091,
             'project_id_094'                => null,
             'history_id_094'                => $history->id_093,
             'price_094'                     => $price

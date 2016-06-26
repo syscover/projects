@@ -16,6 +16,7 @@ class ProjectsCreateTableProject extends Migration {
         {
             Schema::create('006_090_project', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
+                
                 $table->increments('id_090')->unsigned();
 
                 // datos del cliente

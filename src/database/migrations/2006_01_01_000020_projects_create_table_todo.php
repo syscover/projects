@@ -16,6 +16,7 @@ class ProjectsCreateTableTodo extends Migration {
         {
             Schema::create('006_091_todo', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
+                
                 $table->increments('id_091')->unsigned();
 
                 // usuario que se la ha asignado la tarea
@@ -25,7 +26,7 @@ class ProjectsCreateTableTodo extends Migration {
                 // puede ser: project o hours
                 // 1 - project
                 // 2 - hour
-                $table->tinyInteger('type_091')->unsigned();
+                $table->tinyInteger('type_id_091')->unsigned();
 
                 // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto
                 $table->integer('project_id_091')->unsigned()->nullable();

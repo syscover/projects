@@ -87,7 +87,7 @@ class ProjectController extends Controller
                 'date_text_094'                 => date(config('pulsar.datePattern')),
                 'customer_id_094'               => $this->request->input('customerId'),
                 'customer_name_094'             => $this->request->input('customerName'),
-                'type_094'                      => 1, // project
+                'type_id_094'                   => 1, // project
                 'project_id_094'                => $parameters['id'],
                 'history_id_094'                => null,
                 'price_094'                     => $this->request->has('price')? $this->request->input('price') : 0

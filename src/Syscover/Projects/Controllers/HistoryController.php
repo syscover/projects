@@ -59,7 +59,7 @@ class HistoryController extends Controller
         $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
-        if($parameters['object']->type_093 == 2)
+        if($parameters['object']->type_id_093 == 2)
         {
             $response = Facturadirecta::getClient($parameters['object']->customer_id_093);
             $collection = collect();
@@ -102,7 +102,7 @@ class HistoryController extends Controller
         $actions                = $this->request->route()->getAction();
         $parameters['resource'] = $actions['resource'];
 
-        if($parameters['object']->type_093 == 2)
+        if($parameters['object']->type_id_093 == 2)
         {
             $response = Facturadirecta::getClient($parameters['object']->customer_id_093);
             $collection = collect();
@@ -182,7 +182,7 @@ class HistoryController extends Controller
             'user_name_093'            => $this->request->input('userName'),
             'title_093'                => $this->request->input('title'),
             'description_093'          => $this->request->has('description')? $this->request->input('description') : null,
-            'type_093'                 => $this->request->input('type'),
+            'type_id_093'              => $this->request->input('type'),
             'project_id_093'           => $this->request->has('projectId')? $this->request->input('projectId') : null,
             'customer_id_093'          => $customerId,
             'customer_name_093'        => $customerName,

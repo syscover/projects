@@ -16,6 +16,7 @@ class ProjectsCreateTableBilling extends Migration {
         {
             Schema::create('006_092_billing', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
+                
                 $table->increments('id_092')->unsigned();
 
                 // tarea de donde procede este registro

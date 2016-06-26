@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
  * Class Invoiced
  *
  * Model with properties
- * <br><b>[id, date, date_text, customer_id, customer_name, type, project_id, history_id, price]</b>
+ * <br><b>[id, date, date_text, customer_id, customer_name, type_id, project_id, history_id, price]</b>
  *
  * @package Syscover\Projects\Models
  */
@@ -22,7 +22,7 @@ class Invoiced extends Model
     protected $primaryKey   = 'id_094';
     protected $suffix       = '094';
     public $timestamps      = false;
-    protected $fillable     = ['id_094', 'date_094', 'date_text_094', 'customer_id_094', 'customer_name_094', 'type_094', 'project_id_094', 'history_id_094', 'price_094'];
+    protected $fillable     = ['id_094', 'date_094', 'date_text_094', 'customer_id_094', 'customer_name_094', 'type_id_094', 'project_id_094', 'history_id_094', 'price_094'];
     protected $maps         = [];
     protected $relationMaps = [];
     private static $rules   = [];

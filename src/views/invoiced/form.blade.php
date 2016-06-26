@@ -41,7 +41,7 @@
         'fieldSize' => 5,
         'label' => trans_choice('pulsar::pulsar.type', 1),
         'name' => 'type',
-        'value' => old('type', $object->type_094),
+        'value' => old('type', $object->type_id_094),
         'objects' => $types,
         'idSelect' => 'id',
         'nameSelect' => 'name',

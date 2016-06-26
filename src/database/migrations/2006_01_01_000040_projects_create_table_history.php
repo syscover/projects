@@ -25,7 +25,7 @@ class ProjectsCreateTableHistory extends Migration {
                 // puede ser: project o hours
                 // 1 - project
                 // 2 - hours
-                $table->tinyInteger('type_093')->unsigned();
+                $table->tinyInteger('type_id_093')->unsigned();
 
                 // selecciona un cliente en caso de no pertenecer a un proyecto
                 $table->integer('customer_id_093')->unsigned();

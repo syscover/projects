@@ -29,7 +29,7 @@ class ProjectsCreateTableInvoiced extends Migration {
                 // can to be: project o hour
                 // 1 - project
                 // 2 - hour
-                $table->tinyInteger('type_094')->unsigned();
+                $table->tinyInteger('type_id_094')->unsigned();
                 
                 // if is project, record your Project Id
                 $table->integer('project_id_094')->unsigned()->nullable();

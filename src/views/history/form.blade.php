@@ -194,7 +194,7 @@
             $("#todoRequestDate").hide()
 
             @if(isset($object))
-                @if($object->type_093 == 1)
+                @if($object->type_id_093 == 1)
                     // 1 - project
                     $("#todoProject").show()
                 @else
@@ -237,7 +237,7 @@
         'fieldSize' => 5,
         'label' => trans_choice('pulsar::pulsar.type', 1),
         'name' => 'type',
-        'value' => old('type', $object->type_093),
+        'value' => old('type', $object->type_id_093),
         'objects' => $types,
         'idSelect' => 'id',
         'nameSelect' => 'name',
