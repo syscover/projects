@@ -56,10 +56,16 @@ class ProjectsCreateTableTodo extends Migration {
                 // indica si la tarea se ha finalizado
                 $table->boolean('finished_091');
 
-                $table->foreign('user_id_091', 'fk01_006_091_todo')->references('id_010')->on('001_010_user')
-                    ->onDelete('set null')->onUpdate('cascade');
-                $table->foreign('project_id_091', 'fk02_006_091_todo')->references('id_090')->on('006_090_project')
-                    ->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('user_id_091', 'fk01_006_091_todo')
+                    ->references('id_010')
+                    ->on('001_010_user')
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+                $table->foreign('project_id_091', 'fk02_006_091_todo')
+                    ->references('id_090')
+                    ->on('006_090_project')
+                    ->onDelete('cascade')
+                    ->onUpdate('cascade');
             });
         }
     }

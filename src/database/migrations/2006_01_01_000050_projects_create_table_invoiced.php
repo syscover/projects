@@ -40,10 +40,16 @@ class ProjectsCreateTableInvoiced extends Migration {
                 // precio de la tarea, en el cado de haberse definido
                 $table->decimal('price_094', 10, 2)->nullable();
                 
-                $table->foreign('project_id_094', 'fk01_006_094_invoiced')->references('id_090')->on('006_090_project')
-                    ->onDelete('set null')->onUpdate('cascade');
-                $table->foreign('history_id_094', 'fk02_006_094_invoiced')->references('id_093')->on('006_093_history')
-                    ->onDelete('set null')->onUpdate('cascade');
+                $table->foreign('project_id_094', 'fk01_006_094_invoiced')
+                    ->references('id_090')
+                    ->on('006_090_project')
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+                $table->foreign('history_id_094', 'fk02_006_094_invoiced')
+                    ->references('id_093')
+                    ->on('006_093_history')
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
             });
         }
     }

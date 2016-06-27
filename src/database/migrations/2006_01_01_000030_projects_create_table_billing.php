@@ -51,10 +51,16 @@ class ProjectsCreateTableBilling extends Migration {
                 // si está facturado o no
                 $table->boolean('invoiced_092')->default(false);
 
-                $table->foreign('user_id_092', 'fk01_006_092_billing')->references('id_010')->on('001_010_user')
-                    ->onDelete('set null')->onUpdate('cascade');
-                $table->foreign('todo_id_092', 'fk02_006_092_billing')->references('id_091')->on('006_091_todo')
-                    ->onDelete('restrict')->onUpdate('cascade');
+                $table->foreign('user_id_092', 'fk01_006_092_billing')
+                    ->references('id_010')
+                    ->on('001_010_user')
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
+                $table->foreign('todo_id_092', 'fk02_006_092_billing')
+                    ->references('id_091')
+                    ->on('006_091_todo')
+                    ->onDelete('restrict')
+                    ->onUpdate('cascade');
             });
         }
     }
