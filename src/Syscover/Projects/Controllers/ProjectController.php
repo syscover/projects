@@ -16,7 +16,7 @@ class ProjectController extends Controller
     protected $routeSuffix  = 'projectsProject';
     protected $folder       = 'project';
     protected $package      = 'projects';
-    protected $aColumns     = ['id_090', 'customer_name_090', 'name_090', 'total_hours_090', 'estimated_end_date_090', 'estimated_end_date_text_090', ['data' => 'invoiced_090', 'type' => 'check']];
+    protected $indexColumns     = ['id_090', 'customer_name_090', 'name_090', 'total_hours_090', 'estimated_end_date_090', 'estimated_end_date_text_090', ['data' => 'invoiced_090', 'type' => 'check']];
     protected $nameM        = 'name_090';
     protected $model        = Project::class;
     protected $icon         = 'fa fa-rocket';

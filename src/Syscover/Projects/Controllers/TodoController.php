@@ -24,7 +24,7 @@ class TodoController extends Controller
     protected $routeSuffix      = 'projectsTodo';
     protected $folder           = 'todo';
     protected $package          = 'projects';
-    protected $aColumns         = ['id_091', 'user_name_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
+    protected $indexColumns     = ['id_091', 'user_name_091', 'customer_name_091', 'name_090', 'title_091', 'price_091', 'hours_091', 'request_date_091', 'request_date_text_091', 'end_date_091', 'end_date_text_091'];
     protected $nameM            = 'title_091';
     protected $model            = Todo::class;
     protected $icon             = 'fa fa-hourglass-start';

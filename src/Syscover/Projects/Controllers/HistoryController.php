@@ -18,7 +18,7 @@ class HistoryController extends Controller
     protected $routeSuffix  = 'projectsHistory';
     protected $folder       = 'history';
     protected $package      = 'projects';
-    protected $aColumns     = ['id_093', 'user_name_093', 'end_date_093', 'end_date_text_093', 'customer_name_093', 'name_090', 'title_093', 'price_093', 'hours_093', 'request_date_093', 'request_date_text_093'];
+    protected $indexColumns     = ['id_093', 'user_name_093', 'end_date_093', 'end_date_text_093', 'customer_name_093', 'name_090', 'title_093', 'price_093', 'hours_093', 'request_date_093', 'request_date_text_093'];
     protected $nameM        = 'title_093';
     protected $model        = History::class;
     protected $icon         = 'fa fa-history';

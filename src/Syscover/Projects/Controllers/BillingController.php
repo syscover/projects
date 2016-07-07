@@ -19,7 +19,7 @@ class BillingController extends Controller
     protected $routeSuffix      = 'projectsBilling';
     protected $folder           = 'billing';
     protected $package          = 'projects';
-    protected $aColumns         = ['id_092', 'customer_name_092', 'title_092', 'price_092', 'hours_092', 'request_date_092', 'request_date_text_092', 'end_date_092', 'end_date_text_092'];
+    protected $indexColumns         = ['id_092', 'customer_name_092', 'title_092', 'price_092', 'hours_092', 'request_date_092', 'request_date_text_092', 'end_date_092', 'end_date_text_092'];
     protected $nameM            = 'name_092';
     protected $model            = Billing::class;
     protected $icon             = 'fa fa-credit-card';
