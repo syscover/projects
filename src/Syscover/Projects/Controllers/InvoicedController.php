@@ -15,7 +15,7 @@ class InvoicedController extends Controller
     protected $routeSuffix  = 'projectsInvoiced';
     protected $folder       = 'invoiced';
     protected $package      = 'projects';
-    protected $indexColumns     = ['id_094', 'date_094', 'date_text_094', 'customer_name_094', 'price_094'];
+    protected $indexColumns = ['id_094', 'date_094', 'date_text_094', 'customer_name_094', 'price_094'];
     protected $nameM        = 'title_093';
     protected $model        = Invoiced::class;
     protected $icon         = 'projects-invoiced';
