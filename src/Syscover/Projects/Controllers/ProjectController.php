@@ -1,7 +1,7 @@
 <?php namespace Syscover\Projects\Controllers;
 
 use Syscover\Pulsar\Core\Controller;
-use Syscover\Facturadirecta\Facades\Facturadirecta;
+use Syscover\FacturaDirecta\Facades\FacturaDirecta;
 use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Projects\Models\Project;
 use Syscover\Projects\Models\Invoiced;
@@ -44,7 +44,7 @@ class ProjectController extends Controller
 
     public function editCustomRecord($parameters)
     {
-        $response   = Facturadirecta::getClient($parameters['object']->customer_id_090);
+        $response   = FacturaDirecta::getClient($parameters['object']->customer_id_090);
         $collection = collect();
 
         // check that response does not contain httpStatus 404

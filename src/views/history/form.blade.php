@@ -125,7 +125,7 @@
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
                     type: 'POST',
-                    url: '{{ route('apiFacturadirectaCustomers') }}',
+                    url: '{{ route('apiFacturaDirectaCustomers') }}',
                     data: function (params) {
                         return {
                             // search term

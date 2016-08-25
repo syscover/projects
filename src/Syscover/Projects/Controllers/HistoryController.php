@@ -2,7 +2,7 @@
 
 use Syscover\Pulsar\Core\Controller;
 use Illuminate\Http\Request;
-use Syscover\Facturadirecta\Facades\Facturadirecta;
+use Syscover\FacturaDirecta\Facades\FacturaDirecta;
 use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Pulsar\Models\User;
 use Syscover\Projects\Models\Project;
@@ -61,7 +61,7 @@ class HistoryController extends Controller
 
         if($parameters['object']->type_id_093 == 2)
         {
-            $response = Facturadirecta::getClient($parameters['object']->customer_id_093);
+            $response = FacturaDirecta::getClient($parameters['object']->customer_id_093);
             $collection = collect();
 
             // check that response does not contain httpStatus 404
@@ -104,7 +104,7 @@ class HistoryController extends Controller
 
         if($parameters['object']->type_id_093 == 2)
         {
-            $response = Facturadirecta::getClient($parameters['object']->customer_id_093);
+            $response = FacturaDirecta::getClient($parameters['object']->customer_id_093);
             $collection = collect();
 
             // check that response does not contain httpStatus 404

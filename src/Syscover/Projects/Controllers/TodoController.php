@@ -4,7 +4,7 @@ use Syscover\Pulsar\Core\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
-use Syscover\Facturadirecta\Facades\Facturadirecta;
+use Syscover\FacturaDirecta\Facades\FacturaDirecta;
 use Syscover\Pulsar\Libraries\Miscellaneous;
 use Syscover\Pulsar\Models\EmailAccount;
 use Syscover\Pulsar\Models\Preference;
@@ -134,7 +134,7 @@ class TodoController extends Controller
 
         if($parameters['object']->type_id_091 == 2)
         {
-            $response = Facturadirecta::getClient($parameters['object']->customer_id_091);
+            $response = FacturaDirecta::getClient($parameters['object']->customer_id_091);
             $collection = collect();
 
             // check that response does not contain httpStatus 404
