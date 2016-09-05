@@ -1,4 +1,4 @@
-# Projects for Laravel 5.2
+# Projects for Laravel 5.3
 
 [![Total Downloads](https://poser.pugx.org/syscover/projects/downloads)](https://packagist.org/packages/syscover/projects)
 
@@ -6,7 +6,7 @@
 
 **1 - After install Laravel framework, insert on file composer.json, inside require object this value**
 ```
-"syscover/projects": "~1.0"
+"syscover/projects": "~2.0"
 ```
 and execute on console:
 ```
