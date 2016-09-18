@@ -4,7 +4,7 @@
     @parent
     <!-- projects::preferences.index -->
     @include('pulsar::includes.js.messages')
-    <!-- /.projects::preferences.index -->
+    <!-- /projects::preferences.index -->
 @stop
 
 @section('rows')
@@ -41,5 +41,5 @@
         'value' => (float)$hourPrice->value_018,
         'required' => true
     ])
-    <!-- /.projects::preferences.index -->
+    <!-- /projects::preferences.index -->
 @stop

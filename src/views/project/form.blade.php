@@ -282,5 +282,5 @@
         'disabled' => true
     ])
     @endif
-    <!-- /.projects::projects.form -->
+    <!-- /projects::projects.form -->
 @stop

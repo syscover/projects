@@ -342,5 +342,5 @@
         'value' => $object->hours_093,
         'readOnly' => $resource == 'projects-user-history'? true : false
     ])
-    <!-- /.projects::history.form -->
+    <!-- /projects::history.form -->
 @stop

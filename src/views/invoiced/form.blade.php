@@ -7,7 +7,7 @@
 
     <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/moment.min.js') }}"></script>
     <script src="{{ asset('packages/syscover/pulsar/vendor/datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
-    <!-- /.projects::invoiced.form -->
+    <!-- /projects::invoiced.form -->
 @stop
 
 @section('rows')
@@ -83,5 +83,5 @@
         'value' => $object->price_094,
         'readOnly' => true
     ])
-    <!-- /.projects::invoiced.form -->
+    <!-- /projects::invoiced.form -->
 @stop

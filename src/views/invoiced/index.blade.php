@@ -39,7 +39,7 @@
             }
         });
     </script>
-    <!-- /.projects::invoiced.index -->
+    <!-- /projects::invoiced.index -->
 @stop
 
 @section('tHead')
@@ -52,5 +52,5 @@
         <th>{{ trans_choice('pulsar::pulsar.price', 1) }}</th>
         <th>{{ trans_choice('pulsar::pulsar.action', 2) }}</th>
     </tr>
-    <!-- /.projects::invoiced.index -->
+    <!-- /projects::invoiced.index -->
 @stop

@@ -50,7 +50,7 @@
             }
         });
     </script>
-    <!-- /.projects::history.index -->
+    <!-- /projects::history.index -->
 @stop
 
 @section('tHead')
@@ -72,5 +72,5 @@
         @endif
         <th>{{ trans_choice('pulsar::pulsar.action', 2) }}</th>
     </tr>
-    <!-- /.projects::history.index -->
+    <!-- /projects::history.index -->
 @stop
