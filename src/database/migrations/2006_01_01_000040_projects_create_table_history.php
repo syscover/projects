@@ -31,7 +31,7 @@ class ProjectsCreateTableHistory extends Migration {
                 $table->integer('customer_id_093')->unsigned();
                 $table->string('customer_name_093');
 
-                // projecto al que pertenece la tarea, en caso de pertenecer a un proyecto
+                // project al que pertenece la tarea, en caso de pertenecer a un proyecto
                 $table->integer('project_id_093')->unsigned()->nullable();
 
                 // descripción de la tarea
