@@ -22,7 +22,7 @@ class Project extends Model
     protected $primaryKey   = 'id_090';
     protected $suffix       = '090';
     public $timestamps      = false;
-    protected $fillable     = ['id_090', 'customer_id_090', 'customer_name_090', 'name_090', 'description_090', 'estimated_hours_090', 'consumed_hours_090', 'total_hours_090', 'price_090', 'init_date_090', 'init_date_text_090', 'end_date_090', 'end_date_text_090', 'estimated_end_date_090', 'estimated_end_date_text_090', 'end_date_090', 'end_date_text_090'];
+    protected $fillable     = ['id_090', 'customer_id_090', 'customer_name_090', 'name_090', 'description_090', 'estimated_hours_090', 'consumed_hours_090', 'total_hours_090', 'price_090', 'init_date_090', 'init_date_text_090', 'end_date_090', 'end_date_text_090', 'estimated_end_date_090', 'estimated_end_date_text_090', 'end_date_090', 'end_date_text_090', 'invoiced_090'];
     protected $maps         = [];
     protected $relationMaps = [];
     private static $rules   = [

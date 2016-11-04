@@ -24,6 +24,9 @@ class ProjectController extends Controller
     
     public function storeCustomRecord($parameters)
     {
+
+
+
         Project::create([
             'customer_id_090'               => $this->request->input('customerId'),
             'customer_name_090'             => $this->request->input('customerName'),
