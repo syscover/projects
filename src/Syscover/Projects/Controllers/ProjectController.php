@@ -39,6 +39,7 @@ class ProjectController extends Controller
             'estimated_end_date_text_090'   => $this->request->has('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
             'end_date_090'                  => null,
             'end_date_text_090'             => null,
+            'invoiced_090'                  => $this->request->has('invoiced')
         ]);
     }
 
@@ -74,6 +75,7 @@ class ProjectController extends Controller
             'estimated_end_date_text_090'   => $this->request->has('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
             'end_date_090'                  => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
             'end_date_text_090'             => $this->request->has('endDate')? $this->request->input('endDate') : null,
+            'invoiced_090'                  => $this->request->has('invoiced')
         ]);
 
         // start create check and create invoiced
