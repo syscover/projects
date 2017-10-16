@@ -33,10 +33,10 @@ class ProjectController extends Controller
             'consumed_hours_090'            => 0,
             'total_hours_090'               => $this->request->has('estimatedHours')? $this->request->input('estimatedHours') : 0,
             'price_090'                     => $this->request->has('price')? $this->request->input('price') : null,
-            'init_date_090'                 => $this->request->has('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('initDate'))->getTimestamp() : null,
-            'init_date_text_090'            => $this->request->has('initDate')? $this->request->input('initDate') : null,
-            'estimated_end_date_090'        => $this->request->has('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('estimatedEndDate'))->getTimestamp() : null,
-            'estimated_end_date_text_090'   => $this->request->has('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
+            'init_date_090'                 => $this->request->input('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('initDate'))->getTimestamp() : null,
+            'init_date_text_090'            => $this->request->input('initDate')? $this->request->input('initDate') : null,
+            'estimated_end_date_090'        => $this->request->input('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('estimatedEndDate'))->getTimestamp() : null,
+            'estimated_end_date_text_090'   => $this->request->input('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
             'end_date_090'                  => null,
             'end_date_text_090'             => null,
             'invoiced_090'                  => $this->request->has('invoiced')
@@ -69,12 +69,12 @@ class ProjectController extends Controller
             'estimated_hours_090'           => $this->request->has('estimatedHours')? $this->request->input('estimatedHours') : 0,
             'total_hours_090'               => (float) $this->request->input('estimatedHours') - (float)$this->request->input('consumedHours'),
             'price_090'                     => $this->request->has('price')? $this->request->input('price') : null,
-            'init_date_090'                 => $this->request->has('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('initDate'))->getTimestamp() : null,
-            'init_date_text_090'            => $this->request->has('initDate')? $this->request->input('initDate') : null,
-            'estimated_end_date_090'        => $this->request->has('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('estimatedEndDate'))->getTimestamp() : null,
-            'estimated_end_date_text_090'   => $this->request->has('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
-            'end_date_090'                  => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
-            'end_date_text_090'             => $this->request->has('endDate')? $this->request->input('endDate') : null,
+            'init_date_090'                 => $this->request->input('initDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('initDate'))->getTimestamp() : null,
+            'init_date_text_090'            => $this->request->input('initDate')? $this->request->input('initDate') : null,
+            'estimated_end_date_090'        => $this->request->input('estimatedEndDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('estimatedEndDate'))->getTimestamp() : null,
+            'estimated_end_date_text_090'   => $this->request->input('estimatedEndDate')? $this->request->input('estimatedEndDate') : null,
+            'end_date_090'                  => $this->request->input('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
+            'end_date_text_090'             => $this->request->input('endDate')? $this->request->input('endDate') : null,
             'invoiced_090'                  => $this->request->has('invoiced')
         ]);
 

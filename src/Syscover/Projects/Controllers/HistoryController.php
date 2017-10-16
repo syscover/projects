@@ -188,10 +188,10 @@ class HistoryController extends Controller
             'customer_name_093'        => $customerName,
             'hours_093'                => $this->request->has('hours')? $this->request->input('hours') : null,
             'price_093'                => $this->request->has('price')? $this->request->input('price') : null,
-            'request_date_093'         => $this->request->has('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('requestDate'))->getTimestamp() : null,
-            'request_date_text_093'    => $this->request->has('requestDate')? $this->request->input('requestDate') : null,
-            'end_date_093'             => $this->request->has('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
-            'end_date_text_093'        => $this->request->has('endDate')? $this->request->input('endDate') : null
+            'request_date_093'         => $this->request->input('requestDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('requestDate'))->getTimestamp() : null,
+            'request_date_text_093'    => $this->request->input('requestDate')? $this->request->input('requestDate') : null,
+            'end_date_093'             => $this->request->input('endDate')? \DateTime::createFromFormat(config('pulsar.datePattern'), $this->request->input('endDate'))->getTimestamp() : null,
+            'end_date_text_093'        => $this->request->input('endDate')? $this->request->input('endDate') : null
         ]);
     }
 }
