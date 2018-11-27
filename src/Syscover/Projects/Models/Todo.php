@@ -48,7 +48,7 @@ class Todo extends Model
 
         // filter todos onle from current user
         if($actions['resource'] === 'projects-user-todo')
-            $query->where('user_id_091', auth('pulsar')->user()->id_010);
+            $query->where('user_id_091', auth()->guard('pulsar')->user()->id_010);
 
         return $query;
     }

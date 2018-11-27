@@ -48,7 +48,7 @@ class History extends Model
 
         // filter todos only from current user
         if($actions['resource'] === 'projects-user-history')
-            $query->where('user_id_093', auth('pulsar')->user()->id_010);
+            $query->where('user_id_093', auth()->guard('pulsar')->user()->id_010);
 
         return $query;
     }

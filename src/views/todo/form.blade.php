@@ -214,14 +214,14 @@
             'fieldSize' =>  5,
             'label' => trans_choice('pulsar::pulsar.user', 1),
             'name' => 'userName',
-            'value' => old('userName', isset($object)? $object->user_name_091 : auth('pulsar')->user()->name_010 . ' ' . auth('pulsar')->user()->surname_010),
+            'value' => old('userName', isset($object)? $object->user_name_091 : auth()->guard('pulsar')->user()->name_010 . ' ' . auth()->guard('pulsar')->user()->surname_010),
             'maxLength' => '255',
             'rangeLength' => '2,255',
             'readOnly' => true
         ])
         @include('pulsar::includes.html.form_hidden', [
             'name' => 'userId',
-            'value' => old('userId', isset($object)? $object->user_id_091 : auth('pulsar')->user()->id_010)
+            'value' => old('userId', isset($object)? $object->user_id_091 : auth()->guard('pulsar')->user()->id_010)
         ])
     @else
         @include('pulsar::includes.html.form_select_group', [
